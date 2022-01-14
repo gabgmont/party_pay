@@ -14,7 +14,7 @@ class PartyPayApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: HomePage(),
+      home: LoginPage(),
       routes: {
         '/splash_page' : (context) => const SplashPage(),
         '/login_page' : (context) => LoginPage(),

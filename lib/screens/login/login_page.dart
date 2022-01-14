@@ -6,8 +6,8 @@ import 'package:partypay/screens/login/widgets/input_text.dart';
 import 'package:partypay/shared/utils/AppColors.dart';
 import 'package:partypay/shared/utils/AppImages.dart';
 
-const welcome = 'Welcome!';
-const fillAllFields = 'Fill All Fields.';
+const welcome = 'Bem vindo!';
+const fillAllFields = 'Preencha todos os campos.';
 const enter = 'Entrar';
 const forgotPassword = 'Esqueci a senha';
 const password = 'Senha';
