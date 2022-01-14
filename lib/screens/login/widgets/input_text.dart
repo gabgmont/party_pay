@@ -4,23 +4,25 @@ import 'package:partypay/shared/utils/AppColors.dart';
 
 const username = 'Username';
 
-class InputTextWidget extends StatelessWidget {
-  const InputTextWidget({Key? key}) : super(key: key);
+class DoubleInputTextWidget extends StatelessWidget {
+  final TextEditingController textController;
+  final String hint;
+  const DoubleInputTextWidget({Key? key, required this.hint, required this.textController}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
 
     return SizedBox(
-      width: size.width * 0.6,
       height: size.height * 0.06,
+      width: size.width * 0.6,
       child: Stack(
         children: [
           Align(
             alignment: Alignment.bottomRight,
             child: Container(
-              width: size.width * 0.59,
               height: size.height * 0.055,
+              width: size.width * 0.59,
               color: AppColors.secondary,
             ),
           ),
@@ -35,9 +37,10 @@ class InputTextWidget extends StatelessWidget {
                 child: TextFormField(
                   style: GoogleFonts.roboto(fontSize: 20),
                   textAlignVertical: TextAlignVertical.center,
+                  controller: textController,
                   decoration: InputDecoration(
                       border: InputBorder.none,
-                      labelText: username
+                      hintText: hint
                   ),
                 ),
               ),
