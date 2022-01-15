@@ -13,10 +13,7 @@ class PartyPayApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Partypay',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      home: LoginPage(),
+      initialRoute: '/splash_page',
       routes: {
         '/splash_page': (context) => const SplashPage(),
         '/login_page': (context) => LoginPage(),

@@ -7,10 +7,13 @@ const logoName = 'PartyPay!';
 const catchPhrase = 'Share your Bills.';
 
 class SplashPage extends StatelessWidget {
-  const  SplashPage({Key? key}) : super(key: key);
+  const SplashPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    Future.delayed(const Duration(seconds: 2)).then(
+        (value) => Navigator.pushReplacementNamed(context, '/login_page'));
+
     return Scaffold(
       body: Center(
         child: Column(

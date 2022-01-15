@@ -12,7 +12,7 @@ const forgotPassword = 'Esqueci a senha';
 const password = 'Senha';
 const username = 'CPF';
 const login = 'Login';
-const welcome = 'Bem Vindo!';
+const String welcome = 'Bem Vindo!';
 
 class LoginPage extends StatelessWidget {
   final usernameController = TextEditingController();
