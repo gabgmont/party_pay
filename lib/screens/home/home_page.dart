@@ -18,56 +18,69 @@ class HomePage extends StatelessWidget {
     final size = MediaQuery.of(context).size;
 
     return Scaffold(
-        appBar: PreferredSize(
-          preferredSize: Size.fromHeight(size.height * 0.28),
-          child: HomePageAppBar(
-            user: user,
-          ),
+      appBar: PreferredSize(
+        preferredSize: Size.fromHeight(size.height * 0.28),
+        child: HomePageAppBar(
+          user: user,
         ),
-        body: Container(
-          color: AppColors.white,
-          child: Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: Column(
-              children: [
-                SingleChildScrollView(
-                  scrollDirection: Axis.horizontal,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: const [
-                      RoundRestaurantCardWidget(
-                        image: AppImages.smallSrShitake,
-                      ),
-                      RoundRestaurantCardWidget(
-                        image: AppImages.smallCocoBambu,
-                      ),
-                      RoundRestaurantCardWidget(
-                        image: AppImages.smallSiSenor,
-                      ),
-                      RoundRestaurantCardWidget(
-                        image: AppImages.smallOutback,
-                      ),
-                      RoundRestaurantCardWidget(
-                        image: AppImages.smallHardRock,
-                      ),
-                      RoundRestaurantCardWidget(
-                        image: AppImages.smallMadero,
-                      ),
-                      RoundRestaurantCardWidget(
-                        image: AppImages.smallParis6,
-                      ),
-                    ],
+      ),
+      body: Container(
+        color: AppColors.white,
+        child: Column(
+          children: [
+            SingleChildScrollView(
+              scrollDirection: Axis.horizontal,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: const [
+                  RoundRestaurantCardWidget(
+                    image: AppImages.smallSrShitake,
                   ),
-                ),
-                SizedBox(height: size.height * 0.03),
-                DoubleBigButtonWListWidget(label: 'Recent activity', onTap: (){}),
-                SizedBox(height: size.height * 0.03,),
-                DoubleBigButtonWidget(label: 'Restaurants', onTap: (){}),
-                SizedBox(height: size.height * 0.03,),
-                DoubleBigButtonWidget(label: 'Start new Session', onTap: (){}),
-              ],
+                  RoundRestaurantCardWidget(
+                    image: AppImages.smallCocoBambu,
+                  ),
+                  RoundRestaurantCardWidget(
+                    image: AppImages.smallSiSenor,
+                  ),
+                  RoundRestaurantCardWidget(
+                    image: AppImages.smallOutback,
+                  ),
+                  RoundRestaurantCardWidget(
+                    image: AppImages.smallHardRock,
+                  ),
+                  RoundRestaurantCardWidget(
+                    image: AppImages.smallMadero,
+                  ),
+                  RoundRestaurantCardWidget(
+                    image: AppImages.smallParis6,
+                  ),
+                ],
+              ),
             ),
-          ),
-        ));
+            SizedBox(height: size.height * 0.03),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16.0),
+              child: DoubleBigButtonWListWidget(
+                  label: 'Recent activity', onTap: () {}),
+            ),
+            SizedBox(
+              height: size.height * 0.03,
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16.0),
+              child: DoubleBigButtonWidget(label: 'Restaurants', onTap: () {}),
+            ),
+            SizedBox(
+              height: size.height * 0.03,
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16.0),
+              child: DoubleBigButtonWidget(
+                  label: 'Start new Session', onTap: () {}),
+            ),
+          ],
+        ),
+      ),
+    );
   }
 }
