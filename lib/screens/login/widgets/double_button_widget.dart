@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:partypay/shared/utils/AppColors.dart';
 
-class DoubleButton extends StatelessWidget {
+class DoubleButtonWidget extends StatelessWidget {
   final String label;
   final VoidCallback onTap;
 
-  const DoubleButton({Key? key, required this.label, required this.onTap})
+  const DoubleButtonWidget({Key? key, required this.label, required this.onTap})
       : super(key: key);
 
   @override

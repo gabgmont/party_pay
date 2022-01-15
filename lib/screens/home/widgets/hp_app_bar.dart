@@ -5,7 +5,7 @@ import 'package:partypay/shared/utils/AppColors.dart';
 import 'package:partypay/shared/utils/AppImages.dart';
 
 import 'news_widget.dart';
-import 'page_indicator.dart';
+import 'page_indicator_widget.dart';
 
 const logo = 'Partypay!';
 const welcome = 'Welcome,';
@@ -83,7 +83,7 @@ class _HomePageAppBarState extends State<HomePageAppBar> {
                   children: [
                     const Text(
                       logo,
-                      style: TextStyle(color: AppColors.white, fontSize: 35),
+                      style: TextStyle(color: AppColors.white, fontSize: 26),
                     ),
                     Row(
                       children: [
@@ -143,27 +143,27 @@ class _HomePageAppBarState extends State<HomePageAppBar> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  PageIndicator(
+                  PageIndicatorWidget(
                     color: newsController.currentPage == 0
                         ? AppColors.secondary
                         : AppColors.white,
                   ),
-                  PageIndicator(
+                  PageIndicatorWidget(
                     color: newsController.currentPage == 1
                         ? AppColors.secondary
                         : AppColors.white,
                   ),
-                  PageIndicator(
+                  PageIndicatorWidget(
                     color: newsController.currentPage == 2
                         ? AppColors.secondary
                         : AppColors.white,
                   ),
-                  PageIndicator(
+                  PageIndicatorWidget(
                     color: newsController.currentPage == 3
                         ? AppColors.secondary
                         : AppColors.white,
                   ),
-                  PageIndicator(
+                  PageIndicatorWidget(
                     color: newsController.currentPage == 4
                         ? AppColors.secondary
                         : AppColors.white,

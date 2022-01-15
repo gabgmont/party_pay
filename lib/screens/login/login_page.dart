@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:partypay/screens/login/login_controller.dart';
-import 'package:partypay/screens/login/widgets/button.dart';
-import 'package:partypay/screens/login/widgets/input_text.dart';
+import 'package:partypay/screens/login/widgets/double_button_widget.dart';
+import 'package:partypay/screens/login/widgets/double_input_text_widget.dart';
 import 'package:partypay/shared/utils/AppColors.dart';
 import 'package:partypay/shared/utils/AppImages.dart';
 
@@ -69,14 +69,14 @@ class LoginPage extends StatelessWidget {
                         const SizedBox(
                           height: 20,
                         ),
-                        DoubleInputTextWidget(
+                        DoubleInputTextWidgetWidget(
                           textController: usernameController,
                           hint: username,
                         ),
                         const SizedBox(
                           height: 20,
                         ),
-                        DoubleInputTextWidget(
+                        DoubleInputTextWidgetWidget(
                           textController: passwordController,
                           hint: password,
                         ),
@@ -92,7 +92,7 @@ class LoginPage extends StatelessWidget {
                         const SizedBox(
                           height: 20,
                         ),
-                        DoubleButton(
+                        DoubleButtonWidget(
                           label: enter,
                           onTap: () async {
                             var authModel = loginController.getAuthModel(

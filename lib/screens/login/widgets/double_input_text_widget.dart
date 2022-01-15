@@ -4,10 +4,10 @@ import 'package:partypay/shared/utils/AppColors.dart';
 
 const username = 'Username';
 
-class DoubleInputTextWidget extends StatelessWidget {
+class DoubleInputTextWidgetWidget extends StatelessWidget {
   final TextEditingController textController;
   final String hint;
-  const DoubleInputTextWidget({Key? key, required this.hint, required this.textController}) : super(key: key);
+  const DoubleInputTextWidgetWidget({Key? key, required this.hint, required this.textController}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

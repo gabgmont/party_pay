@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:partypay/model/user/user_model.dart';
+import 'package:partypay/screens/home/widgets/double_big_button_widget.dart';
 import 'package:partypay/screens/home/widgets/hp_app_bar.dart';
 import 'package:partypay/shared/utils/AppColors.dart';
 import 'package:partypay/shared/utils/AppImages.dart';
+
+import 'widgets/double_big_button_wlist_widget.dart';
+import 'widgets/round_restaurant_card_widget.dart';
 
 class HomePage extends StatelessWidget {
   final User user;
@@ -26,28 +30,41 @@ class HomePage extends StatelessWidget {
             padding: const EdgeInsets.all(16.0),
             child: Column(
               children: [
-                Row(
-                  children: [
-                    Container(
-                      width: 70,
-                      height: 70,
-                      decoration: BoxDecoration(
-                        image: DecorationImage(
-                          image: AssetImage(AppImages.smallOutback),
-                        ),
-                        color: AppColors.red,
-                        borderRadius: BorderRadius.circular(100),
-                        boxShadow: [
-                          BoxShadow(
-                              offset: Offset.fromDirection(1, 1.5),
-                              spreadRadius: 0.5,
-                              blurRadius: 0.5,
-                              color: Colors.black26),
-                        ],
+                SingleChildScrollView(
+                  scrollDirection: Axis.horizontal,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: const [
+                      RoundRestaurantCardWidget(
+                        image: AppImages.smallSrShitake,
                       ),
-                    )
-                  ],
-                )
+                      RoundRestaurantCardWidget(
+                        image: AppImages.smallCocoBambu,
+                      ),
+                      RoundRestaurantCardWidget(
+                        image: AppImages.smallSiSenor,
+                      ),
+                      RoundRestaurantCardWidget(
+                        image: AppImages.smallOutback,
+                      ),
+                      RoundRestaurantCardWidget(
+                        image: AppImages.smallHardRock,
+                      ),
+                      RoundRestaurantCardWidget(
+                        image: AppImages.smallMadero,
+                      ),
+                      RoundRestaurantCardWidget(
+                        image: AppImages.smallParis6,
+                      ),
+                    ],
+                  ),
+                ),
+                SizedBox(height: size.height * 0.03),
+                DoubleBigButtonWListWidget(label: 'Recent activity', onTap: (){}),
+                SizedBox(height: size.height * 0.03,),
+                DoubleBigButtonWidget(label: 'Restaurants', onTap: (){}),
+                SizedBox(height: size.height * 0.03,),
+                DoubleBigButtonWidget(label: 'Start new Session', onTap: (){}),
               ],
             ),
           ),
