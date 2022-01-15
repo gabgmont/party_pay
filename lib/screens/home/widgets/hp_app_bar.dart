@@ -77,7 +77,7 @@ class _HomePageAppBarState extends State<HomePageAppBar> {
             Container(
               height: size.height * 0.25,
               width: size.width,
-              color: AppColors.secondary,
+              color: AppColors.primary,
               child: Padding(
                 padding: const EdgeInsets.all(15.0),
                 child: Row(
@@ -99,7 +99,7 @@ class _HomePageAppBarState extends State<HomePageAppBar> {
                             ),
                             Text(
                                 StringFilter.getFirstName(widget.user.name),
-                                style: TextStyle(color: AppColors.white))
+                                style: const TextStyle(color: AppColors.white))
                           ],
                         ),
                         const SizedBox(
@@ -111,9 +111,9 @@ class _HomePageAppBarState extends State<HomePageAppBar> {
                             height: 60,
                             width: 60,
                             decoration: BoxDecoration(
-                              border: Border.fromBorderSide(
+                              border: const Border.fromBorderSide(
                                   BorderSide(width: 0.5, color: AppColors.gray)),
-                              image: DecorationImage(
+                              image: const DecorationImage(
                                   image: AssetImage(AppImages.userPicture)),
                               borderRadius: BorderRadius.circular(20),
                               boxShadow: [

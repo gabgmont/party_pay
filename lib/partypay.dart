@@ -13,20 +13,19 @@ class PartyPayApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Partypay',
-      initialRoute: '/splash_page',
+      initialRoute: '/home_page',
       routes: {
         '/splash_page': (context) => const SplashPage(),
         '/login_page': (context) => LoginPage(),
-
         '/home_page': (context) => HomePage(
-            user: ModalRoute.of(context) != null
-                ? ModalRoute.of(context)!.settings.arguments as User
-                : User(name: 'Guest')),
+            user: ModalRoute.of(context)!.settings.arguments == null
+                ? User(name: 'Guest')
+                : ModalRoute.of(context)!.settings.arguments as User),
 
         '/profile_page': (context) => ProfilePage(
-            user: ModalRoute.of(context) != null
-                ? ModalRoute.of(context)!.settings.arguments as User
-                : User(name: 'Guest')),
+            user: ModalRoute.of(context)!.settings.arguments == null
+                ? User(name: 'Guest')
+                : ModalRoute.of(context)!.settings.arguments as User)
       },
     );
   }

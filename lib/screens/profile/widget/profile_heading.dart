@@ -32,65 +32,70 @@ class ProfileHeading extends StatelessWidget {
                 spreadRadius: 0.5,
                 color: AppColors.shadow)
           ]),
-          child: Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                Align(
+          child: Material(
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  Align(
+                      alignment: Alignment.bottomCenter,
+                      child: IconButton(
+                          color: AppColors.primary,
+                          splashRadius: 25,
+                          icon: const Icon(
+                            Icons.edit,
+                            size: 36,
+                          ),
+                          onPressed: onEditPressed,
+                          )),
+                  Align(
                     alignment: Alignment.bottomCenter,
                     child: IconButton(
-                      icon: const Icon(
-                        Icons.edit,
-                        color: AppColors.primary,
-                        size: 36,
-                      ),
-                      onPressed: onEditPressed,
-                    )),
-                Align(
-                  alignment: Alignment.bottomCenter,
-                  child: IconButton(
-                    icon: const Icon(
-                      Icons.logout,
-                      color: AppColors.red,
-                      size: 36,
+                        color: AppColors.red,
+                        splashRadius: 25,
+                        icon: const Icon(
+                          Icons.logout,
+                          size: 36,
+                        ),
+                        onPressed: onLogoutPressed,
+                        ),
+                  ),
+                  const SizedBox(),
+                  SizedBox(
+                    width: 100,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.end,
+                      children: [
+                        Text(
+                          StringFilter.getFirstName(name),
+                          style: const TextStyle(
+                              fontSize: 16, color: AppColors.gray),
+                        ),
+                        Text(
+                          cpf,
+                          style: const TextStyle(color: AppColors.gray),
+                        ),
+                      ],
                     ),
-                    onPressed: onLogoutPressed,
                   ),
-                ),
-                const SizedBox(),
-                SizedBox(
-                  width: 100,
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.end,
-                    children: [
-                      Text(
-                        StringFilter.getFirstName(name),
-                        style: const TextStyle(fontSize: 16, color: AppColors.gray),
-                      ),
-                      Text(
-                        cpf,
-                        style: const TextStyle(color: AppColors.gray),
-                      ),
-                    ],
-                  ),
-                ),
-                Align(
-                  alignment: Alignment.centerRight,
-                  child: Container(
-                    height: size.height * 0.15,
-                    width: size.height * 0.15,
-                    decoration: BoxDecoration(
-                        image: const DecorationImage(
-                            image: AssetImage(AppImages.userPicture),
-                            fit: BoxFit.fill),
-                        border: const Border.fromBorderSide(
-                            BorderSide(width: 1, color: AppColors.primary)),
-                        borderRadius: BorderRadius.circular(100)),
-                  ),
-                )
-              ],
+                  Align(
+                    alignment: Alignment.centerRight,
+                    child: Container(
+                      height: size.height * 0.15,
+                      width: size.height * 0.15,
+                      decoration: BoxDecoration(
+                          image: const DecorationImage(
+                              image: AssetImage(AppImages.userPicture),
+                              fit: BoxFit.fill),
+                          border: const Border.fromBorderSide(
+                              BorderSide(width: 1, color: AppColors.primary)),
+                          borderRadius: BorderRadius.circular(100)),
+                    ),
+                  )
+                ],
+              ),
             ),
           ),
         ),
