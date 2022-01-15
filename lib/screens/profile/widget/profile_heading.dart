@@ -1,9 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:partypay/shared/utils/AppColors.dart';
 import 'package:partypay/shared/utils/AppImages.dart';
+import 'package:partypay/shared/utils/string_filter.dart';
 
 class ProfileHeading extends StatelessWidget {
-  const ProfileHeading({Key? key}) : super(key: key);
+  final String name;
+  final String cpf;
+
+  const ProfileHeading({Key? key, required this.name, required this.cpf})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -48,11 +53,11 @@ class ProfileHeading extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.end,
                     children: [
                       Text(
-                        'Gabriel',
+                        StringFilter.getFirstName(name),
                         style: TextStyle(fontSize: 16, color: AppColors.gray),
                       ),
                       Text(
-                        '000.000.000-22',
+                        cpf,
                         style: TextStyle(color: AppColors.gray),
                       ),
                     ],

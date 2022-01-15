@@ -44,7 +44,7 @@ class DoubleBigButtonWListWidget extends StatelessWidget {
                       child: Text(
                         label,
                         style: const TextStyle(
-                            fontSize: 26,
+                            fontSize: 22,
                             color: AppColors.white,
                             fontWeight: FontWeight.bold),
                       ),

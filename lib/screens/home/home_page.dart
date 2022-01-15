@@ -8,6 +8,10 @@ import 'package:partypay/shared/utils/AppImages.dart';
 import 'widgets/double_big_button_wlist_widget.dart';
 import 'widgets/round_restaurant_card_widget.dart';
 
+const recentActivity = 'Atividade Recente';
+const restaurants = 'Restaurantes';
+const newSession = 'Start new Session';
+
 class HomePage extends StatelessWidget {
   final User user;
 
@@ -61,14 +65,14 @@ class HomePage extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16.0),
               child: DoubleBigButtonWListWidget(
-                  label: 'Recent activity', onTap: () {}),
+                  label: recentActivity, onTap: () {}),
             ),
             SizedBox(
               height: size.height * 0.03,
             ),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16.0),
-              child: DoubleBigButtonWidget(label: 'Restaurants', onTap: () {}),
+              child: DoubleBigButtonWidget(label: restaurants, onTap: () {}),
             ),
             SizedBox(
               height: size.height * 0.03,
@@ -76,7 +80,7 @@ class HomePage extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16.0),
               child: DoubleBigButtonWidget(
-                  label: 'Start new Session', onTap: () {}),
+                  label: newSession, onTap: () {}),
             ),
           ],
         ),

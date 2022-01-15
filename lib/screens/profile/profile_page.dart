@@ -1,11 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:partypay/model/user/user_model.dart';
 import 'package:partypay/shared/utils/AppColors.dart';
 
 import 'widget/profile_heading.dart';
 import 'widget/profiles_text_field.dart';
 
+const userLabel = 'User';
+const emailLabel = 'E-mail';
+const phoneLabel = 'Phone';
+const passwordLabel = 'Password';
+
 class ProfilePage extends StatelessWidget {
-  const ProfilePage({Key? key}) : super(key: key);
+  final User user;
+
+  const ProfilePage({Key? key, required this.user}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -24,21 +32,24 @@ class ProfilePage extends StatelessWidget {
         scrollDirection: Axis.vertical,
         child: Column(
           children: [
-            ProfileHeading(),
+            ProfileHeading(
+              name: user.name,
+              cpf: user.cpf == null ? '' : user.cpf!,
+            ),
             IconTextFieldWidget(
-              label: 'User',
+              label: userLabel,
               icon: Icons.person,
             ),
             IconTextFieldWidget(
-              label: 'E-mail',
+              label: emailLabel,
               icon: Icons.mail_outline,
             ),
             IconTextFieldWidget(
-              label: 'Phone',
+              label: phoneLabel,
               icon: Icons.phone,
             ),
             IconTextFieldWidget(
-              label: 'Password',
+              label: passwordLabel,
               icon: Icons.password,
             ),
           ],

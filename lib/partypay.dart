@@ -16,12 +16,20 @@ class PartyPayApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: ProfilePage(),
+      home: LoginPage(),
       routes: {
-        '/splash_page' : (context) => const SplashPage(),
-        '/login_page' : (context) => LoginPage(),
-        '/home_page': (context) => HomePage(user: User(idUser: -1, name: 'Guest')),
-        '/profile_page' : (context) => ProfilePage()
+        '/splash_page': (context) => const SplashPage(),
+        '/login_page': (context) => LoginPage(),
+
+        '/home_page': (context) => HomePage(
+            user: ModalRoute.of(context) != null
+                ? ModalRoute.of(context)!.settings.arguments as User
+                : User(name: 'Guest')),
+
+        '/profile_page': (context) => ProfilePage(
+            user: ModalRoute.of(context) != null
+                ? ModalRoute.of(context)!.settings.arguments as User
+                : User(name: 'Guest')),
       },
     );
   }

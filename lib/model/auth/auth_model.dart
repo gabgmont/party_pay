@@ -5,7 +5,7 @@ class AuthenticationModel {
   AuthenticationModel(this.email, this.secret);
 
   Map<String, dynamic> toJson() => {
-    '"email"' : '"$email"',
+    '"cpf"' : '"$email"',
     '"secret"' : '"$secret"'
   };
 }

@@ -37,7 +37,7 @@ class DoubleBigButtonWidget extends StatelessWidget {
                   child: Text(
                     label,
                     style: TextStyle(
-                        fontSize: 26,
+                        fontSize: 22,
                         color: AppColors.white,
                         fontWeight: FontWeight.bold),
                   ),

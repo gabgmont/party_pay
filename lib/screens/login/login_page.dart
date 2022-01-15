@@ -1,23 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:partypay/rest/user_service.dart';
 import 'package:partypay/screens/login/login_controller.dart';
 import 'package:partypay/screens/login/widgets/double_button_widget.dart';
 import 'package:partypay/screens/login/widgets/double_input_text_widget.dart';
 import 'package:partypay/shared/utils/AppColors.dart';
 import 'package:partypay/shared/utils/AppImages.dart';
 
-const welcome = 'Bem vindo!';
-const fillAllFields = 'Preencha todos os campos.';
 const enter = 'Entrar';
 const forgotPassword = 'Esqueci a senha';
 const password = 'Senha';
-const username = 'Usuario';
+const username = 'CPF';
 const login = 'Login';
+const welcome = 'Bem Vindo!';
 
 class LoginPage extends StatelessWidget {
   final usernameController = TextEditingController();
   final passwordController = TextEditingController();
   final loginController = LoginController();
+  final userService = UserService();
 
   LoginPage({Key? key}) : super(key: key);
 
@@ -95,30 +96,21 @@ class LoginPage extends StatelessWidget {
                         DoubleButtonWidget(
                           label: enter,
                           onTap: () async {
-                            var authModel = loginController.getAuthModel(
-                                usernameController.text,
-                                passwordController.text);
-                            if (authModel != null) {
-                              if (await loginController.login(
-                                  context, authModel)) {
-                                ScaffoldMessenger.of(context).showSnackBar(
-                                  const SnackBar(
-                                    backgroundColor: AppColors.secondary,
-                                    content: Text(welcome),
-                                  ),
-                                );
-                                Navigator.pushReplacementNamed(
-                                    context, '/home_page');
-                              }
-                            } else {
-                              ScaffoldMessenger.of(context).showSnackBar(
-                                const SnackBar(
-                                  backgroundColor: AppColors.secondary,
-                                  content: Text(
-                                    fillAllFields,
-                                    style: TextStyle(fontSize: 18),
-                                  ),
-                                ),
+                            var cpf = usernameController.text;
+                            var secret = passwordController.text;
+                            var sucess = await loginController.login(
+                              context,
+                              cpf,
+                              secret,
+                            );
+                            if (sucess) {
+
+                              var user = await userService.getUser(context, cpf);
+
+                              Navigator.pushReplacementNamed(
+                                context,
+                                '/home_page',
+                                arguments: user,
                               );
                             }
                           },

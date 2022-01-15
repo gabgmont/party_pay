@@ -1,5 +1,4 @@
 class User {
-  final int idUser;
   final String name;
   String? cpf;
   String? email;
@@ -8,8 +7,7 @@ class User {
   String? photo;
 
   User(
-      {required this.idUser,
-      required this.name,
+      {required this.name,
       this.cpf,
       this.email,
       this.secret,

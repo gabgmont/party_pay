@@ -3,12 +3,13 @@ import 'package:partypay/model/user/user_model.dart';
 import 'package:partypay/screens/home/news_controller.dart';
 import 'package:partypay/shared/utils/AppColors.dart';
 import 'package:partypay/shared/utils/AppImages.dart';
+import 'package:partypay/shared/utils/string_filter.dart';
 
 import 'news_widget.dart';
 import 'page_indicator_widget.dart';
 
 const logo = 'Partypay!';
-const welcome = 'Welcome,';
+const welcome = 'Bem vindo,';
 
 class HomePageAppBar extends StatefulWidget {
   final User user;
@@ -95,7 +96,8 @@ class _HomePageAppBarState extends State<HomePageAppBar> {
                               welcome,
                               style: TextStyle(color: AppColors.white),
                             ),
-                            Text(widget.user.name,
+                            Text(
+                                StringFilter.getFirstName(widget.user.name),
                                 style: TextStyle(color: AppColors.white))
                           ],
                         ),
