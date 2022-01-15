@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'model/user/user_model.dart';
 import 'screens/home/home_page.dart';
 import 'screens/login/login_page.dart';
+import 'screens/profile/profile_page.dart';
 import 'screens/splash/splash_page.dart';
 
 class PartyPayApp extends StatelessWidget {
@@ -15,11 +16,12 @@ class PartyPayApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: HomePage(user: User(idUser: -1, name: 'Guest')),
+      home: ProfilePage(),
       routes: {
         '/splash_page' : (context) => const SplashPage(),
         '/login_page' : (context) => LoginPage(),
-        '/home_page': (context) => HomePage(user: User(idUser: -1, name: 'Guest'))
+        '/home_page': (context) => HomePage(user: User(idUser: -1, name: 'Guest')),
+        '/profile_page' : (context) => ProfilePage()
       },
     );
   }

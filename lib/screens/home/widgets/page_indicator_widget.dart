@@ -19,7 +19,7 @@ class PageIndicatorWidget extends StatelessWidget {
           boxShadow: [
             BoxShadow(
               blurRadius: 2,
-              color: AppColors.gray,
+              color: AppColors.shadow,
               blurStyle: BlurStyle.outer,
             )
           ],

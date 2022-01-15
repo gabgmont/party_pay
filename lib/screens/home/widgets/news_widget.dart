@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:partypay/shared/utils/AppColors.dart';
 
 class NewsWidget extends StatelessWidget {
   final String image;
@@ -24,7 +25,7 @@ class NewsWidget extends StatelessWidget {
               offset: Offset.fromDirection(1, 1.5),
               blurRadius: 0.5,
               spreadRadius: 0.5,
-              color: Colors.black26
+              color: AppColors.shadow
             )]
           ),
         ),
