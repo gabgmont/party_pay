@@ -91,8 +91,12 @@ class _HomePageAppBarState extends State<HomePageAppBar> {
                           mainAxisAlignment: MainAxisAlignment.center,
                           crossAxisAlignment: CrossAxisAlignment.end,
                           children: [
-                            const Text(welcome,style: TextStyle(color: AppColors.white),),
-                            Text(widget.user.name, style: TextStyle(color: AppColors.white))
+                            const Text(
+                              welcome,
+                              style: TextStyle(color: AppColors.white),
+                            ),
+                            Text(widget.user.name,
+                                style: TextStyle(color: AppColors.white))
                           ],
                         ),
                         const SizedBox(
@@ -102,15 +106,19 @@ class _HomePageAppBarState extends State<HomePageAppBar> {
                           height: 60,
                           width: 60,
                           decoration: BoxDecoration(
-                            border: Border.fromBorderSide(BorderSide(width: 0.5, color: AppColors.gray)),
-                            image: DecorationImage(image: AssetImage(AppImages.userPicture)),
+                            border: Border.fromBorderSide(
+                                BorderSide(width: 0.5, color: AppColors.gray)),
+                            image: DecorationImage(
+                                image: AssetImage(AppImages.userPicture)),
                             borderRadius: BorderRadius.circular(20),
-                            boxShadow: [BoxShadow(
-                              offset: Offset.fromDirection(-2, -2),
-                              blurRadius: 0.5,
-                              spreadRadius: 0.5,
-                              color: Colors.black12,
-                            )]
+                            boxShadow: [
+                              BoxShadow(
+                                offset: Offset.fromDirection(1, 1.5),
+                                blurRadius: 0.5,
+                                spreadRadius: 0.5,
+                                color: Colors.black26,
+                              ),
+                            ],
                           ),
                         )
                       ],
