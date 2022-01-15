@@ -120,7 +120,7 @@ class _HomePageAppBarState extends State<HomePageAppBar> {
               ),
             ),
             Container(
-              height: size.height * 0.04,
+              height: size.height * 0.0813,
               width: size.width,
               color: AppColors.white,
             ),

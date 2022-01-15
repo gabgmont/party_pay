@@ -20,7 +20,7 @@ class HomePage extends StatelessWidget {
           ),
         ),
         body: Container(
-          color: AppColors.red,
+          color: AppColors.white,
         ));
   }
 }
