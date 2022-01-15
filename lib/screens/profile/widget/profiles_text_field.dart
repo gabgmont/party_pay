@@ -4,9 +4,18 @@ import 'package:partypay/shared/utils/AppColors.dart';
 class IconTextFieldWidget extends StatelessWidget {
   final IconData icon;
   final String label;
+  final String value;
+  final bool hidden;
+  final bool active;
 
-  const IconTextFieldWidget({Key? key, required this.icon, required this.label})
-      : super(key: key);
+  const IconTextFieldWidget({
+    Key? key,
+    required this.icon,
+    required this.label,
+    required this.value,
+    this.hidden = false,
+    this.active = false,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -57,12 +66,17 @@ class IconTextFieldWidget extends StatelessWidget {
                       height: size.height * 0.8,
                       child: TextFormField(
                         keyboardType: TextInputType.name,
-                        style: const TextStyle(fontSize: 16, color: AppColors.black),
+                        initialValue: value,
+                        obscureText: hidden,
+                        enabled: active,
+                        style: TextStyle(
+                            fontSize: 16,
+                            color: active ? AppColors.black : AppColors.gray),
                         decoration: InputDecoration(
                             floatingLabelBehavior: FloatingLabelBehavior.always,
                             labelText: label,
-                            labelStyle:
-                                const TextStyle(color: AppColors.gray, fontSize: 16),
+                            labelStyle: const TextStyle(
+                                color: AppColors.gray, fontSize: 16),
                             border: InputBorder.none),
                       ),
                     ),

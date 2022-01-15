@@ -26,6 +26,9 @@ class HomePage extends StatelessWidget {
         preferredSize: Size.fromHeight(size.height * 0.28),
         child: HomePageAppBar(
           user: user,
+          onTap: () {
+            Navigator.pushNamed(context, '/profile_page', arguments: user);
+          },
         ),
       ),
       body: Container(
@@ -79,8 +82,7 @@ class HomePage extends StatelessWidget {
             ),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16.0),
-              child: DoubleBigButtonWidget(
-                  label: newSession, onTap: () {}),
+              child: DoubleBigButtonWidget(label: newSession, onTap: () {}),
             ),
           ],
         ),

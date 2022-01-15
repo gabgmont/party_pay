@@ -13,8 +13,9 @@ const welcome = 'Bem vindo,';
 
 class HomePageAppBar extends StatefulWidget {
   final User user;
+  final VoidCallback onTap;
 
-  const HomePageAppBar({Key? key, required this.user}) : super(key: key);
+  const HomePageAppBar({Key? key, required this.user, required this.onTap}) : super(key: key);
 
   @override
   State<HomePageAppBar> createState() => _HomePageAppBarState();
@@ -104,23 +105,26 @@ class _HomePageAppBarState extends State<HomePageAppBar> {
                         const SizedBox(
                           width: 10,
                         ),
-                        Container(
-                          height: 60,
-                          width: 60,
-                          decoration: BoxDecoration(
-                            border: Border.fromBorderSide(
-                                BorderSide(width: 0.5, color: AppColors.gray)),
-                            image: DecorationImage(
-                                image: AssetImage(AppImages.userPicture)),
-                            borderRadius: BorderRadius.circular(20),
-                            boxShadow: [
-                              BoxShadow(
-                                offset: Offset.fromDirection(1, 1.5),
-                                blurRadius: 0.5,
-                                spreadRadius: 0.5,
-                                color: AppColors.shadow,
-                              ),
-                            ],
+                        InkWell(
+                          onTap: widget.onTap,
+                          child: Container(
+                            height: 60,
+                            width: 60,
+                            decoration: BoxDecoration(
+                              border: Border.fromBorderSide(
+                                  BorderSide(width: 0.5, color: AppColors.gray)),
+                              image: DecorationImage(
+                                  image: AssetImage(AppImages.userPicture)),
+                              borderRadius: BorderRadius.circular(20),
+                              boxShadow: [
+                                BoxShadow(
+                                  offset: Offset.fromDirection(1, 1.5),
+                                  blurRadius: 0.5,
+                                  spreadRadius: 0.5,
+                                  color: AppColors.shadow,
+                                ),
+                              ],
+                            ),
                           ),
                         )
                       ],

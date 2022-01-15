@@ -4,11 +4,18 @@ import 'package:partypay/shared/utils/AppImages.dart';
 import 'package:partypay/shared/utils/string_filter.dart';
 
 class ProfileHeading extends StatelessWidget {
+  final VoidCallback onEditPressed;
+  final VoidCallback onLogoutPressed;
   final String name;
   final String cpf;
 
-  const ProfileHeading({Key? key, required this.name, required this.cpf})
-      : super(key: key);
+  const ProfileHeading({
+    Key? key,
+    required this.name,
+    required this.cpf,
+    required this.onEditPressed,
+    required this.onLogoutPressed,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -32,20 +39,26 @@ class ProfileHeading extends StatelessWidget {
               children: [
                 Align(
                     alignment: Alignment.bottomCenter,
-                    child: Icon(
-                      Icons.edit,
-                      color: AppColors.primary,
-                      size: 36,
+                    child: IconButton(
+                      icon: const Icon(
+                        Icons.edit,
+                        color: AppColors.primary,
+                        size: 36,
+                      ),
+                      onPressed: onEditPressed,
                     )),
                 Align(
                   alignment: Alignment.bottomCenter,
-                  child: Icon(
-                    Icons.logout,
-                    color: AppColors.red,
-                    size: 36,
+                  child: IconButton(
+                    icon: const Icon(
+                      Icons.logout,
+                      color: AppColors.red,
+                      size: 36,
+                    ),
+                    onPressed: onLogoutPressed,
                   ),
                 ),
-                SizedBox(),
+                const SizedBox(),
                 SizedBox(
                   width: 100,
                   child: Column(
@@ -54,11 +67,11 @@ class ProfileHeading extends StatelessWidget {
                     children: [
                       Text(
                         StringFilter.getFirstName(name),
-                        style: TextStyle(fontSize: 16, color: AppColors.gray),
+                        style: const TextStyle(fontSize: 16, color: AppColors.gray),
                       ),
                       Text(
                         cpf,
-                        style: TextStyle(color: AppColors.gray),
+                        style: const TextStyle(color: AppColors.gray),
                       ),
                     ],
                   ),
@@ -69,10 +82,10 @@ class ProfileHeading extends StatelessWidget {
                     height: size.height * 0.15,
                     width: size.height * 0.15,
                     decoration: BoxDecoration(
-                        image: DecorationImage(
+                        image: const DecorationImage(
                             image: AssetImage(AppImages.userPicture),
                             fit: BoxFit.fill),
-                        border: Border.fromBorderSide(
+                        border: const Border.fromBorderSide(
                             BorderSide(width: 1, color: AppColors.primary)),
                         borderRadius: BorderRadius.circular(100)),
                   ),
