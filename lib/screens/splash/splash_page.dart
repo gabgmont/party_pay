@@ -11,8 +11,7 @@ const logoName = 'PartyPay!';
 const catchPhrase = 'Share your Bills.';
 
 class SplashPage extends StatelessWidget {
-  SplashPage({Key? key}) : super(key: key);
-  final prefs = SharedPreferences.getInstance();
+  const SplashPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
