@@ -13,9 +13,9 @@ class PartyPayApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Partypay',
-      initialRoute: '/home_page',
+      initialRoute: '/splash_page',
       routes: {
-        '/splash_page': (context) => const SplashPage(),
+        '/splash_page': (context) => SplashPage(),
         '/login_page': (context) => LoginPage(),
         '/home_page': (context) => HomePage(
             user: ModalRoute.of(context)!.settings.arguments == null

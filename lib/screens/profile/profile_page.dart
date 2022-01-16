@@ -51,6 +51,7 @@ class _ProfilePageState extends State<ProfilePage> {
               onLogoutPressed: () async {
                 var prefs = await SharedPreferences.getInstance();
                 prefs.remove('token');
+                prefs.remove('user');
                 Navigator.pushReplacementNamed(context, '/login_page');
               },
             ),

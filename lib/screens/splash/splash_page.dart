@@ -1,18 +1,23 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:partypay/model/user/user_model.dart';
 import 'package:partypay/shared/utils/AppColors.dart';
 import 'package:partypay/shared/utils/AppImages.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 const logoName = 'PartyPay!';
 const catchPhrase = 'Share your Bills.';
 
 class SplashPage extends StatelessWidget {
-  const SplashPage({Key? key}) : super(key: key);
+  SplashPage({Key? key}) : super(key: key);
+  final prefs = SharedPreferences.getInstance();
 
   @override
   Widget build(BuildContext context) {
     Future.delayed(const Duration(seconds: 2)).then(
-        (value) => Navigator.pushReplacementNamed(context, '/login_page'));
+            (value) => checkLogin(context));
 
     return Scaffold(
       body: Center(
@@ -33,11 +38,34 @@ class SplashPage extends StatelessWidget {
             Text(
               catchPhrase,
               style:
-                  GoogleFonts.redRose(fontSize: 24, color: AppColors.primary),
+              GoogleFonts.redRose(fontSize: 24, color: AppColors.primary),
             ),
           ],
         ),
       ),
     );
   }
+}
+
+void checkLogin(BuildContext context) async {
+  var prefs = await SharedPreferences.getInstance();
+  var token = prefs.getString('token');
+  var user = prefs.getString('user');
+
+  if (token == null || user == null) {
+    prefs.remove('token');
+    prefs.remove('user');
+    Navigator.pushReplacementNamed(context, '/login_page');
+    return;
+  }
+
+  var userMap = jsonDecode(user);
+  var userModel = User(
+      name: userMap['name'],
+      cpf: userMap['cpf'],
+      email: userMap['email'],
+      phone: userMap['phone'],
+      photo: userMap['photo']);
+
+  Navigator.pushReplacementNamed(context, '/home_page', arguments: userModel);
 }

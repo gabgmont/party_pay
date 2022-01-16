@@ -98,21 +98,11 @@ class LoginPage extends StatelessWidget {
                           onTap: () async {
                             var cpf = usernameController.text;
                             var secret = passwordController.text;
-                            var sucess = await loginController.login(
+                            loginController.login(
                               context,
                               cpf,
                               secret,
                             );
-                            if (sucess) {
-
-                              var user = await userService.getUser(context, cpf);
-
-                              Navigator.pushReplacementNamed(
-                                context,
-                                '/home_page',
-                                arguments: user,
-                              );
-                            }
                           },
                         )
                       ],
