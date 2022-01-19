@@ -12,40 +12,42 @@ class DoubleBigButtonWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
 
-    return InkWell(
-      onTap: onTap,
-      child: SizedBox(
-        height: size.height * 0.135,
-        width: size.width * 0.96,
-        child: Stack(
-          children: [
-            Align(
-              alignment: Alignment.bottomRight,
-              child: Container(
-                height: size.height * 0.13,
-                width: size.width * 0.9,
-                color: AppColors.secondary,
-              ),
+    return SizedBox(
+      height: size.height * 0.135,
+      width: size.width * 0.96,
+      child: Stack(
+        children: [
+          Align(
+            alignment: Alignment.bottomRight,
+            child: Container(
+              height: size.height * 0.13,
+              width: size.width * 0.9,
+              color: AppColors.secondary,
             ),
-            Align(
-              alignment: Alignment.topLeft,
-              child: Container(
-                height: size.height * 0.13,
-                width: size.width * 0.9,
-                color: AppColors.primary,
-                child: Center(
-                  child: Text(
-                    label,
-                    style: TextStyle(
-                        fontSize: 22,
-                        color: AppColors.white,
-                        fontWeight: FontWeight.bold),
+          ),
+          Align(
+            alignment: Alignment.topLeft,
+            child: Material(
+              child: InkWell(
+                onTap: onTap,
+                child: Container(
+                  height: size.height * 0.13,
+                  width: size.width * 0.9,
+                  color: AppColors.primary,
+                  child: Center(
+                    child: Text(
+                      label,
+                      style: TextStyle(
+                          fontSize: 22,
+                          color: AppColors.white,
+                          fontWeight: FontWeight.bold),
+                    ),
                   ),
                 ),
               ),
-            )
-          ],
-        ),
+            ),
+          )
+        ],
       ),
     );
   }

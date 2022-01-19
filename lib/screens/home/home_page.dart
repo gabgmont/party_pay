@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:partypay/model/restaurant/restaurant_model.dart';
 import 'package:partypay/model/user/user_model.dart';
 import 'package:partypay/screens/home/widgets/double_big_button_widget.dart';
 import 'package:partypay/screens/home/widgets/hp_app_bar.dart';
 import 'package:partypay/shared/utils/AppColors.dart';
-import 'package:partypay/shared/utils/AppImages.dart';
 
 import 'widgets/double_big_button_wlist_widget.dart';
 import 'widgets/round_restaurant_card_widget.dart';
@@ -31,60 +31,53 @@ class HomePage extends StatelessWidget {
           },
         ),
       ),
-      body: Container(
-        color: AppColors.white,
-        child: Column(
-          children: [
-            SingleChildScrollView(
-              scrollDirection: Axis.horizontal,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: const [
-                  RoundRestaurantCardWidget(
-                    image: AppImages.smallSrShitake,
-                  ),
-                  RoundRestaurantCardWidget(
-                    image: AppImages.smallCocoBambu,
-                  ),
-                  RoundRestaurantCardWidget(
-                    image: AppImages.smallSiSenor,
-                  ),
-                  RoundRestaurantCardWidget(
-                    image: AppImages.smallOutback,
-                  ),
-                  RoundRestaurantCardWidget(
-                    image: AppImages.smallHardRock,
-                  ),
-                  RoundRestaurantCardWidget(
-                    image: AppImages.smallMadero,
-                  ),
-                  RoundRestaurantCardWidget(
-                    image: AppImages.smallParis6,
-                  ),
-                ],
+      body: SingleChildScrollView(
+        scrollDirection: Axis.vertical,
+        child: Container(
+          color: AppColors.white,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              SingleChildScrollView(
+                scrollDirection: Axis.horizontal,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    RoundRestaurantCardWidget(
+                      restaurant: RestaurantModel.outback,
+                      shape: Shape.ROUND,
+                      onTap: () {},
+                    ),
+                  ],
+                ),
               ),
-            ),
-            SizedBox(height: size.height * 0.03),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16.0),
-              child: DoubleBigButtonWListWidget(
-                  label: recentActivity, onTap: () {}),
-            ),
-            SizedBox(
-              height: size.height * 0.03,
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16.0),
-              child: DoubleBigButtonWidget(label: restaurants, onTap: () {}),
-            ),
-            SizedBox(
-              height: size.height * 0.03,
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16.0),
-              child: DoubleBigButtonWidget(label: newSession, onTap: () {}),
-            ),
-          ],
+              SizedBox(height: size.height * 0.03),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                child: DoubleBigButtonWListWidget(
+                    label: recentActivity, onTap: () {}),
+              ),
+              SizedBox(
+                height: size.height * 0.03,
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                child: DoubleBigButtonWidget(label: restaurants, onTap: () {}),
+              ),
+              SizedBox(
+                height: size.height * 0.03,
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                child: DoubleBigButtonWidget(
+                    label: newSession,
+                    onTap: () {
+                      Navigator.pushNamed(context, '/session_create_page',
+                          arguments: user);
+                    }),
+              ),
+            ],
+          ),
         ),
       ),
     );

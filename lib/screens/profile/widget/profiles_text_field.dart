@@ -61,7 +61,7 @@ class IconTextFieldWidget extends StatelessWidget {
                   ),
                   Align(
                     alignment: Alignment.topRight,
-                    child: Container(
+                    child: SizedBox(
                       width: size.width * 0.77,
                       height: size.height * 0.8,
                       child: TextFormField(
@@ -80,7 +80,7 @@ class IconTextFieldWidget extends StatelessWidget {
                             border: InputBorder.none),
                       ),
                     ),
-                  )
+                  ),
                 ],
               ),
             )

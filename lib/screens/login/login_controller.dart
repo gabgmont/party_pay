@@ -29,8 +29,17 @@ class LoginController {
 
     var authJson = AuthenticationModel(cpf, secret).toJson();
     var response = await service.post(PartyPayService.auth, authJson);
+    if(response == null) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          backgroundColor: AppColors.secondary,
+          content: Text('Ocorreu um erro no servidor da aplicacao.'),
+        ),
+      );
+      return false;
+    };
+
     var json = jsonDecode(utf8.decode(response.bodyBytes));
-    print(json);
 
     if (response.statusCode != 200) {
       ScaffoldMessenger.of(context).showSnackBar(
