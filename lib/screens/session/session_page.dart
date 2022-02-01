@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:partypay/shared/utils/AppColors.dart';
+
+import 'widgets/session_page_appbar_widget.dart';
 
 class SessionPage extends StatelessWidget {
   const SessionPage({Key? key}) : super(key: key);
@@ -7,10 +8,13 @@ class SessionPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
-    return Container(
-      height: size.height,
-      width: size.width,
-      color: AppColors.primary,
+
+    return Scaffold(
+      appBar: PreferredSize(
+        preferredSize: Size.fromHeight(size.height * 0.22),
+        child: const SessionPageAppBar(),
+      ),
+      body: Container(),
     );
   }
 }
