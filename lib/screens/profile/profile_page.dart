@@ -42,8 +42,7 @@ class _ProfilePageState extends State<ProfilePage> {
         child: Column(
           children: [
             ProfileHeading(
-              name: widget.user.name,
-              cpf: widget.user.cpf ?? '',
+              user: widget.user,
               onEditPressed: () {
                 setState(() {
                   active = !active;

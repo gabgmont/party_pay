@@ -1,20 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:partypay/model/user/user_model.dart';
+import 'package:partypay/screens/create_session/widget/user_round_card_widget.dart';
 import 'package:partypay/shared/utils/AppColors.dart';
-import 'package:partypay/shared/utils/AppImages.dart';
 import 'package:partypay/shared/utils/string_filter.dart';
 
 class ProfileHeading extends StatelessWidget {
   final VoidCallback onEditPressed;
   final VoidCallback onLogoutPressed;
-  final String name;
-  final String cpf;
+  final User user;
 
   const ProfileHeading({
     Key? key,
-    required this.name,
-    required this.cpf,
     required this.onEditPressed,
     required this.onLogoutPressed,
+    required this.user,
   }) : super(key: key);
 
   @override
@@ -41,25 +40,25 @@ class ProfileHeading extends StatelessWidget {
                   Align(
                       alignment: Alignment.bottomCenter,
                       child: IconButton(
-                          color: AppColors.primary,
-                          splashRadius: 25,
-                          icon: const Icon(
-                            Icons.edit,
-                            size: 36,
-                          ),
-                          onPressed: onEditPressed,
-                          )),
+                        color: AppColors.primary,
+                        splashRadius: 25,
+                        icon: const Icon(
+                          Icons.edit,
+                          size: 36,
+                        ),
+                        onPressed: onEditPressed,
+                      )),
                   Align(
                     alignment: Alignment.bottomCenter,
                     child: IconButton(
-                        color: AppColors.red,
-                        splashRadius: 25,
-                        icon: const Icon(
-                          Icons.logout,
-                          size: 36,
-                        ),
-                        onPressed: onLogoutPressed,
-                        ),
+                      color: AppColors.red,
+                      splashRadius: 25,
+                      icon: const Icon(
+                        Icons.logout,
+                        size: 36,
+                      ),
+                      onPressed: onLogoutPressed,
+                    ),
                   ),
                   const SizedBox(),
                   SizedBox(
@@ -69,12 +68,12 @@ class ProfileHeading extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.end,
                       children: [
                         Text(
-                          StringFilter.getFirstName(name),
+                          StringFilter.getFirstName(user.name),
                           style: const TextStyle(
                               fontSize: 16, color: AppColors.gray),
                         ),
                         Text(
-                          cpf,
+                          user.cpf ?? '',
                           style: const TextStyle(color: AppColors.gray),
                         ),
                       ],
@@ -82,16 +81,11 @@ class ProfileHeading extends StatelessWidget {
                   ),
                   Align(
                     alignment: Alignment.centerRight,
-                    child: Container(
+                    child: UserRoundCardWidget(
                       height: size.height * 0.15,
                       width: size.height * 0.15,
-                      decoration: BoxDecoration(
-                          image: const DecorationImage(
-                              image: AssetImage(AppImages.userPicture),
-                              fit: BoxFit.fill),
-                          border: const Border.fromBorderSide(
-                              BorderSide(width: 1, color: AppColors.primary)),
-                          borderRadius: BorderRadius.circular(100)),
+                      initials: user.getInitials(),
+                      photo: user.photo,
                     ),
                   )
                 ],

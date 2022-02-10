@@ -33,7 +33,8 @@ class _SessionCreatePageState extends State<SessionCreatePage> {
   void checkOption(int index) {
     setState(() {
       selected = index;
-      sessionController.restaurant = sessionController.restaurantList[selected -1]['name'];
+      sessionController.restaurant =
+          sessionController.restaurantList[selected - 1]['name'];
     });
   }
 
@@ -90,9 +91,7 @@ class _SessionCreatePageState extends State<SessionCreatePage> {
                 padding: EdgeInsets.symmetric(vertical: 16.0),
                 child: Align(
                     alignment: Alignment.topLeft,
-                    child: Text(addUser,
-                        style:
-                            TextStyle( fontSize: 18))),
+                    child: Text(addUser, style: TextStyle(fontSize: 18))),
               ),
               CpfAddFormFieldWidget(
                 textController: textController,
@@ -101,8 +100,12 @@ class _SessionCreatePageState extends State<SessionCreatePage> {
                       context, textController.text);
                   if (user != null) {
                     setState(() {
-                      sessionController.userCardList.add(UserRoundCardWidget(
-                          initials: user.getInitials(), photo: user.photo));
+                      sessionController.userCardList.add(
+                        UserRoundCardWidget(
+                          initials: user.getInitials(),
+                          photo: user.photo,
+                        ),
+                      );
                     });
                   }
                 },
@@ -130,14 +133,24 @@ class _SessionCreatePageState extends State<SessionCreatePage> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  const Icon(Icons.restaurant, color: AppColors.primary, size: 36,),
+                  const Icon(
+                    Icons.restaurant,
+                    color: AppColors.primary,
+                    size: 36,
+                  ),
                   const Padding(
                     padding: EdgeInsets.symmetric(horizontal: 8.0),
-                    child: Text(table, style: TextStyle(fontSize: 18),),
+                    child: Text(
+                      table,
+                      style: TextStyle(fontSize: 18),
+                    ),
                   ),
                   DropdownButton(
                     value: dropdownValue,
-                    icon: const Icon(Icons.keyboard_arrow_down_rounded, color: AppColors.secondary,),
+                    icon: const Icon(
+                      Icons.keyboard_arrow_down_rounded,
+                      color: AppColors.secondary,
+                    ),
                     underline: Container(
                       height: 2,
                       color: AppColors.primary,
@@ -163,7 +176,8 @@ class _SessionCreatePageState extends State<SessionCreatePage> {
               CreateSessionConfirmButton(
                 onTap: () async {
                   var sucess = await sessionController.startSession(context);
-                  if (sucess) Navigator.pushReplacementNamed(context, '/session_page');
+                  if (sucess)
+                    Navigator.pushReplacementNamed(context, '/session_page');
                 },
               )
             ],

@@ -1,3 +1,5 @@
+import 'package:partypay/shared/utils/AppImages.dart';
+
 class User {
   final String name;
   String? cpf;
@@ -11,7 +13,7 @@ class User {
     this.cpf,
     this.email,
     this.phone,
-    this.photo,
+    this.photo = AppImages.userPicture,
   });
 
   String cpfValue() => cpf!.replaceAll('.', '').replaceAll('-', '');

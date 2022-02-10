@@ -72,7 +72,7 @@ class HomePage extends StatelessWidget {
                 child: DoubleBigButtonWidget(
                     label: newSession,
                     onTap: () {
-                      Navigator.pushNamed(context, '/session_create_page',
+                      Navigator.pushNamed(context, '/session_page',
                           arguments: user);
                     }),
               ),

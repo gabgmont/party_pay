@@ -26,7 +26,7 @@ class CreateSessionController {
   var userService = UserService();
 
   void init(User user) {
-    if(usersList.isNotEmpty) return;
+    if (usersList.isNotEmpty) return;
 
     usersList.add(user);
     userCardList.add(

@@ -40,7 +40,7 @@ class UserService {
       cpf: json[0]['cpf'],
       email: json[0]['email'],
       phone: json[0]['phone'],
-      photo: json[0]['photo'],
+      // photo: json[0]['photo'],
     );
   }
 }

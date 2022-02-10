@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:partypay/model/user/user_model.dart';
+import 'package:partypay/screens/create_session/widget/user_round_card_widget.dart';
 import 'package:partypay/screens/home/news_controller.dart';
 import 'package:partypay/shared/utils/AppColors.dart';
 import 'package:partypay/shared/utils/AppImages.dart';
@@ -107,25 +108,31 @@ class _HomePageAppBarState extends State<HomePageAppBar> {
                         ),
                         InkWell(
                           onTap: widget.onTap,
-                          child: Container(
-                            height: 60,
-                            width: 60,
-                            decoration: BoxDecoration(
-                              border: const Border.fromBorderSide(
-                                  BorderSide(width: 0.5, color: AppColors.gray)),
-                              image: const DecorationImage(
-                                  image: AssetImage(AppImages.userPicture)),
-                              borderRadius: BorderRadius.circular(20),
-                              boxShadow: [
-                                BoxShadow(
-                                  offset: Offset.fromDirection(1, 1.5),
-                                  blurRadius: 0.5,
-                                  spreadRadius: 0.5,
-                                  color: AppColors.shadow,
-                                ),
-                              ],
-                            ),
-                          ),
+                          child: UserRoundCardWidget(
+                            height: 70,
+                            width: 70,
+                            initials: widget.user.getInitials(),
+                            photo: widget.user.photo,
+                          )
+                          // Container(
+                          //   height: 60,
+                          //   width: 60,
+                          //   decoration: BoxDecoration(
+                          //     border: const Border.fromBorderSide(
+                          //         BorderSide(width: 0.5, color: AppColors.gray)),
+                          //     image: DecorationImage(
+                          //         image: AssetImage(widget.user.photo!)),
+                          //     borderRadius: BorderRadius.circular(20),
+                          //     boxShadow: [
+                          //       BoxShadow(
+                          //         offset: Offset.fromDirection(1, 1.5),
+                          //         blurRadius: 0.5,
+                          //         spreadRadius: 0.5,
+                          //         color: AppColors.shadow,
+                          //       ),
+                          //     ],
+                          //   ),
+                          // ),
                         )
                       ],
                     )
