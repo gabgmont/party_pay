@@ -19,6 +19,7 @@ class CloseSessionButton extends StatelessWidget {
     return Material(
       color: AppColors.primary,
       borderRadius: borderRadius,
+      elevation: 3,
       child: InkWell(
         onTap: onTap,
         borderRadius: borderRadius,
