@@ -4,14 +4,10 @@ import 'close_session_button.dart';
 import 'session_navigation_button.dart';
 
 class SessionBottomNavigationBar extends StatelessWidget {
-  final VoidCallback leftButtonTap;
-  final VoidCallback rightButtonTap;
   final VoidCallback closeButtonTap;
 
   const SessionBottomNavigationBar(
       {Key? key,
-      required this.leftButtonTap,
-      required this.rightButtonTap,
       required this.closeButtonTap})
       : super(key: key);
 
@@ -34,18 +30,20 @@ class SessionBottomNavigationBar extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
               SessionNavigationButton(
-                label: 'Menu',
-                icon: Icons.restaurant_menu,
-                onTap: leftButtonTap,
-              ),
+                  label: 'Menu',
+                  icon: Icons.restaurant_menu,
+                  onTap: () {
+                    Scaffold.of(context).openDrawer();
+                  }),
               CloseSessionButton(
                 onTap: closeButtonTap,
               ),
               SessionNavigationButton(
-                label: 'Users',
-                icon: Icons.groups,
-                onTap: rightButtonTap,
-              )
+                  label: 'Users',
+                  icon: Icons.groups,
+                  onTap: () {
+                    Scaffold.of(context).openEndDrawer();
+                  })
             ],
           ),
         ],

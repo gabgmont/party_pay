@@ -1,0 +1,197 @@
+import 'package:flutter/material.dart';
+
+import '../../../shared/utils/AppColors.dart';
+
+class MenuOrderWidget extends StatelessWidget {
+  final String label;
+  final String description;
+  final double price;
+
+  const MenuOrderWidget(
+      {Key? key,
+      required this.label,
+      required this.description,
+      required this.price})
+      : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
+
+    return Padding(
+      padding: EdgeInsets.all(size.height * .01),
+      child: SizedBox(
+        height: size.height * .2,
+        width: size.width * .9,
+        child: Stack(
+          children: [
+            const Align(
+              alignment: Alignment.bottomLeft,
+              child: _MenuOrderShadow(),
+            ),
+            Align(
+              alignment: Alignment.topRight,
+              child: _MenuOrderCard(
+                label: label,
+                description: description,
+                price: price,
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class _MenuOrderShadow extends StatelessWidget {
+  const _MenuOrderShadow({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
+
+    return Container(
+      height: size.height * .192,
+      width: size.width * .79,
+      color: AppColors.secondary,
+    );
+  }
+}
+
+class _MenuOrderCard extends StatelessWidget {
+  final String label;
+  final String description;
+  final double price;
+
+  const _MenuOrderCard(
+      {Key? key,
+      required this.price,
+      required this.label,
+      required this.description})
+      : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
+
+    return Container(
+      height: size.height * .194,
+      width: size.width * .79,
+      decoration: BoxDecoration(
+        color: AppColors.white,
+        boxShadow: [
+          BoxShadow(
+            color: AppColors.shadow,
+            offset: Offset.fromDirection(5.5),
+            blurRadius: .3,
+            spreadRadius: .3,
+          )
+        ],
+      ),
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            Container(
+              height: size.height * .13,
+              width: size.height * .13,
+              color: AppColors.secondary,
+            ),
+            Align(
+              alignment: Alignment.bottomLeft,
+              child: Padding(
+                padding: EdgeInsets.only(left: size.width * .02),
+                child: SizedBox(
+                  width: size.width * .45,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      _MenuOrderNameDescription(
+                        label: label,
+                        description: description,
+                      ),
+                      _MenuOrderPrice(
+                        price: price,
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class _MenuOrderNameDescription extends StatelessWidget {
+  final String label;
+  final String description;
+
+  const _MenuOrderNameDescription(
+      {Key? key, required this.label, required this.description})
+      : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
+
+    return Padding(
+      padding: EdgeInsets.only(top: size.height * .03),
+      child: Align(
+        alignment: Alignment.topLeft,
+        child: Text.rich(
+          TextSpan(
+            text: '$label\n',
+            style: TextStyle(fontSize: size.height * .023),
+            children: [
+              TextSpan(
+                text: description,
+                style: TextStyle(fontSize: size.height * .013),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class _MenuOrderPrice extends StatelessWidget {
+  final double price;
+
+  const _MenuOrderPrice({Key? key, required this.price}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
+
+    return Align(
+      alignment: Alignment.bottomRight,
+      child: SizedBox(
+        height: size.height * .05,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.end,
+          children: [
+            Align(
+                alignment: Alignment.topRight,
+                child: Text(
+                  'R\$',
+                  style: TextStyle(fontSize: size.height * .016),
+                )),
+            Align(
+              alignment: Alignment.topLeft,
+              child: Text(
+                '$price',
+                style: TextStyle(fontSize: size.height * .045),
+              ),
+            )
+          ],
+        ),
+      ),
+    );
+  }
+}
