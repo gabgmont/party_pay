@@ -21,7 +21,7 @@ class SessionPageAppBar extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Align(
+              const Align(
                 alignment: Alignment.topLeft,
                 child: Text(
                   'Restaurant',
@@ -34,27 +34,24 @@ class SessionPageAppBar extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
-                  UserRoundCardWidget(
-                    height: size.height * 0.1,
-                    width: size.height * 0.1,
-                  ),
+                  // UserRoundCardWidget(
+                  //   height: size.height * 0.1,
+                  //   width: size.height * 0.1,
+                  // ),
                   HeaderTileWidget(
                     height: size.height * 0.054,
-                    width: size.width * 0.155,
                     icon: Icons.restaurant,
-                    data: '0',
+                    data: '110',
                   ),
                   HeaderTileWidget(
                     height: size.height * 0.054,
-                    width: size.width * 0.255,
                     icon: Icons.person,
-                    data: 'R\$00,00',
+                    data: 'R\$0000,00',
                   ),
                   HeaderTileWidget(
                     height: size.height * 0.054,
-                    width: size.width * 0.255,
                     icon: Icons.group,
-                    data: 'R\$00,00',
+                    data: 'R\$10000,00',
                   )
                 ],
               ),

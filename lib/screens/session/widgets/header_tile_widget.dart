@@ -5,10 +5,12 @@ class HeaderTileWidget extends StatelessWidget {
   final IconData icon;
   final String data;
   final double height;
-  final double width;
 
   const HeaderTileWidget(
-      {Key? key, required this.icon, required this.data, this.height = 0, this.width = 0})
+      {Key? key,
+      required this.icon,
+      required this.data,
+      this.height = 0})
       : super(key: key);
 
   @override
@@ -17,39 +19,66 @@ class HeaderTileWidget extends StatelessWidget {
 
     return SizedBox(
       height: height, //size.height * 0.054,
-      width: width, //size.width * 0.254,
       child: Stack(
         children: [
           Align(
             alignment: Alignment.bottomRight,
             child: Container(
               height: height * 0.9, //size.height * 0.05,
-              width: width * 0.9, //size.width * 0.25,
               decoration: BoxDecoration(
-                  color: AppColors.secondary,
-                  borderRadius: BorderRadius.circular(200)),
+                color: AppColors.secondary,
+                borderRadius: BorderRadius.circular(200),
+                boxShadow: [
+                  BoxShadow(
+                      color: AppColors.shadow,
+                      offset: Offset.fromDirection(1),
+                      blurRadius: .5,
+                      spreadRadius: .5)
+                ],
+              ),
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Icon(
+                      icon,
+                      color: AppColors.primary,
+                      size: size.height * .035,
+                    ),
+                    const SizedBox(
+                      width: 4,
+                    ),
+                    Text(data)
+                  ],
+                ),
+              ),
             ),
           ),
           Align(
             alignment: Alignment.topLeft,
             child: Container(
               height: size.height * 0.05,
-              width: size.width * 0.25,
               decoration: BoxDecoration(
-                  color: AppColors.white,
-                  borderRadius: BorderRadius.circular(200)),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Icon(
-                    icon,
-                    color: AppColors.primary,
-                  ),
-                  SizedBox(
-                    width: 4,
-                  ),
-                  Text(data)
-                ],
+                color: AppColors.white,
+                borderRadius: BorderRadius.circular(200),
+              ),
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Icon(
+                      icon,
+                      color: AppColors.primary,
+                      size: size.height * .035,
+                    ),
+                    const SizedBox(
+                      width: 4,
+                    ),
+                    Text(data)
+                  ],
+                ),
               ),
             ),
           ),
