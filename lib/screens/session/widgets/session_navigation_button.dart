@@ -20,6 +20,9 @@ class SessionNavigationButton extends StatelessWidget {
         children: [
           IconButton(
             onPressed: onTap,
+            highlightColor: AppColors.secondary,
+            splashRadius: size.height * .035,
+            splashColor: AppColors.secondary,
             padding: EdgeInsets.zero,
             icon: Icon(
               icon,

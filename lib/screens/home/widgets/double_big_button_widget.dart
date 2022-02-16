@@ -28,12 +28,14 @@ class DoubleBigButtonWidget extends StatelessWidget {
           Align(
             alignment: Alignment.topLeft,
             child: Material(
+              color: AppColors.primary,
               child: InkWell(
                 onTap: onTap,
+                highlightColor: AppColors.secondary,
+                splashColor: AppColors.secondary,
                 child: Container(
                   height: size.height * 0.13,
                   width: size.width * 0.9,
-                  color: AppColors.primary,
                   child: Center(
                     child: Text(
                       label,
