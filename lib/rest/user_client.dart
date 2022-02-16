@@ -6,11 +6,13 @@ import 'package:partypay/shared/utils/AppColors.dart';
 
 import 'partypay_api_service.dart';
 
-class UserService {
+class UserClient {
+  final service = PartyPayService();
+
   Future<User?> getUser(BuildContext context, String cpf) async {
     var path = PartyPayService.getUser + '?cpf=$cpf';
 
-    var response = await PartyPayService().get(path);
+    var response = await service.get(path);
     if (response == null) {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(

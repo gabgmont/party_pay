@@ -4,8 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:partypay/rest/partypay_api_service.dart';
 import 'package:partypay/shared/utils/AppColors.dart';
 
-class SessionService {
-  var service = PartyPayService();
+class SessionClient {
+  final service = PartyPayService();
 
   Future<int> createSession(
       BuildContext context, String restaurant, int table) async {

@@ -3,8 +3,8 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:partypay/model/restaurant/restaurant_model.dart';
 import 'package:partypay/model/user/user_model.dart';
-import 'package:partypay/rest/session_service.dart';
-import 'package:partypay/rest/user_service.dart';
+import 'package:partypay/rest/session_client.dart';
+import 'package:partypay/rest/user_client.dart';
 import 'package:partypay/screens/create_session/widget/user_round_card_widget.dart';
 import 'package:partypay/shared/utils/AppColors.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -22,8 +22,8 @@ class CreateSessionController {
   var userCardList = <Widget>[];
   var restaurantList = <Map>[];
 
-  var sessionService = SessionService();
-  var userService = UserService();
+  var sessionService = SessionClient();
+  var userService = UserClient();
 
   void init(User user) {
     if (usersList.isNotEmpty) return;

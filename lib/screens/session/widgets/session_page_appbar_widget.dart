@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:partypay/screens/create_session/widget/user_round_card_widget.dart';
 import 'package:partypay/shared/utils/AppColors.dart';
 
 import 'header_tile_widget.dart';

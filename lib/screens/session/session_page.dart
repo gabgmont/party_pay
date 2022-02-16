@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:partypay/shared/utils/AppColors.dart';
 
-import 'widgets/close_session_button.dart';
 import 'widgets/order_card_widget.dart';
 import 'widgets/order_header_widget.dart';
-import 'widgets/session_navigation_button.dart';
+import 'widgets/session_bottom_navigation_bar.dart';
 import 'widgets/session_page_appbar_widget.dart';
 
 class SessionPage extends StatelessWidget {
@@ -37,35 +35,10 @@ class SessionPage extends StatelessWidget {
           )
         ],
       ),
-      bottomNavigationBar: SizedBox(
-        height: size.height * .1486,
-        width: size.width,
-        child: Column(
-          children: [
-            Divider(
-              indent: size.width * .08,
-              endIndent: size.width * .08,
-              thickness: 1,
-            ),
-            Row(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                SessionNavigationButton(
-                  label: 'Menu',
-                  onTap: () {},
-                ),
-                CloseSessionButton(
-                  onTap: () {},
-                ),
-                SessionNavigationButton(
-                  label: 'Users',
-                  onTap: () {},
-                )
-              ],
-            ),
-          ],
-        ),
+      bottomNavigationBar: SessionBottomNavigationBar(
+        leftButtonTap: () {},
+        closeButtonTap: () {},
+        rightButtonTap: () {},
       ),
     );
   }

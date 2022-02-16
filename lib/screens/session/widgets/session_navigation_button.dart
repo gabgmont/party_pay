@@ -3,10 +3,11 @@ import 'package:partypay/shared/utils/AppColors.dart';
 
 class SessionNavigationButton extends StatelessWidget {
   final String label;
+  final IconData icon;
   final VoidCallback onTap;
 
   const SessionNavigationButton(
-      {Key? key, required this.label, required this.onTap})
+      {Key? key, required this.label, required this.onTap, required this.icon})
       : super(key: key);
 
   @override
@@ -21,7 +22,7 @@ class SessionNavigationButton extends StatelessWidget {
             onPressed: onTap,
             padding: EdgeInsets.zero,
             icon: Icon(
-              Icons.restaurant_menu,
+              icon,
               size: size.height * .05,
               color: AppColors.primary,
             ),
