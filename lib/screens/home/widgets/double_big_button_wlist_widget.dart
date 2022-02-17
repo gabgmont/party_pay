@@ -16,59 +16,63 @@ class DoubleBigButtonWListWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
 
-    return InkWell(
-      onTap: onTap,
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          SizedBox(
-            height: size.height * 0.135,
-            width: size.width * 0.60,
-            child: Stack(
-              children: [
-                Align(
-                  alignment: Alignment.bottomRight,
-                  child: Container(
-                    height: size.height * 0.13,
-                    width: size.width * 0.59,
-                    color: AppColors.secondary,
-                  ),
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        SizedBox(
+          height: size.height * 0.135,
+          width: size.width * 0.60,
+          child: Stack(
+            children: [
+              Align(
+                alignment: Alignment.bottomRight,
+                child: Container(
+                  height: size.height * 0.13,
+                  width: size.width * 0.59,
+                  color: AppColors.secondary,
                 ),
-                Align(
-                  alignment: Alignment.topLeft,
-                  child: Container(
-                    height: size.height * 0.13,
-                    width: size.width * 0.59,
-                    color: AppColors.primary,
-                    child: Center(
-                      child: Text(
-                        label,
-                        style: const TextStyle(
-                            fontSize: 22,
-                            color: AppColors.white,
-                            fontWeight: FontWeight.bold),
+              ),
+              Align(
+                alignment: Alignment.topLeft,
+                child: Material(
+                  color: AppColors.primary,
+                  child: InkWell(
+                    onTap: onTap,
+                    highlightColor: AppColors.secondary,
+                    splashColor: AppColors.secondary,
+                    child: Container(
+                      height: size.height * 0.13,
+                      width: size.width * 0.59,
+                      child: Center(
+                        child: Text(
+                          label,
+                          style: const TextStyle(
+                              fontSize: 22,
+                              color: AppColors.white,
+                              fontWeight: FontWeight.bold),
+                        ),
                       ),
                     ),
                   ),
-                )
-              ],
-            ),
-          ),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              RecentActivityButtonItemWidget(image: AppImages.smallOutback, price: 'R\$87,99',),
-              Padding(
-                padding: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 30),
-                child: Container(height: 1,width: 50,color: AppColors.secondary,),
-              ),
-              RecentActivityButtonItemWidget(image: AppImages.smallSiSenor, price: 'R\$159,99',),
+                ),
+              )
             ],
           ),
-          const SizedBox()
-        ],
-      ),
+        ),
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            RecentActivityButtonItemWidget(image: AppImages.smallOutback, price: 'R\$87,99',),
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 30),
+              child: Container(height: 1,width: 50,color: AppColors.secondary,),
+            ),
+            RecentActivityButtonItemWidget(image: AppImages.smallSiSenor, price: 'R\$159,99',),
+          ],
+        ),
+        const SizedBox()
+      ],
     );
   }
 }

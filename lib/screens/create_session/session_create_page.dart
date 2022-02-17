@@ -47,7 +47,12 @@ class _SessionCreatePageState extends State<SessionCreatePage> {
 
     return Scaffold(
       appBar: AppBar(
-        leading: const BackButton(),
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back_ios),
+          onPressed: () {
+            Navigator.pop(context);
+          },
+        ),
         title: const Text(createSession),
         backgroundColor: AppColors.primary,
       ),

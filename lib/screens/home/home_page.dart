@@ -29,7 +29,12 @@ class HomePage extends StatelessWidget {
         child: HomePageAppBar(
           user: user,
           onTap: () {
-            Navigator.push(context, MaterialPageRoute(builder: (context) => ProfilePage(user: user)));
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => ProfilePage(user: user),
+              ),
+            );
           },
         ),
       ),
@@ -72,14 +77,16 @@ class HomePage extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 16.0),
                 child: DoubleBigButtonWidget(
-                    label: newSession,
-                    onTap: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) =>
-                                  SessionCreatePage(user: user)));
-                    }),
+                  label: newSession,
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => SessionCreatePage(user: user),
+                      ),
+                    );
+                  },
+                ),
               ),
             ],
           ),
