@@ -80,6 +80,7 @@ class LoginPage extends StatelessWidget {
                         DoubleInputTextWidgetWidget(
                           textController: passwordController,
                           hint: password,
+                          obscureText: true,
                         ),
                         const SizedBox(
                           height: 20,

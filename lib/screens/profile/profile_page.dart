@@ -53,6 +53,7 @@ class _ProfilePageState extends State<ProfilePage> {
                 var prefs = await SharedPreferences.getInstance();
                 prefs.remove('token');
                 prefs.remove('user');
+                prefs.remove('session_id');
                 Navigator.pushReplacement(context,
                     MaterialPageRoute(builder: (context) => LoginPage()));
               },

@@ -26,6 +26,8 @@ class CreateSessionController {
   final _sessionService = SessionClient();
   final _userService = UserClient();
 
+  var prefs = SharedPreferences.getInstance();
+
   void init(UserModel user) {
     if (usersList.isNotEmpty) return;
 
@@ -55,6 +57,9 @@ class CreateSessionController {
     var cpfs = usersList.map((e) => e.cpf).toList();
     var sucess = await _sessionService.addUsers(context, sessionModel.id, cpfs);
     if (sucess != null) {
+      var prefs = await SharedPreferences.getInstance();
+      prefs.setInt('session_id', sessionModel.id);
+
       sessionModel.userList.addAll(usersList);
       return sessionModel;
     }

@@ -7,7 +7,14 @@ const username = 'Username';
 class DoubleInputTextWidgetWidget extends StatelessWidget {
   final TextEditingController textController;
   final String hint;
-  const DoubleInputTextWidgetWidget({Key? key, required this.hint, required this.textController}) : super(key: key);
+  final bool obscureText;
+
+  const DoubleInputTextWidgetWidget(
+      {Key? key,
+      required this.hint,
+      required this.textController,
+      this.obscureText = false})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -35,16 +42,16 @@ class DoubleInputTextWidgetWidget extends StatelessWidget {
               child: Padding(
                 padding: const EdgeInsets.only(top: 4.0, left: 4.0, right: 4.0),
                 child: TextFormField(
+                  obscureText: obscureText,
                   style: GoogleFonts.roboto(fontSize: 20),
                   textAlignVertical: TextAlignVertical.center,
                   controller: textController,
-                  decoration: InputDecoration(
-                      border: InputBorder.none,
-                      hintText: hint
-                  ),
+                  decoration:
+                      InputDecoration(border: InputBorder.none, hintText: hint),
                 ),
               ),
-            ),)
+            ),
+          )
         ],
       ),
     );

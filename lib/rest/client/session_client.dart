@@ -9,6 +9,37 @@ import 'package:partypay/shared/utils/AppColors.dart';
 class SessionClient {
   final service = PartyPayService();
 
+  Future<SessionModel?> getSession(BuildContext context, int sessionId) async {
+    var path =
+        PartyPayService.getSession.replaceAll('{sessionId}', '$sessionId');
+
+    var response = await service.get(path);
+
+    if (response == null) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          backgroundColor: AppColors.secondary,
+          content: Text('Ocorreu um erro no servidor da aplicacao.'),
+        ),
+      );
+      return null;
+    }
+
+    var body = jsonDecode(utf8.decode(response.bodyBytes));
+
+    if (response.statusCode != 200) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          backgroundColor: AppColors.secondary,
+          content: Text(body['message']),
+        ),
+      );
+      return null;
+    }
+
+    return SessionModel.fromJson(body);
+  }
+
   Future<SessionModel?> createSession(
       BuildContext context, String restaurant, int table) async {
     var json = {'"restaurant"': '"$restaurant"', '"table"': table};
@@ -65,11 +96,15 @@ class SessionClient {
       return null;
     }
     print(body);
-    return (body['user_list'] as List).map((json) => UserModel(name: json['name'], cpf: json['cpf'])).toList();
+    return (body['user_list'] as List)
+        .map((json) => UserModel(name: json['name'], cpf: json['cpf']))
+        .toList();
   }
 
-  Future<bool> closeSession(BuildContext context, int sessionId, bool forceClose) async {
-    var path = PartyPayService.closeSession.replaceAll('{sessionId}', '$sessionId');
+  Future<bool> closeSession(
+      BuildContext context, int sessionId, bool forceClose) async {
+    var path =
+        PartyPayService.closeSession.replaceAll('{sessionId}', '$sessionId');
     path = forceClose ? '$path?forceClose=$forceClose' : path;
 
     var response = await service.put(path, null);

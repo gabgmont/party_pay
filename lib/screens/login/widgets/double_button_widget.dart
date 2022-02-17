@@ -36,8 +36,11 @@ class _DoubleButtonWidgetState extends State<DoubleButtonWidget> {
           Align(
             alignment: Alignment.topLeft,
             child: Material(
+              color: AppColors.white,
               child: InkWell(
                 onTap: widget.onTap,
+                highlightColor: AppColors.secondary,
+                splashColor: AppColors.secondary,
                 child: SizedBox(
                   height: size.height * 0.045,
                   width: size.width * 0.49,
