@@ -39,7 +39,6 @@ class LoginController {
       );
       return false;
     }
-    ;
 
     var json = jsonDecode(utf8.decode(response.bodyBytes));
 
