@@ -64,7 +64,7 @@ class CategoryDropDownState extends State<CategoryDropDown> {
                     children: widget.orderItemList,
                   ),
                 )
-              : Container()
+              : Divider(thickness: 2, color: AppColors.secondary,)
         ],
       ),
     );

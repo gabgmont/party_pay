@@ -6,7 +6,7 @@ import '../../../rest/menu_client.dart';
 import '../../../rest/session_client.dart';
 
 class SessionController {
-  SessionModel? sessionModel;
+  late SessionModel sessionModel;
   MenuModel? menu;
 
   var sessionClient = SessionClient();

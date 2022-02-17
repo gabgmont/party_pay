@@ -5,8 +5,8 @@ class SessionModel {
   final int id;
   final String restaurant;
   final int table;
-  final List<SessionOrderModel> sessionOrderList;
-  final List<UserModel> userList;
+  List<SessionOrderModel> sessionOrderList = [];
+  List<UserModel> userList = [];
 
   SessionModel(
       {required this.id,

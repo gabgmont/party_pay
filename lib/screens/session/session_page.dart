@@ -51,7 +51,24 @@ class _SessionPageState extends State<SessionPage> {
           return Container();
         },
       ),
-      endDrawer: SessionUsersEndDrawer(),
+      endDrawer: FutureBuilder(
+        future: _futureMenu,
+        builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
+          switch (snapshot.connectionState) {
+            case ConnectionState.none:
+              break;
+            case ConnectionState.waiting:
+              return const Center(
+                child: CircularProgressIndicator(),
+              );
+            case ConnectionState.active:
+              break;
+            case ConnectionState.done:
+              return SessionUsersEndDrawer(users: sessionController.sessionModel.userList);
+          }
+          return Container();
+        },
+      ),
       body: SessionBody(),
       bottomNavigationBar: SessionBottomNavigationBar(
         closeButtonTap: () {
