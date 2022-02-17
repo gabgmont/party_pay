@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:partypay/model/restaurant/restaurant_model.dart';
+import 'package:partypay/model/session/session_model.dart';
 import 'package:partypay/model/user/user_model.dart';
 import 'package:partypay/rest/session_client.dart';
 import 'package:partypay/rest/user_client.dart';
@@ -17,15 +18,15 @@ class CreateSessionController {
   int sessionId = -1;
   String? restaurant;
   int? table;
-  var usersList = <User>[];
+  var usersList = <UserModel>[];
 
   var userCardList = <Widget>[];
   var restaurantList = <Map>[];
 
-  var sessionService = SessionClient();
-  var userService = UserClient();
+  final _sessionService = SessionClient();
+  final _userService = UserClient();
 
-  void init(User user) {
+  void init(UserModel user) {
     if (usersList.isNotEmpty) return;
 
     usersList.add(user);
@@ -36,7 +37,7 @@ class CreateSessionController {
     restaurantList.add(RestaurantModel.cocoBambu);
   }
 
-  Future<bool> startSession(BuildContext context) async {
+  Future<SessionModel?> startSession(BuildContext context) async {
     if (restaurant == null || table == null) {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
@@ -44,22 +45,25 @@ class CreateSessionController {
           content: Text(selectTableAndRestaurant),
         ),
       );
-      return false;
+      return null;
     }
 
-    var sessionId =
-        await sessionService.createSession(context, restaurant!, table!);
-    if (sessionId < 0) return false;
+    var sessionModel =
+        await _sessionService.createSession(context, restaurant!, table!);
+    if (sessionModel == null) return null;
 
     var cpfs = usersList.map((e) => e.cpf).toList();
-    var sucess = await sessionService.addUsers(context, sessionId, cpfs);
-    if (sucess) return true;
+    var sucess = await _sessionService.addUsers(context, sessionModel.id, cpfs);
+    if (sucess) {
+      sessionModel.userList.addAll(usersList);
+      return sessionModel;
+    }
 
-    sessionService.closeSession(context, sessionId, true);
-    return false;
+    _sessionService.closeSession(context, sessionModel.id, true);
+    return null;
   }
 
-  Future<User?> getUser(BuildContext context, String cpf) async {
+  Future<UserModel?> getUser(BuildContext context, String cpf) async {
     if (cpf.isEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
@@ -82,22 +86,17 @@ class CreateSessionController {
       }
     }
 
-    var user = await userService.getUser(context, cpf);
+    var user = await _userService.getUser(context, cpf);
     if (user == null) return null;
     usersList.add(user);
     return user;
   }
 
-  Future<User> getPrefUser() async {
+  Future<UserModel> getPrefUser() async {
     var prefs = await SharedPreferences.getInstance();
     var user = prefs.getString('user');
 
     var userMap = jsonDecode(user!);
-    return User(
-        name: userMap['name'],
-        cpf: userMap['cpf'],
-        email: userMap['email'],
-        phone: userMap['phone'],
-        photo: userMap['photo']);
+    return UserModel.fromJson(userMap);
   }
 }

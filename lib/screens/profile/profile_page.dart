@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:partypay/model/user/user_model.dart';
+import 'package:partypay/screens/login/login_page.dart';
 import 'package:partypay/shared/utils/AppColors.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -13,7 +14,7 @@ const phoneLabel = 'Phone';
 const passwordLabel = 'Password';
 
 class ProfilePage extends StatefulWidget {
-  final User user;
+  final UserModel user;
 
   const ProfilePage({Key? key, required this.user}) : super(key: key);
 
@@ -52,7 +53,8 @@ class _ProfilePageState extends State<ProfilePage> {
                 var prefs = await SharedPreferences.getInstance();
                 prefs.remove('token');
                 prefs.remove('user');
-                Navigator.pushReplacementNamed(context, '/login_page');
+                Navigator.pushReplacement(context,
+                    MaterialPageRoute(builder: (context) => LoginPage()));
               },
             ),
             IconTextFieldWidget(

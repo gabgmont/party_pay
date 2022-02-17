@@ -3,6 +3,8 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:partypay/model/user/user_model.dart';
+import 'package:partypay/screens/home/home_page.dart';
+import 'package:partypay/screens/login/login_page.dart';
 import 'package:partypay/shared/utils/AppColors.dart';
 import 'package:partypay/shared/utils/AppImages.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -54,17 +56,19 @@ void checkLogin(BuildContext context) async {
   if (token == null || user == null) {
     prefs.remove('token');
     prefs.remove('user');
-    Navigator.pushReplacementNamed(context, '/login_page');
+    Navigator.pushReplacement(
+        context, MaterialPageRoute(builder: (context) => LoginPage()));
     return;
   }
 
   var userMap = jsonDecode(user);
-  var userModel = User(
+  var userModel = UserModel(
       name: userMap['name'],
       cpf: userMap['cpf'],
       email: userMap['email'],
       phone: userMap['phone'],
       photo: userMap['photo']);
 
-  Navigator.pushReplacementNamed(context, '/home_page', arguments: userModel);
+  Navigator.pushReplacement(context,
+      MaterialPageRoute(builder: (context) => HomePage(user: userModel)));
 }

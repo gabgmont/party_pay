@@ -13,7 +13,7 @@ const logo = 'Partypay!';
 const welcome = 'Bem vindo,';
 
 class HomePageAppBar extends StatefulWidget {
-  final User user;
+  final UserModel user;
   final VoidCallback onTap;
 
   const HomePageAppBar({Key? key, required this.user, required this.onTap}) : super(key: key);

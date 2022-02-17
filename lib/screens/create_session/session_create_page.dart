@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:partypay/model/user/user_model.dart';
 import 'package:partypay/screens/home/widgets/round_restaurant_card_widget.dart';
+import 'package:partypay/screens/session/session_page.dart';
 import 'package:partypay/shared/utils/AppColors.dart';
 
 import 'controller/create_session_controller.dart';
@@ -14,7 +15,7 @@ const selectRestaurant = 'Selecione o restaurante';
 const table = 'Mesa';
 
 class SessionCreatePage extends StatefulWidget {
-  final User user;
+  final UserModel user;
 
   const SessionCreatePage({Key? key, required this.user}) : super(key: key);
 
@@ -169,15 +170,22 @@ class _SessionCreatePageState extends State<SessionCreatePage> {
                   ),
                 ],
               ),
-
               SizedBox(
                 height: size.height * 0.06,
               ),
               CreateSessionConfirmButton(
                 onTap: () async {
-                  var sucess = await sessionController.startSession(context);
-                  if (sucess)
-                    Navigator.pushReplacementNamed(context, '/session_page');
+                  var sessionModel =
+                      await sessionController.startSession(context);
+                  if (sessionModel != null) {
+                    Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) =>
+                            SessionPage(sessionModel: sessionModel),
+                      ),
+                    );
+                  }
                 },
               )
             ],

@@ -1,13 +1,14 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:partypay/model/session/session_model.dart';
 import 'package:partypay/rest/partypay_api_service.dart';
 import 'package:partypay/shared/utils/AppColors.dart';
 
 class SessionClient {
   final service = PartyPayService();
 
-  Future<int> createSession(
+  Future<SessionModel?> createSession(
       BuildContext context, String restaurant, int table) async {
     var json = {'"restaurant"': '"$restaurant"', '"table"': table};
 
@@ -20,7 +21,7 @@ class SessionClient {
           content: Text('Ocorreu um erro no servidor da aplicacao.'),
         ),
       );
-      return -1;
+      return null;
     }
 
     var body = jsonDecode(utf8.decode(response.bodyBytes));
@@ -32,10 +33,10 @@ class SessionClient {
           content: Text(body['message']),
         ),
       );
-      return -1;
+      return null;
     }
 
-    return body['id'];
+    return SessionModel.fromJson(body);
   }
 
   Future<bool> addUsers(

@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:partypay/model/session/session_model.dart';
+import 'package:partypay/screens/session/controller/session_controller.dart';
 import 'package:partypay/screens/session/pages/session_body.dart';
 
 import 'pages/session_menu_drawer.dart';
@@ -7,15 +9,21 @@ import 'widgets/session_bottom_navigation_bar.dart';
 import 'widgets/session_page_appbar_widget.dart';
 
 class SessionPage extends StatefulWidget {
-  const SessionPage({Key? key}) : super(key: key);
+  final SessionModel sessionModel;
+
+  const SessionPage({Key? key, required this.sessionModel}) : super(key: key);
 
   @override
   State<SessionPage> createState() => _SessionPageState();
 }
 
 class _SessionPageState extends State<SessionPage> {
+  final SessionController sessionController = SessionController();
+
   @override
   Widget build(BuildContext context) {
+    var _futureMenu = sessionController.init(context, widget.sessionModel);
+
     final size = MediaQuery.of(context).size;
 
     return Scaffold(
@@ -23,7 +31,26 @@ class _SessionPageState extends State<SessionPage> {
         preferredSize: Size.fromHeight(size.height * .13),
         child: const SessionPageAppBar(),
       ),
-      drawer: SessionMenuDrawer(),
+      drawer: FutureBuilder(
+        future: _futureMenu,
+        builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
+          switch (snapshot.connectionState) {
+            case ConnectionState.none:
+              break;
+            case ConnectionState.waiting:
+              return const Center(
+                child: CircularProgressIndicator(),
+              );
+            case ConnectionState.active:
+              break;
+            case ConnectionState.done:
+              return SessionMenuDrawer(
+                menu: sessionController.menu!,
+              );
+          }
+          return Container();
+        },
+      ),
       endDrawer: SessionUsersEndDrawer(),
       body: SessionBody(),
       bottomNavigationBar: SessionBottomNavigationBar(

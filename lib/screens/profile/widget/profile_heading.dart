@@ -7,7 +7,7 @@ import 'package:partypay/shared/utils/string_filter.dart';
 class ProfileHeading extends StatelessWidget {
   final VoidCallback onEditPressed;
   final VoidCallback onLogoutPressed;
-  final User user;
+  final UserModel user;
 
   const ProfileHeading({
     Key? key,

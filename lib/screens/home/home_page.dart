@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:partypay/model/restaurant/restaurant_model.dart';
 import 'package:partypay/model/user/user_model.dart';
+import 'package:partypay/screens/create_session/session_create_page.dart';
 import 'package:partypay/screens/home/widgets/double_big_button_widget.dart';
 import 'package:partypay/screens/home/widgets/hp_app_bar.dart';
+import 'package:partypay/screens/profile/profile_page.dart';
 import 'package:partypay/shared/utils/AppColors.dart';
 
 import 'widgets/double_big_button_wlist_widget.dart';
@@ -13,7 +15,7 @@ const restaurants = 'Restaurantes';
 const newSession = 'Start new Session';
 
 class HomePage extends StatelessWidget {
-  final User user;
+  final UserModel user;
 
   const HomePage({Key? key, required this.user}) : super(key: key);
 
@@ -27,7 +29,7 @@ class HomePage extends StatelessWidget {
         child: HomePageAppBar(
           user: user,
           onTap: () {
-            Navigator.pushNamed(context, '/profile_page', arguments: user);
+            Navigator.push(context, MaterialPageRoute(builder: (context) => ProfilePage(user: user)));
           },
         ),
       ),
@@ -72,8 +74,11 @@ class HomePage extends StatelessWidget {
                 child: DoubleBigButtonWidget(
                     label: newSession,
                     onTap: () {
-                      Navigator.pushNamed(context, '/session_page',
-                          arguments: user);
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) =>
+                                  SessionCreatePage(user: user)));
                     }),
               ),
             ],

@@ -97,7 +97,10 @@ class _MenuOrderCard extends StatelessWidget {
             Container(
               height: size.height * .13,
               width: size.height * .13,
-              color: AppColors.secondary,
+              decoration: BoxDecoration(
+                color: AppColors.secondary,
+                borderRadius: BorderRadius.circular(15)
+              ),
             ),
             Align(
               alignment: Alignment.bottomLeft,
@@ -143,16 +146,22 @@ class _MenuOrderNameDescription extends StatelessWidget {
       padding: EdgeInsets.only(top: size.height * .03),
       child: Align(
         alignment: Alignment.topLeft,
-        child: Text.rich(
-          TextSpan(
-            text: '$label\n',
-            style: TextStyle(fontSize: size.height * .023),
-            children: [
+        child: SingleChildScrollView(
+          scrollDirection: Axis.vertical,
+          child: SizedBox(
+            height: size.height* .08,
+            child: Text.rich(
               TextSpan(
-                text: description,
-                style: TextStyle(fontSize: size.height * .013),
+                text: '$label\n',
+                style: TextStyle(fontSize: size.height * .023),
+                children: [
+                  TextSpan(
+                    text: description,
+                    style: TextStyle(fontSize: size.height * .013, overflow: TextOverflow.fade),
+                  ),
+                ],
               ),
-            ],
+            ),
           ),
         ),
       ),

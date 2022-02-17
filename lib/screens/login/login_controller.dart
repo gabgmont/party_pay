@@ -4,14 +4,15 @@ import 'package:flutter/material.dart';
 import 'package:partypay/model/auth/auth_model.dart';
 import 'package:partypay/rest/partypay_api_service.dart';
 import 'package:partypay/rest/user_client.dart';
+import 'package:partypay/screens/home/home_page.dart';
 import 'package:partypay/shared/utils/AppColors.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 const fillAllFields = 'Preencha todos os campos.';
 
 class LoginController {
-  final PartyPayService service = PartyPayService();
-  final UserClient userService = UserClient();
+  final PartyPayService _service = PartyPayService();
+  final UserClient _userService = UserClient();
 
   Future<bool> login(BuildContext context, String cpf, String secret) async {
     if (cpf == '' || secret == '') {
@@ -28,8 +29,8 @@ class LoginController {
     }
 
     var authJson = AuthenticationModel(cpf, secret).toJson();
-    var response = await service.post(PartyPayService.auth, authJson);
-    if(response == null) {
+    var response = await _service.post(PartyPayService.auth, authJson);
+    if (response == null) {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
           backgroundColor: AppColors.secondary,
@@ -37,7 +38,8 @@ class LoginController {
         ),
       );
       return false;
-    };
+    }
+    ;
 
     var json = jsonDecode(utf8.decode(response.bodyBytes));
 
@@ -53,10 +55,11 @@ class LoginController {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     prefs.setString('token', json['token']);
 
-    var user = await userService.getUser(context, cpf);
+    var user = await _userService.getUser(context, cpf);
     prefs.setString('user', user!.toJson().toString());
 
-    Navigator.pushReplacementNamed(context, '/home_page', arguments: user);
+    Navigator.pushReplacement(
+        context, MaterialPageRoute(builder: (context) => HomePage(user: user)));
     return true;
   }
 }

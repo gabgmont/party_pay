@@ -5,7 +5,7 @@ const String url = 'https://partypay.herokuapp.com';
 
 class PartyPayService {
   static const String auth = '/auth';
-  static const String getRestaurant = '/menu/{restaurant}';
+  static const String getMenu = '/menu/{restaurant}';
   static const String getCategory = '/menu/{restaurant}/category/{category}';
   static const String getOrder = '/menu/{restaurant}/order/{order}';
   static const String getSession = '/session/{sessionId}';

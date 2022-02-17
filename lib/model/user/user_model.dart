@@ -1,6 +1,6 @@
 import 'package:partypay/shared/utils/AppImages.dart';
 
-class User {
+class UserModel {
   final String name;
   String? cpf;
   String? secret;
@@ -8,7 +8,7 @@ class User {
   String? phone;
   String? photo;
 
-  User({
+  UserModel({
     required this.name,
     this.cpf,
     this.email,
@@ -18,8 +18,14 @@ class User {
 
   String cpfValue() => cpf!.replaceAll('.', '').replaceAll('-', '');
 
-  Map<String, dynamic> toJson() =>
-      {
+  UserModel.fromJson(Map<String, dynamic> json)
+      : name = json['name'],
+        cpf = json['cpf'],
+        email = json['email'],
+        phone = json['phone'],
+        photo = json['photo'];
+
+  Map<String, dynamic> toJson() => {
         '"name"': '"$name"',
         '"cpf"': '"$cpf"',
         '"email"': '"$email"',
@@ -27,13 +33,12 @@ class User {
         '"photo"': '"$photo"',
       };
 
-  Map<String, dynamic> toMap() =>
-      {
+  Map<String, dynamic> toMap() => {
         'name': name,
-        'cpf' : cpf,
-        'email' : email,
-        'phone' : phone,
-        'photo' : photo
+        'cpf': cpf,
+        'email': email,
+        'phone': phone,
+        'photo': photo
       };
 
   String getInitials() {
@@ -41,10 +46,10 @@ class User {
     String initials = '';
     int numWords = 2;
 
-    if(numWords > names.length) {
+    if (numWords > names.length) {
       numWords = names.length;
     }
-    for(var i = 0; i < numWords; i++){
+    for (var i = 0; i < numWords; i++) {
       initials += names[i][0];
     }
     return initials.toUpperCase();
