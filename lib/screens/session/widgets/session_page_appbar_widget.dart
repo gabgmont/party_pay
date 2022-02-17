@@ -46,7 +46,7 @@ class SessionPageAppBar extends StatelessWidget {
                 children: [
                   HeaderTileWidget(
                     height: size.height * 0.054,
-                    icon: Icons.table_bar,
+                    icon: Icons.restaurant,
                     data: '$table',
                   ),
                   HeaderTileWidget(
