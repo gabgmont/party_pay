@@ -5,13 +5,15 @@ class SessionHeaderWidget extends StatelessWidget {
   final String label;
   final IconData leading;
   final bool showTrailing;
+  final VoidCallback? onTap;
 
-  const SessionHeaderWidget(
-      {Key? key,
-      required this.label,
-      required this.showTrailing,
-      required this.leading})
-      : super(key: key);
+  const SessionHeaderWidget({
+    Key? key,
+    required this.label,
+    required this.showTrailing,
+    required this.leading,
+    this.onTap,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -44,10 +46,13 @@ class SessionHeaderWidget extends StatelessWidget {
               ],
             ),
             showTrailing
-                ? Icon(
-                    Icons.add,
-                    color: AppColors.white,
-                    size: size.height * .05,
+                ? IconButton(
+                    icon: Icon(
+                      Icons.add,
+                      color: AppColors.white,
+                      size: size.height * .05,
+                    ),
+                    onPressed: onTap,
                   )
                 : Container()
           ],

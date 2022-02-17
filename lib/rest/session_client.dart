@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:partypay/model/session/session_model.dart';
+import 'package:partypay/model/user/user_model.dart';
 import 'package:partypay/rest/partypay_api_service.dart';
 import 'package:partypay/shared/utils/AppColors.dart';
 
@@ -39,7 +40,7 @@ class SessionClient {
     return SessionModel.fromJson(body);
   }
 
-  Future<bool> addUsers(
+  Future<List<UserModel>?> addUsers(
       BuildContext context, int sessionId, List<String?> cpfs) async {
     var path = PartyPayService.addUser.replaceAll('{sessionId}', '$sessionId');
     var json = {'"cpf_list"': jsonEncode(cpfs)};
@@ -51,7 +52,7 @@ class SessionClient {
           content: Text('Ocorreu um erro no servidor da aplicacao.'),
         ),
       );
-      return false;
+      return null;
     }
     var body = jsonDecode(utf8.decode(response.bodyBytes));
     if (response.statusCode != 200) {
@@ -61,10 +62,10 @@ class SessionClient {
           content: Text(body['message']),
         ),
       );
-      return false;
+      return null;
     }
-
-    return true;
+    print(body);
+    return (body['user_list'] as List).map((json) => UserModel(name: json['name'], cpf: json['cpf'])).toList();
   }
 
   Future<bool> closeSession(BuildContext context, int sessionId, bool forceClose) async {

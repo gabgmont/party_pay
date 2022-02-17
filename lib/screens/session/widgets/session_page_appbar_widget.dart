@@ -4,7 +4,18 @@ import 'package:partypay/shared/utils/AppColors.dart';
 import 'header_tile_widget.dart';
 
 class SessionPageAppBar extends StatelessWidget {
-  const SessionPageAppBar({Key? key}) : super(key: key);
+  final int table;
+  final String restaurant;
+  final double individualValue;
+  final double totalValue;
+
+  const SessionPageAppBar(
+      {Key? key,
+      required this.table,
+      required this.restaurant,
+      required this.individualValue,
+      required this.totalValue})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -12,7 +23,7 @@ class SessionPageAppBar extends StatelessWidget {
 
     return Container(
       color: AppColors.primary,
-      height: size.height * 0.22,
+      height: size.height * .22,
       child: SafeArea(
         child: Padding(
           padding: const EdgeInsets.all(8.0),
@@ -20,37 +31,33 @@ class SessionPageAppBar extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Align(
+              Align(
                 alignment: Alignment.topLeft,
                 child: Text(
-                  'Restaurant',
+                  restaurant,
                   style: TextStyle(
                       color: AppColors.white,
-                      fontSize: 22,
+                      fontSize: size.height * .035,
                       fontWeight: FontWeight.bold),
                 ),
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
-                  // UserRoundCardWidget(
-                  //   height: size.height * 0.1,
-                  //   width: size.height * 0.1,
-                  // ),
                   HeaderTileWidget(
                     height: size.height * 0.054,
-                    icon: Icons.restaurant,
-                    data: '110',
+                    icon: Icons.table_bar,
+                    data: '$table',
                   ),
                   HeaderTileWidget(
                     height: size.height * 0.054,
                     icon: Icons.person,
-                    data: 'R\$0000,00',
+                    data: 'R\$$individualValue',
                   ),
                   HeaderTileWidget(
                     height: size.height * 0.054,
                     icon: Icons.group,
-                    data: 'R\$10000,00',
+                    data: 'R\$$totalValue',
                   )
                 ],
               ),

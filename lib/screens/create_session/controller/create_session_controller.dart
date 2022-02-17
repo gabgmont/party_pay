@@ -54,7 +54,7 @@ class CreateSessionController {
 
     var cpfs = usersList.map((e) => e.cpf).toList();
     var sucess = await _sessionService.addUsers(context, sessionModel.id, cpfs);
-    if (sucess) {
+    if (sucess != null) {
       sessionModel.userList.addAll(usersList);
       return sessionModel;
     }

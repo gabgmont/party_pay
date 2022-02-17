@@ -19,4 +19,14 @@ class SessionController {
 
     return future;
   }
+
+  Future<bool> addUsers(BuildContext context, List<String> cpfs) async {
+    var users = await sessionClient.addUsers(context, sessionModel.id, cpfs);
+
+    if (users != null) {
+      sessionModel.userList.addAll(users);
+      return true;
+    }
+     return false;
+  }
 }
