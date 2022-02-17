@@ -3,8 +3,8 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:partypay/model/session/menu_model.dart';
 
-import '../shared/utils/AppColors.dart';
-import 'partypay_api_service.dart';
+import '../../shared/utils/AppColors.dart';
+import '../partypay_api_service.dart';
 
 class MenuClient {
   final _service = PartyPayService();

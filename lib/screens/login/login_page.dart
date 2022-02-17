@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:partypay/rest/user_client.dart';
-import 'package:partypay/screens/login/login_controller.dart';
+import 'package:partypay/rest/client/user_client.dart';
+import 'package:partypay/screens/login/controller/login_controller.dart';
 import 'package:partypay/screens/login/widgets/double_button_widget.dart';
 import 'package:partypay/screens/login/widgets/double_input_text_widget.dart';
 import 'package:partypay/shared/utils/AppColors.dart';

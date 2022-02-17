@@ -2,11 +2,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:partypay/model/session/session_model.dart';
 import 'package:partypay/model/user/user_model.dart';
-import 'package:partypay/screens/create_session/controller/create_session_controller.dart';
 
 import '../../../model/session/menu_model.dart';
-import '../../../rest/menu_client.dart';
-import '../../../rest/session_client.dart';
+import '../../../rest/client/menu_client.dart';
+import '../../../rest/client/session_client.dart';
 
 class SessionController {
   late SessionModel sessionModel;

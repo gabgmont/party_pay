@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:partypay/model/user/user_model.dart';
 import 'package:partypay/shared/utils/AppColors.dart';
 
-import 'partypay_api_service.dart';
+import '../partypay_api_service.dart';
 
 class UserClient {
   final service = PartyPayService();

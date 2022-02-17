@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:partypay/model/user/user_model.dart';
 import 'package:partypay/screens/create_session/widget/user_round_card_widget.dart';
-import 'package:partypay/screens/home/news_controller.dart';
+import 'package:partypay/screens/home/controller/news_controller.dart';
 import 'package:partypay/shared/utils/AppColors.dart';
 import 'package:partypay/shared/utils/AppImages.dart';
 import 'package:partypay/shared/utils/string_filter.dart';

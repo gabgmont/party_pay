@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:partypay/model/auth/auth_model.dart';
 import 'package:partypay/rest/partypay_api_service.dart';
-import 'package:partypay/rest/user_client.dart';
+import 'package:partypay/rest/client/user_client.dart';
 import 'package:partypay/screens/home/home_page.dart';
 import 'package:partypay/shared/utils/AppColors.dart';
 import 'package:shared_preferences/shared_preferences.dart';
