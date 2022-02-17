@@ -29,9 +29,9 @@ class _SessionBodyState extends State<SessionBody> {
             children: [
               SessionOrderWidget(),
               SessionOrderWidget(),
-              SessionOrderWidget(),
-              SessionOrderWidget(),
-              SessionOrderWidget(),
+              // SessionOrderWidget(),
+              // SessionOrderWidget(),
+              // SessionOrderWidget(),
             ],
           ),
         ),

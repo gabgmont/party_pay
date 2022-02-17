@@ -6,7 +6,7 @@ import 'package:partypay/shared/utils/AppColors.dart';
 
 import 'pages/session_menu_drawer.dart';
 import 'pages/session_users_end_drawer.dart';
-import 'widgets/session_bottom_navigation_bar.dart';
+import 'widgets/add_user_bottom_sheet.dart';
 import 'widgets/session_page_appbar_widget.dart';
 
 class SessionPage extends StatefulWidget {
@@ -75,8 +75,8 @@ class _SessionPageState extends State<SessionPage> {
               return SessionUsersEndDrawer(
                 users: sessionController.sessionModel.userList,
                 trailingTap: () {
-                  Scaffold.of(context).showBottomSheet((context) => _showBottomSheet(context, size));
-
+                  Scaffold.of(context)
+                      .showBottomSheet((context) => AddUserBottomSheet(sessionController: sessionController,));
                   // sessionController.addUsers(context, );
                 },
               );
@@ -84,25 +84,7 @@ class _SessionPageState extends State<SessionPage> {
           return Container();
         },
       ),
-      body: SessionBody(),
-      // bottomNavigationBar: SessionBottomNavigationBar(
-      //   closeButtonTap: () {
-      //     setState(() {});
-      //   },
-      // ),
+      body: SingleChildScrollView(child: SessionBody()),
     );
   }
-}
-
-BottomSheet _showBottomSheet(BuildContext context, Size size){
-  return BottomSheet(
-      onDragStart: (_) {
-        Navigator.pop(context);
-      },
-      constraints:
-      BoxConstraints.expand(height: size.height * .6),
-      onClosing: () {},
-      builder: (context) {
-        return Container();
-      });
 }
