@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:partypay/model/session/session_model.dart';
+import 'package:partypay/model/session/session_order_model.dart';
 import 'package:partypay/model/user/user_model.dart';
 
 import '../../../model/session/menu_model.dart';
@@ -43,18 +44,30 @@ class SessionController {
     return true;
   }
 
-  double getTotalValue(){
+  double getTotalValue() {
     double totalValue = 0.0;
     for (var element in sessionModel.sessionOrderList) {
       totalValue += element.order.value;
     }
 
-    return totalValue;
+    var value = totalValue.toStringAsFixed(2);
+    return double.parse(value);
   }
 
-  double getUserValue(){
+  double getUserValue() {
     double userValue = 0.0;
+    var loggedUser = sessionModel.userList[0];
+    var loggedUserOrders = <SessionOrderModel>[];
 
-    return userValue;
+    loggedUserOrders = sessionModel.sessionOrderList
+        .where((element) => element.userList.contains(loggedUser))
+        .toList();
+
+    for (var element in loggedUserOrders) {
+      double dividedValue = element.order.value / element.userList.length;
+      userValue += dividedValue;
+    }
+    var value = userValue.toStringAsFixed(2);
+    return double.parse(value);
   }
 }

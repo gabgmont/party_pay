@@ -54,4 +54,14 @@ class UserModel {
     }
     return initials.toUpperCase();
   }
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is UserModel &&
+          runtimeType == other.runtimeType &&
+          cpf == other.cpf;
+
+  @override
+  int get hashCode => cpf.hashCode;
 }

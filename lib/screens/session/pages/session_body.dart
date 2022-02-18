@@ -27,7 +27,7 @@ class _SessionBodyState extends State<SessionBody> {
         const SessionHeaderWidget(
           label: 'Orders',
           leading: Icons.list,
-          showTrailing: true,
+          showTrailing: false,
         ),
         SizedBox(
           height: size.height * .61,
