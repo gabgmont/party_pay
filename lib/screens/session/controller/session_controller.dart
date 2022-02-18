@@ -44,6 +44,10 @@ class SessionController {
     return true;
   }
 
+  Future<bool> closeSession(BuildContext context) async {
+    return await sessionClient.closeSession(context, sessionModel.id, true);
+  }
+
   double getTotalValue() {
     double totalValue = 0.0;
     for (var element in sessionModel.sessionOrderList) {

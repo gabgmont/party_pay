@@ -21,7 +21,8 @@ class AddOrderButtonBottomSheet extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  State<AddOrderButtonBottomSheet> createState() => _AddOrderButtonBottomSheetState();
+  State<AddOrderButtonBottomSheet> createState() =>
+      _AddOrderButtonBottomSheetState();
 }
 
 class _AddOrderButtonBottomSheetState extends State<AddOrderButtonBottomSheet>
@@ -37,7 +38,7 @@ class _AddOrderButtonBottomSheetState extends State<AddOrderButtonBottomSheet>
       onDragStart: (_) {
         Navigator.pop(context);
       },
-      constraints: BoxConstraints.expand(height: size.height * .3),
+      constraints: BoxConstraints.expand(height: size.height * .32),
       onClosing: widget.onConfirmOrder,
       builder: (context) {
         return Column(
@@ -98,34 +99,26 @@ class _AddOrderButtonBottomSheetState extends State<AddOrderButtonBottomSheet>
               height: size.height * .14,
               width: size.width,
               child: Padding(
-                  padding: EdgeInsets.symmetric(vertical: size.height * .014),
-                  child: SizedBox(
-                    child: ListView.builder(
-                        itemCount: widget.userList.length,
-                        scrollDirection: Axis.horizontal,
-                        itemBuilder: (BuildContext context, int index) {
+                padding: EdgeInsets.symmetric(vertical: size.height * .014),
+                child: SizedBox(
+                  child: ListView.builder(
+                      itemCount: widget.userList.length,
+                      scrollDirection: Axis.horizontal,
+                      itemBuilder: (BuildContext context, int index) {
+                        final userContent = widget.userList[index];
+                        selectUserList.add(
+                          SelectUserWidget(
+                            user: userContent,
+                            onTap: () {
+                              setState(() {});
+                            },
+                          ),
+                        );
 
-                          final userContent = widget.userList[index];
-                          selectUserList.add(
-                            SelectUserWidget(
-                              user: userContent,
-                              onTap: () {
-                                setState(() {
-                                });
-                              },
-                            ),
-                          );
-
-                          return selectUserList[index];
-                        }),
-                  )
-                  // SingleChildScrollView(
-                  //   scrollDirection: Axis.horizontal,
-                  //   child: Row(
-                  //     children: userWidgetList(),
-                  //   ),
-                  // ),
-                  ),
+                        return selectUserList[index];
+                      }),
+                ),
+              ),
             ),
             EnterButtonWidget(
               onTap: () async {
@@ -134,11 +127,12 @@ class _AddOrderButtonBottomSheetState extends State<AddOrderButtonBottomSheet>
                     .map((userWidget) => userWidget.user)
                     .toList();
 
-                if(selectedUsers.isEmpty){
+                if (selectedUsers.isEmpty) {
                   ScaffoldMessenger.of(context).showSnackBar(
                     const SnackBar(
                       backgroundColor: AppColors.secondary,
-                      content: Text('Escolha ao menos um usuário para dividir o pedido.'),
+                      content: Text(
+                          'Escolha ao menos um usuário para dividir o pedido.'),
                     ),
                   );
                   return;
@@ -156,16 +150,4 @@ class _AddOrderButtonBottomSheetState extends State<AddOrderButtonBottomSheet>
       },
     );
   }
-//
-// List<Widget> userWidgetList() {
-//   return widget.userList
-//       .map((user) => SelectUserWidget(
-//           user: user,
-//           onTap: () {
-//             setState(() {
-//               print('1234asdfasda');
-//             });
-//           }))
-//       .toList();
-// }
 }

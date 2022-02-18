@@ -42,7 +42,7 @@ class _HomePageState extends State<HomePage> {
             Navigator.pushNamed(context, '/profile_page',
                     arguments: widget.user)
                 .then((shouldLogout) {
-              if(shouldLogout == null) return;
+              if (shouldLogout == null) return;
               if (shouldLogout as bool) {
                 Navigator.pushReplacementNamed(context, '/login_page');
               }
@@ -133,7 +133,10 @@ class _HomePageState extends State<HomePage> {
       label: newSession,
       onTap: () {
         Navigator.pushNamed(context, '/session_create_page',
-            arguments: widget.user);
+                arguments: widget.user)
+            .then((value) => setState(() {
+                  print('CREATE SESSION PAGE');
+                }));
       },
     );
   }
@@ -142,8 +145,10 @@ class _HomePageState extends State<HomePage> {
     return DoubleBigButtonWidget(
       label: enterSession,
       onTap: () {
-        Navigator.pushNamed(context, '/session_page', arguments: _sessionModel);
-
+        Navigator.pushNamed(context, '/session_page', arguments: _sessionModel)
+            .then((value) => setState(() {
+                  print('SESSION PAGE');
+                }));
       },
     );
   }

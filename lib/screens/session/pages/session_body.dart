@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:partypay/screens/session/controller/session_controller.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../widgets/alert_widget.dart';
 import '../widgets/session_bottom_navigation_bar.dart';
@@ -38,8 +39,19 @@ class _SessionBodyState extends State<SessionBody> {
               : ListView(children: sessionOrders),
         ),
         SessionBottomNavigationBar(
-          closeButtonTap: () {
-            setState(() {});
+          closeButtonTap: () async {
+            var sucess = await widget.sessionController.closeSession(context);
+            if (sucess) {
+              var prefs = await SharedPreferences.getInstance();
+              prefs.remove('session_id');
+
+              Navigator.of(context).pushNamedAndRemoveUntil(
+                  '/home_page', (Route<dynamic> route) => false,
+                  arguments: widget.sessionController.sessionModel.userList[0]);
+              // Navigator.removeRoute(context, );
+              // Navigator.popAndPushNamed(context, '/home_page');
+
+            }
           },
         )
       ],

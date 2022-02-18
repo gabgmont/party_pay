@@ -27,19 +27,21 @@ class _SelectUserWidgetState extends State<SelectUserWidget> {
         borderRadius: BorderRadius.circular(size.height),
         child: InkWell(
           borderRadius: BorderRadius.circular(size.height),
-          onTap: (){
-            setState(() {
-              widget.selected = !widget.selected;
-              });
+          onTap: () {
+            setState(
+              () {
+                widget.selected = !widget.selected;
+              },
+            );
           },
           child: Padding(
-            padding: const EdgeInsets.all(4.0),
+            padding: const EdgeInsets.symmetric(horizontal: 4.0),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 UserRoundCardWidget(
-                  height: size.height * .08,
-                  width: size.height * .08,
+                  height: size.height * .07,
+                  width: size.height * .07,
                   initials: widget.user.getInitials(),
                   photo: widget.user.photo,
                   showInitials: true,

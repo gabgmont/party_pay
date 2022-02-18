@@ -33,7 +33,10 @@ class UserRoundCardWidget extends StatelessWidget {
                     ),
                   ),
           ),
-          (hasPhoto() && showInitials) ? Center(child: Text(initials ?? 'G'),) : Container()
+          (hasPhoto() && showInitials) ? Padding(
+            padding: const EdgeInsets.only(top: 8.0),
+            child: Center(child: Text(initials ?? 'G'),),
+          ) : Container()
         ],
       ),
     );
