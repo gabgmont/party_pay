@@ -6,13 +6,13 @@ import 'package:partypay/shared/utils/AppColors.dart';
 
 import '../controller/session_controller.dart';
 
-class OrderButtonBottomSheet extends StatefulWidget {
+class AddOrderButtonBottomSheet extends StatefulWidget {
   final String orderName;
   final SessionController sessionController;
   final List<UserModel> userList;
   final VoidCallback onConfirmOrder;
 
-  const OrderButtonBottomSheet({
+  const AddOrderButtonBottomSheet({
     Key? key,
     required this.orderName,
     required this.sessionController,
@@ -21,10 +21,10 @@ class OrderButtonBottomSheet extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  State<OrderButtonBottomSheet> createState() => _OrderButtonBottomSheetState();
+  State<AddOrderButtonBottomSheet> createState() => _AddOrderButtonBottomSheetState();
 }
 
-class _OrderButtonBottomSheetState extends State<OrderButtonBottomSheet>
+class _AddOrderButtonBottomSheetState extends State<AddOrderButtonBottomSheet>
     with TickerProviderStateMixin {
   List<SelectUserWidget> selectUserList = [];
 
@@ -106,13 +106,11 @@ class _OrderButtonBottomSheetState extends State<OrderButtonBottomSheet>
                         itemBuilder: (BuildContext context, int index) {
 
                           final userContent = widget.userList[index];
-
                           selectUserList.add(
                             SelectUserWidget(
                               user: userContent,
                               onTap: () {
                                 setState(() {
-
                                 });
                               },
                             ),
@@ -145,10 +143,8 @@ class _OrderButtonBottomSheetState extends State<OrderButtonBottomSheet>
                   );
                   return;
                 }
-
                 var sucess = await widget.sessionController
                     .addOrder(context, widget.orderName, selectedUsers);
-
                 if (sucess) {
                   Navigator.pop(context);
                   widget.onConfirmOrder();

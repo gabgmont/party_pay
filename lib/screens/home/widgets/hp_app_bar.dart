@@ -106,33 +106,17 @@ class _HomePageAppBarState extends State<HomePageAppBar> {
                         const SizedBox(
                           width: 10,
                         ),
-                        InkWell(
-                          onTap: widget.onTap,
-                          child: UserRoundCardWidget(
-                            height: 70,
-                            width: 70,
-                            initials: widget.user.getInitials(),
-                            photo: widget.user.photo,
-                          )
-                          // Container(
-                          //   height: 60,
-                          //   width: 60,
-                          //   decoration: BoxDecoration(
-                          //     border: const Border.fromBorderSide(
-                          //         BorderSide(width: 0.5, color: AppColors.gray)),
-                          //     image: DecorationImage(
-                          //         image: AssetImage(widget.user.photo!)),
-                          //     borderRadius: BorderRadius.circular(20),
-                          //     boxShadow: [
-                          //       BoxShadow(
-                          //         offset: Offset.fromDirection(1, 1.5),
-                          //         blurRadius: 0.5,
-                          //         spreadRadius: 0.5,
-                          //         color: AppColors.shadow,
-                          //       ),
-                          //     ],
-                          //   ),
-                          // ),
+                        Padding(
+                          padding: EdgeInsets.symmetric(vertical: size.height*.05),
+                          child: InkWell(
+                            onTap: widget.onTap,
+                            child: UserRoundCardWidget(
+                              height: size.height*.09,
+                              width: size.height*.09,
+                              initials: widget.user.getInitials(),
+                              photo: widget.user.photo,
+                            )
+                          ),
                         )
                       ],
                     )

@@ -42,4 +42,19 @@ class SessionController {
     sessionModel.sessionOrderList = sessionOrder;
     return true;
   }
+
+  double getTotalValue(){
+    double totalValue = 0.0;
+    for (var element in sessionModel.sessionOrderList) {
+      totalValue += element.order.value;
+    }
+
+    return totalValue;
+  }
+
+  double getUserValue(){
+    double userValue = 0.0;
+
+    return userValue;
+  }
 }

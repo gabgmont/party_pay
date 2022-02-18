@@ -6,8 +6,9 @@ class UserRoundCardWidget extends StatelessWidget {
   final String? photo;
   final double? height;
   final double? width;
+  final bool showInitials;
 
-  const UserRoundCardWidget({Key? key, this.initials, this.photo, this.height, this.width})
+  const UserRoundCardWidget({Key? key, this.initials, this.photo, this.height, this.width, this.showInitials = false})
       : super(key: key);
 
   @override
@@ -16,18 +17,24 @@ class UserRoundCardWidget extends StatelessWidget {
 
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 4.0),
-      child: Container(
-        height: height ?? size.height * 0.06,
-        width: width  ?? size.height * 0.06,
-        decoration: hasPhoto() ? photoDecoration(photo!) : initialsDecoration(),
-        child: hasPhoto()
-            ? null
-            : Center(
-                child: Text(
-                  initials ?? 'G',
-                  style: TextStyle(fontSize: height == null ? size.height*.025 : height! *.45, color: AppColors.white),
-                ),
-              ),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        children: [
+          Container(
+            height: height ?? size.height * 0.06,
+            width: width  ?? size.height * 0.06,
+            decoration: hasPhoto() ? photoDecoration(photo!) : initialsDecoration(),
+            child: hasPhoto()
+                ? null
+                : Center(
+                    child: Text(
+                      initials ?? 'G',
+                      style: TextStyle(fontSize: height == null ? size.height*.025 : height! *.45, color: AppColors.white),
+                    ),
+                  ),
+          ),
+          (hasPhoto() && showInitials) ? Center(child: Text(initials ?? 'G'),) : Container()
+        ],
       ),
     );
   }

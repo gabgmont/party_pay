@@ -4,7 +4,7 @@ import 'package:partypay/model/session/menu_model.dart';
 import '../controller/session_controller.dart';
 import '../widgets/category_drop_down_widget.dart';
 import '../widgets/menu_order_widget.dart';
-import 'order_button_bottom_sheet.dart';
+import 'add_order_button_bottom_sheet.dart';
 import '../widgets/session_header_widget.dart';
 
 class SessionMenuDrawer extends StatefulWidget {
@@ -63,7 +63,7 @@ class _SessionMenuDrawerState extends State<SessionMenuDrawer> {
                 onTap: () {
                   Navigator.pop(context);
                   Scaffold.of(context).showBottomSheet(
-                    (context) => OrderButtonBottomSheet(
+                    (context) => AddOrderButtonBottomSheet(
                       orderName: order.name,
                       sessionController: widget.sessionController,
                       userList: widget.sessionController.sessionModel.userList,

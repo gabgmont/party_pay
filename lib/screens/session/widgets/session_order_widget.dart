@@ -109,7 +109,7 @@ class SessionOrderWidget extends StatelessWidget {
                 ),
               ),
               child: Padding(
-                padding: const EdgeInsets.all(4.0),
+                padding: const EdgeInsets.symmetric(horizontal: 4.0),
                 child: ListView(
                   scrollDirection: Axis.horizontal,
                   children: getOrderUsers(size),

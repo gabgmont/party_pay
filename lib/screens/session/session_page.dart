@@ -33,8 +33,8 @@ class _SessionPageState extends State<SessionPage> {
         child: SessionPageAppBar(
           restaurant: sessionController.sessionModel.restaurant,
           table: sessionController.sessionModel.table,
-          individualValue: 0.0,
-          totalValue: 0.0,
+          individualValue: sessionController.getUserValue(),
+          totalValue: sessionController.getTotalValue(),
         ),
       ),
       drawer: FutureBuilder(

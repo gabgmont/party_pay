@@ -37,7 +37,7 @@ class EnterButtonWidget extends StatelessWidget {
                   width: size.width * .69,
                   child: Center(
                     child: Text(
-                      'Confirm',
+                      'Confirmar',
                       style: TextStyle(
                           fontSize: size.height * .04, color: AppColors.white),
                     ),

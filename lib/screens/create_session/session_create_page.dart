@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:partypay/model/user/user_model.dart';
 import 'package:partypay/screens/home/widgets/round_restaurant_card_widget.dart';
-import 'package:partypay/screens/session/session_page.dart';
+import 'package:partypay/screens/session/widgets/enter_button_widget.dart';
 import 'package:partypay/shared/utils/AppColors.dart';
 
 import 'controller/create_session_controller.dart';
 import 'widget/cpf_add_form_field_widget.dart';
-import 'widget/create_session_confirm_button.dart';
 import 'widget/user_round_card_widget.dart';
 
 const addUser = 'Adicionar usuário na mesa';
@@ -120,7 +119,7 @@ class _SessionCreatePageState extends State<SessionCreatePage> {
                 height: size.height * 0.02,
               ),
               SizedBox(
-                height: size.height * 0.07,
+                height: size.height * 0.09,
                 width: size.width * 0.9,
                 child: SingleChildScrollView(
                   scrollDirection: Axis.horizontal,
@@ -178,12 +177,13 @@ class _SessionCreatePageState extends State<SessionCreatePage> {
               SizedBox(
                 height: size.height * 0.06,
               ),
-              CreateSessionConfirmButton(
+              EnterButtonWidget(
                 onTap: () async {
                   var sessionModel =
                       await sessionController.startSession(context);
                   if (sessionModel != null) {
-                    Navigator.pushReplacementNamed(context, '/session_page', arguments: sessionModel);
+                    Navigator.pushReplacementNamed(context, '/session_page',
+                        arguments: sessionModel);
                   }
                 },
               )

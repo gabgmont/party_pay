@@ -42,6 +42,7 @@ class _SelectUserWidgetState extends State<SelectUserWidget> {
                   width: size.height * .08,
                   initials: widget.user.getInitials(),
                   photo: widget.user.photo,
+                  showInitials: true,
                 ),
                 widget.selected
                     ? Container(
