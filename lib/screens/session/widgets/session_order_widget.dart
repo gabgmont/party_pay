@@ -1,13 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:partypay/model/session/session_order_model.dart';
 import 'package:partypay/screens/create_session/widget/user_round_card_widget.dart';
 import 'package:partypay/shared/utils/AppColors.dart';
 
 class SessionOrderWidget extends StatelessWidget {
-  const SessionOrderWidget({Key? key}) : super(key: key);
+  final SessionOrderModel sessionOrderModel;
+
+  const SessionOrderWidget({Key? key, required this.sessionOrderModel})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
+    final totalValue = (sessionOrderModel.order.value).toStringAsFixed(2);
+    final valuePerUser =
+        (sessionOrderModel.order.value / sessionOrderModel.userList.length)
+            .toStringAsFixed(2);
 
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 4.0, horizontal: 4.0),
@@ -41,27 +49,33 @@ class SessionOrderWidget extends StatelessWidget {
                         height: size.height * .085,
                         width: size.height * .085,
                         decoration: BoxDecoration(
-                            border: Border.fromBorderSide(BorderSide(
-                                color: AppColors.secondary, width: 1)),
-                            borderRadius: BorderRadius.circular(size.height)),
+                          border: const Border.fromBorderSide(
+                            BorderSide(color: AppColors.secondary, width: 1),
+                          ),
+                          borderRadius: BorderRadius.circular(size.height),
+                        ),
                       ),
                       Padding(
                         padding:
                             EdgeInsets.symmetric(horizontal: size.width * .03),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              'Product Name',
-                              style: TextStyle(fontSize: size.height * .02),
-                            ),
-                            Text(
-                              'Description',
-                              style: TextStyle(
+                        child: SizedBox(
+                          width: size.width * .45,
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                sessionOrderModel.order.name,
+                                style: TextStyle(fontSize: size.height * .02),
+                              ),
+                              Text(
+                                sessionOrderModel.order.description,
+                                style: TextStyle(
                                   color: AppColors.gray,
-                                  fontSize: size.height * .015),
-                            )
-                          ],
+                                  fontSize: size.height * .015,
+                                ),
+                              )
+                            ],
+                          ),
                         ),
                       ),
                     ],
@@ -72,11 +86,11 @@ class SessionOrderWidget extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.end,
                       children: [
                         Text(
-                          'R\$00.00',
+                          'R\$$totalValue',
                           style: TextStyle(fontSize: size.height * .02),
                         ),
                         Text(
-                          'R\$00.00',
+                          'R\$$valuePerUser',
                           style: TextStyle(fontSize: size.height * .015),
                         )
                       ],
@@ -98,11 +112,7 @@ class SessionOrderWidget extends StatelessWidget {
                 padding: const EdgeInsets.all(4.0),
                 child: ListView(
                   scrollDirection: Axis.horizontal,
-                  children: [
-                    UserRoundCardWidget(
-                      width: size.height * .04,
-                    )
-                  ],
+                  children: getOrderUsers(size),
                 ),
               ),
             )
@@ -110,5 +120,16 @@ class SessionOrderWidget extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  List<UserRoundCardWidget> getOrderUsers(Size size) {
+    return sessionOrderModel.userList
+        .map((e) => UserRoundCardWidget(
+              height: size.height * .04,
+              width: size.height * .04,
+              initials: e.getInitials(),
+              photo: e.photo,
+            ))
+        .toList();
   }
 }

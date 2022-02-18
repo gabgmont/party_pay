@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:partypay/screens/create_session/controller/create_session_controller.dart';
 import 'package:partypay/screens/create_session/widget/user_round_card_widget.dart';
 import 'package:partypay/screens/session/controller/session_controller.dart';
-import 'package:partypay/shared/utils/AppColors.dart';
+import 'package:partypay/screens/session/widgets/enter_button_widget.dart';
 
 import '../../create_session/widget/cpf_add_form_field_widget.dart';
 
@@ -20,11 +20,13 @@ class _AddUserBottomSheetState extends State<AddUserBottomSheet>
     with TickerProviderStateMixin {
   final cpfTextController = TextEditingController();
   final CreateSessionController _createSessionController =
-      CreateSessionController();
+  CreateSessionController();
 
   @override
   Widget build(BuildContext context) {
-    final size = MediaQuery.of(context).size;
+    final size = MediaQuery
+        .of(context)
+        .size;
 
     return BottomSheet(
         animationController: BottomSheet.createAnimationController(this),
@@ -82,52 +84,14 @@ class _AddUserBottomSheetState extends State<AddUserBottomSheet>
                       ),
                     ],
                   ),
-                  SizedBox(
-                    height: size.height * .08,
-                    width: size.width * .7,
-                    child: Stack(
-                      children: [
-                        Align(
-                          alignment: Alignment.bottomLeft,
-                          child: Container(
-                            height: size.height * .075,
-                            width: size.width * .69,
-                            color: AppColors.secondary,
-                          ),
-                        ),
-                        Align(
-                          alignment: Alignment.topRight,
-                          child: Material(
-                            color: AppColors.primary,
-                            child: InkWell(
-                              onTap: () async {
-                                var sucess = await widget.sessionController
-                                    .addUsers(context,
-                                        _createSessionController.usersList);
-                                if (sucess) {
-                                  Navigator.pop(context);
-                                }
-                              },
-                              highlightColor: AppColors.secondary,
-                              splashColor: AppColors.secondary,
-                              child: SizedBox(
-                                height: size.height * .075,
-                                width: size.width * .69,
-                                child: Center(
-                                  child: Text(
-                                    'Confirm',
-                                    style: TextStyle(
-                                        fontSize: size.height * .04,
-                                        color: AppColors.white),
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  )
+                  EnterButtonWidget(onTap: () async {
+                    var sucess = await widget.sessionController
+                        .addUsers(context,
+                        _createSessionController.usersList);
+                    if (sucess) {
+                      Navigator.pop(context);
+                    }
+                  })
                 ],
               ),
             ),

@@ -1,14 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:partypay/model/session/menu_model.dart';
 
+import '../controller/session_controller.dart';
 import '../widgets/category_drop_down_widget.dart';
 import '../widgets/menu_order_widget.dart';
+import '../widgets/order_button_bottom_sheet.dart';
 import '../widgets/session_header_widget.dart';
 
 class SessionMenuDrawer extends StatefulWidget {
   final MenuModel menu;
+  final SessionController sessionController;
+  final VoidCallback onConfirmOrder;
 
-  const SessionMenuDrawer({Key? key, required this.menu}) : super(key: key);
+  const SessionMenuDrawer({
+    Key? key,
+    required this.menu,
+    required this.sessionController,
+    required this.onConfirmOrder,
+  }) : super(key: key);
 
   @override
   State<SessionMenuDrawer> createState() => _SessionMenuDrawerState();
@@ -51,6 +60,17 @@ class _SessionMenuDrawerState extends State<SessionMenuDrawer> {
                 label: order.name,
                 description: order.description,
                 price: order.value,
+                onTap: () {
+                  Navigator.pop(context);
+                  Scaffold.of(context).showBottomSheet(
+                    (context) => OrderButtonBottomSheet(
+                      orderName: order.name,
+                      sessionController: widget.sessionController,
+                      userList: widget.sessionController.sessionModel.userList,
+                        onConfirmOrder: widget.onConfirmOrder
+                    ),
+                  );
+                },
               ))
           .toList();
       return CategoryDropDown(

@@ -24,7 +24,6 @@ class _SessionPageState extends State<SessionPage> {
   @override
   Widget build(BuildContext context) {
     var _futureMenu = sessionController.init(context, widget.sessionModel);
-
     final size = MediaQuery.of(context).size;
 
     return Scaffold(
@@ -54,6 +53,10 @@ class _SessionPageState extends State<SessionPage> {
             case ConnectionState.done:
               return SessionMenuDrawer(
                 menu: sessionController.menu!,
+                sessionController: sessionController,
+                onConfirmOrder: (){
+                  setState(() {});
+                },
               );
           }
           return Container();
@@ -76,7 +79,9 @@ class _SessionPageState extends State<SessionPage> {
                 users: sessionController.sessionModel.userList,
                 trailingTap: () {
                   Scaffold.of(context)
-                      .showBottomSheet((context) => AddUserBottomSheet(sessionController: sessionController,));
+                      .showBottomSheet((context) => AddUserBottomSheet(
+                            sessionController: sessionController,
+                          ));
                   // sessionController.addUsers(context, );
                 },
               );
@@ -84,7 +89,11 @@ class _SessionPageState extends State<SessionPage> {
           return Container();
         },
       ),
-      body: SingleChildScrollView(child: SessionBody()),
+      body: SingleChildScrollView(
+        child: SessionBody(
+          sessionController: sessionController,
+        ),
+      ),
     );
   }
 }

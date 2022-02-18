@@ -10,8 +10,8 @@ class SessionOrderModel {
   SessionOrderModel(this.order, this.orderStatus, this.userList, this.valuePerUser);
   
   SessionOrderModel.fromJson(Map<String, dynamic> json) :
-      order = OrderModel.fromJson(json['order']),
+      order = OrderModel.fromResumeJson(json['order']),
       orderStatus = json['order_status'],
       userList = (json['user_list'] as List).map((json) => UserModel.fromJson(json)).toList(),
-      valuePerUser = json['value_per_user'];
+      valuePerUser = json['value_per_user'].toDouble();
 }

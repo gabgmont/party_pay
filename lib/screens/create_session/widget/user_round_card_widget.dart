@@ -25,7 +25,7 @@ class UserRoundCardWidget extends StatelessWidget {
             : Center(
                 child: Text(
                   initials ?? 'G',
-                  style: const TextStyle(fontSize: 18, color: AppColors.white),
+                  style: TextStyle(fontSize: height == null ? size.height*.025 : height! *.45, color: AppColors.white),
                 ),
               ),
       ),

@@ -6,12 +6,14 @@ class MenuOrderWidget extends StatelessWidget {
   final String label;
   final String description;
   final double price;
+  final VoidCallback onTap;
 
   const MenuOrderWidget(
       {Key? key,
       required this.label,
       required this.description,
-      required this.price})
+      required this.price,
+      required this.onTap})
       : super(key: key);
 
   @override
@@ -35,6 +37,7 @@ class MenuOrderWidget extends StatelessWidget {
                 label: label,
                 description: description,
                 price: price,
+                onTap: onTap,
               ),
             ),
           ],
@@ -63,67 +66,65 @@ class _MenuOrderCard extends StatelessWidget {
   final String label;
   final String description;
   final double price;
+  final VoidCallback onTap;
 
   const _MenuOrderCard(
       {Key? key,
       required this.price,
       required this.label,
-      required this.description})
+      required this.description,
+      required this.onTap})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
 
-    return Container(
-      height: size.height * .194,
-      width: size.width * .79,
-      decoration: BoxDecoration(
-        color: AppColors.white,
-        boxShadow: [
-          BoxShadow(
-            color: AppColors.shadow,
-            offset: Offset.fromDirection(5.5),
-            blurRadius: .3,
-            spreadRadius: .3,
-          )
-        ],
-      ),
-      child: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: [
-            Container(
-              height: size.height * .13,
-              width: size.height * .13,
-              decoration: BoxDecoration(
-                color: AppColors.secondary,
-                borderRadius: BorderRadius.circular(15)
-              ),
-            ),
-            Align(
-              alignment: Alignment.bottomLeft,
-              child: Padding(
-                padding: EdgeInsets.only(left: size.width * .02),
-                child: SizedBox(
-                  width: size.width * .45,
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      _MenuOrderNameDescription(
-                        label: label,
-                        description: description,
+    return Material(
+      color: AppColors.white,
+      child: InkWell(
+        onTap: onTap,
+        highlightColor: AppColors.secondary,
+        splashColor: AppColors.secondary,
+        child: SizedBox(
+          height: size.height * .194,
+          width: size.width * .79,
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                Container(
+                  height: size.height * .13,
+                  width: size.height * .13,
+                  decoration: BoxDecoration(
+                      color: AppColors.secondary,
+                      borderRadius: BorderRadius.circular(15)),
+                ),
+                Align(
+                  alignment: Alignment.bottomLeft,
+                  child: Padding(
+                    padding: EdgeInsets.only(left: size.width * .02),
+                    child: SizedBox(
+                      width: size.width * .45,
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          _MenuOrderNameDescription(
+                            label: label,
+                            description: description,
+                          ),
+                          _MenuOrderPrice(
+                            price: price,
+                          ),
+                        ],
                       ),
-                      _MenuOrderPrice(
-                        price: price,
-                      ),
-                    ],
+                    ),
                   ),
                 ),
-              ),
+              ],
             ),
-          ],
+          ),
         ),
       ),
     );
@@ -149,7 +150,7 @@ class _MenuOrderNameDescription extends StatelessWidget {
         child: SingleChildScrollView(
           scrollDirection: Axis.vertical,
           child: SizedBox(
-            height: size.height* .08,
+            height: size.height * .08,
             child: Text.rich(
               TextSpan(
                 text: '$label\n',
@@ -157,7 +158,9 @@ class _MenuOrderNameDescription extends StatelessWidget {
                 children: [
                   TextSpan(
                     text: description,
-                    style: TextStyle(fontSize: size.height * .013, overflow: TextOverflow.fade),
+                    style: TextStyle(
+                        fontSize: size.height * .013,
+                        overflow: TextOverflow.fade),
                   ),
                 ],
               ),

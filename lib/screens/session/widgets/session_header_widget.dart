@@ -47,6 +47,7 @@ class SessionHeaderWidget extends StatelessWidget {
             ),
             showTrailing
                 ? IconButton(
+                    padding: EdgeInsets.zero,
                     icon: Icon(
                       Icons.add,
                       color: AppColors.white,
