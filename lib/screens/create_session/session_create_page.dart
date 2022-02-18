@@ -183,13 +183,7 @@ class _SessionCreatePageState extends State<SessionCreatePage> {
                   var sessionModel =
                       await sessionController.startSession(context);
                   if (sessionModel != null) {
-                    Navigator.pushReplacement(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) =>
-                            SessionPage(sessionModel: sessionModel),
-                      ),
-                    );
+                    Navigator.pushReplacementNamed(context, '/session_page', arguments: sessionModel);
                   }
                 },
               )

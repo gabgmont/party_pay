@@ -32,7 +32,7 @@ class _ProfilePageState extends State<ProfilePage> {
         leading: IconButton(
           icon: const Icon(Icons.arrow_back_ios),
           onPressed: () {
-            Navigator.pop(context);
+            Navigator.pop(context, false);
           },
         ),
         title: const Text(profileTitle),
@@ -54,8 +54,7 @@ class _ProfilePageState extends State<ProfilePage> {
                 prefs.remove('token');
                 prefs.remove('user');
                 prefs.remove('session_id');
-                Navigator.pushReplacement(context,
-                    MaterialPageRoute(builder: (context) => LoginPage()));
+                Navigator.pop(context, true);
               },
             ),
             IconTextFieldWidget(

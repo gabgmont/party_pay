@@ -3,11 +3,8 @@ import 'package:partypay/model/restaurant/restaurant_model.dart';
 import 'package:partypay/model/session/session_model.dart';
 import 'package:partypay/model/user/user_model.dart';
 import 'package:partypay/rest/client/session_client.dart';
-import 'package:partypay/screens/create_session/session_create_page.dart';
 import 'package:partypay/screens/home/widgets/double_big_button_widget.dart';
 import 'package:partypay/screens/home/widgets/hp_app_bar.dart';
-import 'package:partypay/screens/profile/profile_page.dart';
-import 'package:partypay/screens/session/session_page.dart';
 import 'package:partypay/shared/utils/AppColors.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -41,13 +38,15 @@ class _HomePageState extends State<HomePage> {
         preferredSize: Size.fromHeight(size.height * 0.28),
         child: HomePageAppBar(
           user: widget.user,
-          onTap: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => ProfilePage(user: widget.user),
-              ),
-            );
+          onTap: () async {
+            Navigator.pushNamed(context, '/profile_page',
+                    arguments: widget.user)
+                .then((shouldLogout) {
+              if(shouldLogout == null) return;
+              if (shouldLogout as bool) {
+                Navigator.pushReplacementNamed(context, '/login_page');
+              }
+            });
           },
         ),
       ),
@@ -133,12 +132,8 @@ class _HomePageState extends State<HomePage> {
     return DoubleBigButtonWidget(
       label: newSession,
       onTap: () {
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (context) => SessionCreatePage(user: widget.user),
-          ),
-        );
+        Navigator.pushNamed(context, '/session_create_page',
+            arguments: widget.user);
       },
     );
   }
@@ -147,12 +142,8 @@ class _HomePageState extends State<HomePage> {
     return DoubleBigButtonWidget(
       label: enterSession,
       onTap: () {
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (context) => SessionPage(sessionModel: _sessionModel!),
-          ),
-        );
+        Navigator.pushNamed(context, '/session_page', arguments: _sessionModel);
+
       },
     );
   }

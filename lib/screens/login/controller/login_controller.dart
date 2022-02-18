@@ -57,8 +57,8 @@ class LoginController {
     var user = await _userService.getUser(context, cpf);
     prefs.setString('user', user!.toJson().toString());
 
-    Navigator.pushReplacement(
-        context, MaterialPageRoute(builder: (context) => HomePage(user: user)));
+    Navigator.pushReplacementNamed(context, '/home_page', arguments: user);
+
     return true;
   }
 }

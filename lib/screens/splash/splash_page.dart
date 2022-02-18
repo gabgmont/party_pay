@@ -56,8 +56,8 @@ void checkLogin(BuildContext context) async {
   if (token == null || user == null) {
     prefs.remove('token');
     prefs.remove('user');
-    Navigator.pushReplacement(
-        context, MaterialPageRoute(builder: (context) => LoginPage()));
+    Navigator.pushReplacementNamed(context, '/login_page');
+
     return;
   }
 
@@ -69,6 +69,5 @@ void checkLogin(BuildContext context) async {
       phone: userMap['phone'],
       photo: userMap['photo']);
 
-  Navigator.pushReplacement(context,
-      MaterialPageRoute(builder: (context) => HomePage(user: userModel)));
+  Navigator.pushReplacementNamed(context, '/home_page', arguments: userModel);
 }
