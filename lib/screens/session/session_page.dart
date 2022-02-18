@@ -7,6 +7,7 @@ import 'package:partypay/shared/utils/AppColors.dart';
 import 'pages/session_menu_drawer.dart';
 import 'pages/session_users_end_drawer.dart';
 import 'pages/add_user_bottom_sheet.dart';
+import 'widgets/alert_widget.dart';
 import 'widgets/session_page_appbar_widget.dart';
 
 class SessionPage extends StatefulWidget {
@@ -54,7 +55,7 @@ class _SessionPageState extends State<SessionPage> {
               return SessionMenuDrawer(
                 menu: sessionController.menu!,
                 sessionController: sessionController,
-                onConfirmOrder: (){
+                onConfirmOrder: () {
                   setState(() {});
                 },
               );
@@ -90,8 +91,36 @@ class _SessionPageState extends State<SessionPage> {
         },
       ),
       body: SingleChildScrollView(
-        child: SessionBody(
-          sessionController: sessionController,
+        child: FutureBuilder(
+          future: _futureMenu,
+          builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
+            switch (snapshot.connectionState) {
+              case ConnectionState.none:
+                break;
+              case ConnectionState.waiting:
+                return SizedBox(
+                  height: size.height * .61,
+                  child: const Center(
+                    child:
+                        CircularProgressIndicator(color: AppColors.secondary),
+                  ),
+                );
+
+              case ConnectionState.active:
+                break;
+              case ConnectionState.done:
+                return SessionBody(
+                  sessionController: sessionController,
+                );
+            }
+            return SizedBox(
+              height: size.height * .61,
+              child: const AlertWidget(
+                message: 'Erro ao carregar sessão',
+                icon: Icons.warning,
+              ),
+            );
+          },
         ),
       ),
     );
