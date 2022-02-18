@@ -7,7 +7,7 @@ import '../../create_session/widget/user_round_card_widget.dart';
 class SelectUserWidget extends StatefulWidget {
   final UserModel user;
   final VoidCallback onTap;
-  bool pressed = false;
+  bool selected = false;
 
   SelectUserWidget({Key? key, required this.user, required this.onTap})
       : super(key: key);
@@ -17,7 +17,6 @@ class SelectUserWidget extends StatefulWidget {
 }
 
 class _SelectUserWidgetState extends State<SelectUserWidget> {
-
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
@@ -28,11 +27,10 @@ class _SelectUserWidgetState extends State<SelectUserWidget> {
         borderRadius: BorderRadius.circular(size.height),
         child: InkWell(
           borderRadius: BorderRadius.circular(size.height),
-          onTap: () {
+          onTap: (){
             setState(() {
-              widget.pressed = !widget.pressed;
-              widget.onTap();
-            });
+              widget.selected = !widget.selected;
+              });
           },
           child: Padding(
             padding: const EdgeInsets.all(4.0),
@@ -45,7 +43,7 @@ class _SelectUserWidgetState extends State<SelectUserWidget> {
                   initials: widget.user.getInitials(),
                   photo: widget.user.photo,
                 ),
-                widget.pressed
+                widget.selected
                     ? Container(
                         height: 4,
                         width: size.height * .08,

@@ -6,7 +6,7 @@ import 'package:partypay/shared/utils/AppColors.dart';
 
 import 'pages/session_menu_drawer.dart';
 import 'pages/session_users_end_drawer.dart';
-import 'widgets/add_user_bottom_sheet.dart';
+import 'pages/add_user_bottom_sheet.dart';
 import 'widgets/session_page_appbar_widget.dart';
 
 class SessionPage extends StatefulWidget {

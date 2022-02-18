@@ -26,7 +26,7 @@ class OrderButtonBottomSheet extends StatefulWidget {
 
 class _OrderButtonBottomSheetState extends State<OrderButtonBottomSheet>
     with TickerProviderStateMixin {
-  List<SelectUserWidget> auxUserList = [];
+  List<SelectUserWidget> selectUserList = [];
 
   @override
   Widget build(BuildContext context) {
@@ -98,19 +98,57 @@ class _OrderButtonBottomSheetState extends State<OrderButtonBottomSheet>
               height: size.height * .14,
               width: size.width,
               child: Padding(
-                padding: EdgeInsets.symmetric(vertical: size.height * .014),
-                child: SingleChildScrollView(
-                  scrollDirection: Axis.horizontal,
-                  child: Row(
-                    children: userWidgetList(),
+                  padding: EdgeInsets.symmetric(vertical: size.height * .014),
+                  child: SizedBox(
+                    child: ListView.builder(
+                        itemCount: widget.userList.length,
+                        scrollDirection: Axis.horizontal,
+                        itemBuilder: (BuildContext context, int index) {
+
+                          final userContent = widget.userList[index];
+
+                          selectUserList.add(
+                            SelectUserWidget(
+                              user: userContent,
+                              onTap: () {
+                                setState(() {
+
+                                });
+                              },
+                            ),
+                          );
+
+                          return selectUserList[index];
+                        }),
+                  )
+                  // SingleChildScrollView(
+                  //   scrollDirection: Axis.horizontal,
+                  //   child: Row(
+                  //     children: userWidgetList(),
+                  //   ),
+                  // ),
                   ),
-                ),
-              ),
             ),
             EnterButtonWidget(
               onTap: () async {
+                var selectedUsers = selectUserList
+                    .where((userWidget) => userWidget.selected)
+                    .map((userWidget) => userWidget.user)
+                    .toList();
+
+                if(selectedUsers.isEmpty){
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(
+                      backgroundColor: AppColors.secondary,
+                      content: Text('Escolha ao menos um usuário para dividir o pedido.'),
+                    ),
+                  );
+                  return;
+                }
+
                 var sucess = await widget.sessionController
-                    .addOrder(context, widget.orderName, widget.userList);
+                    .addOrder(context, widget.orderName, selectedUsers);
+
                 if (sucess) {
                   Navigator.pop(context);
                   widget.onConfirmOrder();
@@ -122,14 +160,16 @@ class _OrderButtonBottomSheetState extends State<OrderButtonBottomSheet>
       },
     );
   }
-
-  List<Widget> userWidgetList() {
-    return widget.userList
-        .map((user) => SelectUserWidget(
-            user: user,
-            onTap: () {
-              setState(() {});
-            }))
-        .toList();
-  }
+//
+// List<Widget> userWidgetList() {
+//   return widget.userList
+//       .map((user) => SelectUserWidget(
+//           user: user,
+//           onTap: () {
+//             setState(() {
+//               print('1234asdfasda');
+//             });
+//           }))
+//       .toList();
+// }
 }

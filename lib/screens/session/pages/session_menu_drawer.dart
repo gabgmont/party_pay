@@ -4,7 +4,7 @@ import 'package:partypay/model/session/menu_model.dart';
 import '../controller/session_controller.dart';
 import '../widgets/category_drop_down_widget.dart';
 import '../widgets/menu_order_widget.dart';
-import '../widgets/order_button_bottom_sheet.dart';
+import 'order_button_bottom_sheet.dart';
 import '../widgets/session_header_widget.dart';
 
 class SessionMenuDrawer extends StatefulWidget {
