@@ -134,7 +134,6 @@ class _SessionCreatePageState extends State<SessionCreatePage> {
               SizedBox(
                 height: size.height * 0.04,
               ),
-              // Icon(Icons.table),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [

@@ -48,9 +48,6 @@ class _SessionBodyState extends State<SessionBody> {
               Navigator.of(context).pushNamedAndRemoveUntil(
                   '/home_page', (Route<dynamic> route) => false,
                   arguments: widget.sessionController.sessionModel.userList[0]);
-              // Navigator.removeRoute(context, );
-              // Navigator.popAndPushNamed(context, '/home_page');
-
             }
           },
         )

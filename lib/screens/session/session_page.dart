@@ -83,7 +83,6 @@ class _SessionPageState extends State<SessionPage> {
                       .showBottomSheet((context) => AddUserBottomSheet(
                             sessionController: sessionController,
                           ));
-                  // sessionController.addUsers(context, );
                 },
               );
           }

@@ -44,7 +44,6 @@ class _DoubleButtonWidgetState extends State<DoubleButtonWidget> {
                 child: SizedBox(
                   height: size.height * 0.045,
                   width: size.width * 0.49,
-                  // color: mainColor,
                   child: Center(
                     child: Text(
                       widget.label,

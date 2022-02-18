@@ -18,13 +18,13 @@ class HeaderTileWidget extends StatelessWidget {
     final size = MediaQuery.of(context).size;
 
     return SizedBox(
-      height: height, //size.height * 0.054,
+      height: height,
       child: Stack(
         children: [
           Align(
             alignment: Alignment.bottomRight,
             child: Container(
-              height: height * 0.9, //size.height * 0.05,
+              height: height * 0.9,
               decoration: BoxDecoration(
                 color: AppColors.secondary,
                 borderRadius: BorderRadius.circular(200),
