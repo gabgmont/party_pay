@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import '../widgets/individual_resume_item_widget.dart';
 import '../widgets/resume_header_widget.dart';
 
+const myResume = 'Meu Resumo';
+
 class IndividualResumePage extends StatelessWidget {
 
   const IndividualResumePage({Key? key}) : super(key: key);
@@ -14,7 +16,7 @@ class IndividualResumePage extends StatelessWidget {
     return Column(
       children: [
         ResumeHeaderWidget(
-          label: 'Meu Resumo',
+          label: myResume,
         ),
         SizedBox(
           height: size.height * .6,

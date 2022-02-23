@@ -4,6 +4,8 @@ import 'package:partypay/model/user/user_model.dart';
 import '../widgets/session_header_widget.dart';
 import '../widgets/session_user_card.dart';
 
+const usersLabel = 'Usuários';
+
 class SessionUsersEndDrawer extends StatefulWidget {
   final List<UserModel> users;
   final VoidCallback trailingTap;
@@ -37,7 +39,7 @@ class _SessionUsersEndDrawerState extends State<SessionUsersEndDrawer> {
             Padding(
               padding: const EdgeInsets.only(bottom: 8.0),
               child: SessionHeaderWidget(
-                label: 'Users',
+                label: usersLabel,
                 leading: Icons.groups,
                 showTrailing: true,
                 onTap: () {

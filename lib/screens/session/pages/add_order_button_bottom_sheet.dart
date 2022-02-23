@@ -6,6 +6,8 @@ import 'package:partypay/shared/utils/AppColors.dart';
 
 import '../controller/session_controller.dart';
 
+const selectUsersToShare = 'Selecione usuários para dividir';
+
 class AddOrderButtonBottomSheet extends StatefulWidget {
   final String orderName;
   final SessionController sessionController;
@@ -72,7 +74,7 @@ class _AddOrderButtonBottomSheetState extends State<AddOrderButtonBottomSheet>
                         padding: const EdgeInsets.symmetric(horizontal: 4.0),
                         child: Text.rich(
                           TextSpan(
-                            text: 'Selecione usuários para dividir:\n',
+                            text: '$selectUsersToShare:\n',
                             style: TextStyle(
                               fontSize: size.height * .02,
                               color: AppColors.white,

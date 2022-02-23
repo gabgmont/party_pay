@@ -6,6 +6,8 @@ import 'package:partypay/screens/session/widgets/enter_button_widget.dart';
 
 import '../../create_session/widget/cpf_add_form_field_widget.dart';
 
+const addUserSession = 'Adicionar usuário na Sessão';
+
 class AddUserBottomSheet extends StatefulWidget {
   final SessionController sessionController;
 
@@ -46,7 +48,7 @@ class _AddUserBottomSheetState extends State<AddUserBottomSheet>
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   Text(
-                    'Add user to session',
+                    addUserSession,
                     style: TextStyle(fontSize: size.height * .03),
                   ),
                   CpfAddFormFieldWidget(
@@ -85,10 +87,10 @@ class _AddUserBottomSheetState extends State<AddUserBottomSheet>
                     ],
                   ),
                   EnterButtonWidget(onTap: () async {
-                    var sucess = await widget.sessionController
+                    var success = await widget.sessionController
                         .addUsers(context,
                         _createSessionController.usersList);
-                    if (sucess) {
+                    if (success) {
                       Navigator.pop(context);
                     }
                   })

@@ -5,6 +5,11 @@ import 'package:partypay/shared/utils/AppColors.dart';
 
 import 'pages/group_resume_page.dart';
 
+const myLabel = 'Meu';
+const groupLabel = 'Geral';
+const pay = 'Pagar';
+const payment = 'Pagamento';
+
 class ResumePage extends StatefulWidget {
   const ResumePage({Key? key}) : super(key: key);
 
@@ -25,7 +30,7 @@ class _ResumePageState extends State<ResumePage> {
     return Scaffold(
       appBar: AppBar(
         title: const Text(
-          'Pagamento',
+          payment,
           style: TextStyle(
             color: AppColors.white,
             fontSize: 24,
@@ -55,7 +60,7 @@ class _ResumePageState extends State<ResumePage> {
           children: [
             pages[index],
             SessionBottomNavigationBar(
-              leftButtonLabel: 'Meu',
+              leftButtonLabel: myLabel,
               leftButtonIcon: Icons.person,
               leftButtonColor: leftButtonColor,
               onLeftButtonTap: () {
@@ -65,7 +70,7 @@ class _ResumePageState extends State<ResumePage> {
                   index = 0;
                 });
               },
-              rightButtonLabel: 'Geral',
+              rightButtonLabel: groupLabel,
               rightButtonIcon: Icons.groups,
               rightButtonColor: rightButtonColor,
               onRightButtonTap: () {
@@ -76,7 +81,7 @@ class _ResumePageState extends State<ResumePage> {
                 });
               },
               centerButtonLabel: const Text(
-                'Pagar',
+                pay,
                 style: TextStyle(color: AppColors.white, fontSize: 32),
               ),
               centerButtonTap: () {},

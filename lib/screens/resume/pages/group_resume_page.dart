@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import '../widgets/group_user_resume_widget.dart';
 import '../widgets/resume_header_widget.dart';
 
+const groupResume = 'Resumo Geral';
+
 class GroupResumePage extends StatelessWidget {
   const GroupResumePage({Key? key}) : super(key: key);
 
@@ -12,7 +14,7 @@ class GroupResumePage extends StatelessWidget {
 
     return Column(
       children: [
-        const ResumeHeaderWidget(label: 'Resumo Geral'),
+        const ResumeHeaderWidget(label: groupResume),
         SizedBox(
           height: size.height * .616,
           child: ListView(

@@ -3,6 +3,8 @@ import 'package:partypay/model/session/session_order_model.dart';
 import 'package:partypay/screens/create_session/widget/user_round_card_widget.dart';
 import 'package:partypay/shared/utils/AppColors.dart';
 
+const moneyPrefix = 'R\$';
+
 class SessionOrderWidget extends StatelessWidget {
   final SessionOrderModel sessionOrderModel;
 
@@ -86,11 +88,11 @@ class SessionOrderWidget extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.end,
                       children: [
                         Text(
-                          'R\$$totalValue',
+                          '$moneyPrefix$totalValue',
                           style: TextStyle(fontSize: size.height * .02),
                         ),
                         Text(
-                          'R\$$valuePerUser',
+                          '$moneyPrefix$valuePerUser',
                           style: TextStyle(fontSize: size.height * .015),
                         )
                       ],

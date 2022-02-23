@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 
 import '../../../shared/utils/AppColors.dart';
 
+const confirmLabel = 'Confirmar';
+
 class EnterButtonWidget extends StatelessWidget {
   final VoidCallback onTap;
 
@@ -37,7 +39,7 @@ class EnterButtonWidget extends StatelessWidget {
                   width: size.width * .69,
                   child: Center(
                     child: Text(
-                      'Confirmar',
+                      confirmLabel,
                       style: TextStyle(
                           fontSize: size.height * .04, color: AppColors.white),
                     ),

@@ -3,6 +3,8 @@ import 'package:partypay/shared/utils/AppColors.dart';
 
 import 'header_tile_widget.dart';
 
+const moneyPrefix = 'R\$';
+
 class SessionPageAppBar extends StatelessWidget {
   final int table;
   final String restaurant;
@@ -52,12 +54,12 @@ class SessionPageAppBar extends StatelessWidget {
                   HeaderTileWidget(
                     height: size.height * 0.054,
                     icon: Icons.person,
-                    data: 'R\$$individualValue',
+                    data: '$moneyPrefix$individualValue',
                   ),
                   HeaderTileWidget(
                     height: size.height * 0.054,
                     icon: Icons.group,
-                    data: 'R\$$totalValue',
+                    data: '$moneyPrefix$totalValue',
                   )
                 ],
               ),

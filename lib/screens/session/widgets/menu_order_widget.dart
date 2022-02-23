@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 
 import '../../../shared/utils/AppColors.dart';
 
+const moneyPrefix = 'R\$';
+
 class MenuOrderWidget extends StatelessWidget {
   final String label;
   final String description;
@@ -191,7 +193,7 @@ class _MenuOrderPrice extends StatelessWidget {
             Align(
                 alignment: Alignment.topRight,
                 child: Text(
-                  'R\$',
+                  moneyPrefix,
                   style: TextStyle(fontSize: size.height * .016),
                 )),
             Align(

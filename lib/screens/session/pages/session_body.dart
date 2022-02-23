@@ -7,6 +7,11 @@ import '../widgets/session_bottom_navigation_bar.dart';
 import '../widgets/session_header_widget.dart';
 import '../widgets/session_order_widget.dart';
 
+const clickMenuToOrder = 'Faça um pedido clicando no Menu!';
+const ordersLabel = 'Pedidos';
+const menuLabel = 'Cardápio';
+const usersLabel = 'Usuários';
+
 class SessionBody extends StatefulWidget {
   final SessionController sessionController;
 
@@ -26,7 +31,7 @@ class _SessionBodyState extends State<SessionBody> {
     return Column(
       children: [
         const SessionHeaderWidget(
-          label: 'Orders',
+          label: ordersLabel,
           leading: Icons.list,
           showTrailing: false,
         ),
@@ -34,25 +39,25 @@ class _SessionBodyState extends State<SessionBody> {
           height: size.height * .61,
           child: sessionOrders.isEmpty
               ? const AlertWidget(
-                  message: 'Faça um pedido clicando no Menu!',
+                  message: clickMenuToOrder,
                   icon: Icons.lunch_dining)
               : ListView(children: sessionOrders),
         ),
         SessionBottomNavigationBar(
-          leftButtonLabel: 'Menu',
+          leftButtonLabel: menuLabel,
           leftButtonIcon: Icons.restaurant_menu,
-          rightButtonLabel: 'Users',
+          rightButtonLabel: usersLabel,
           rightButtonIcon: Icons.groups,
           centerButtonLabel: Text.rich(
             TextSpan(
-              text: 'Close\n',
+              text: 'Encerrar\n',
               style: TextStyle(
                 color: AppColors.white,
-                fontSize: size.height * .046,
+                fontSize: size.height * .033,
               ),
               children: [
                 TextSpan(
-                  text: 'Session',
+                  text: 'Sessão',
                   style: TextStyle(
                       color: AppColors.white, fontSize: size.height * .028),
                 )

@@ -10,6 +10,8 @@ import 'pages/add_user_bottom_sheet.dart';
 import 'widgets/alert_widget.dart';
 import 'widgets/session_page_appbar_widget.dart';
 
+const errorLoadingSession = 'Erro ao carregar sessão';
+
 class SessionPage extends StatefulWidget {
   final SessionModel sessionModel;
 
@@ -115,7 +117,7 @@ class _SessionPageState extends State<SessionPage> {
             return SizedBox(
               height: size.height * .61,
               child: const AlertWidget(
-                message: 'Erro ao carregar sessão',
+                message: errorLoadingSession,
                 icon: Icons.warning,
               ),
             );
