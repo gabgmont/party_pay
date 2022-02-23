@@ -5,6 +5,7 @@ import 'package:partypay/screens/create_session/session_create_page.dart';
 import 'package:partypay/screens/home/home_page.dart';
 import 'package:partypay/screens/login/login_page.dart';
 import 'package:partypay/screens/profile/profile_page.dart';
+import 'package:partypay/screens/resume/resume_page.dart';
 import 'package:partypay/screens/session/session_page.dart';
 
 import 'screens/splash/splash_page.dart';
@@ -19,25 +20,32 @@ class PartyPayApp extends StatelessWidget {
       initialRoute: '/splash_page',
       routes: {
         '/splash_page': (context) => const SplashPage(),
+
         '/login_page': (context) => LoginPage(),
+
         '/home_page': (context) => HomePage(
               user: ModalRoute.of(context)?.settings.arguments == null
                   ? UserModel(name: 'Guest')
                   : ModalRoute.of(context)?.settings.arguments as UserModel,
             ),
+
         '/profile_page': (context) => ProfilePage(
               user: ModalRoute.of(context)?.settings.arguments == null
                   ? UserModel(name: 'Guest')
                   : ModalRoute.of(context)?.settings.arguments as UserModel,
             ),
+
         '/session_create_page': (context) => SessionCreatePage(
               user: ModalRoute.of(context)?.settings.arguments == null
                   ? UserModel(name: 'Guest')
                   : ModalRoute.of(context)?.settings.arguments as UserModel,
             ),
+
         '/session_page': (context) => SessionPage(
               sessionModel: ModalRoute.of(context)?.settings.arguments as SessionModel
-            )
+            ),
+
+        'resume_page' : (context) => ResumePage()
       },
     );
   }

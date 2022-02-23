@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:partypay/model/user/user_model.dart';
-import 'package:partypay/screens/login/login_page.dart';
 import 'package:partypay/shared/utils/AppColors.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -30,7 +29,10 @@ class _ProfilePageState extends State<ProfilePage> {
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back_ios),
+          icon: const Icon(
+            Icons.arrow_back_ios,
+            size: 28,
+          ),
           onPressed: () {
             Navigator.pop(context, false);
           },

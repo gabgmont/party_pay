@@ -4,10 +4,15 @@ import 'package:partypay/shared/utils/AppColors.dart';
 class SessionNavigationButton extends StatelessWidget {
   final String label;
   final IconData icon;
+  final Color iconColor;
   final VoidCallback onTap;
 
   const SessionNavigationButton(
-      {Key? key, required this.label, required this.onTap, required this.icon})
+      {Key? key,
+      required this.label,
+      required this.onTap,
+      required this.icon,
+      required this.iconColor})
       : super(key: key);
 
   @override
@@ -27,7 +32,7 @@ class SessionNavigationButton extends StatelessWidget {
             icon: Icon(
               icon,
               size: size.height * .05,
-              color: AppColors.primary,
+              color: iconColor,
             ),
           ),
           Text(

@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:partypay/screens/session/controller/session_controller.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
+import '../../../shared/utils/AppColors.dart';
 import '../widgets/alert_widget.dart';
 import '../widgets/session_bottom_navigation_bar.dart';
-import '../widgets/session_order_widget.dart';
 import '../widgets/session_header_widget.dart';
+import '../widgets/session_order_widget.dart';
 
 class SessionBody extends StatefulWidget {
   final SessionController sessionController;
@@ -39,16 +39,38 @@ class _SessionBodyState extends State<SessionBody> {
               : ListView(children: sessionOrders),
         ),
         SessionBottomNavigationBar(
-          closeButtonTap: () async {
-            var sucess = await widget.sessionController.closeSession(context);
-            if (sucess) {
-              var prefs = await SharedPreferences.getInstance();
-              prefs.remove('session_id');
-
-              Navigator.of(context).pushNamedAndRemoveUntil(
-                  '/home_page', (Route<dynamic> route) => false,
-                  arguments: widget.sessionController.sessionModel.userList[0]);
-            }
+          leftButtonLabel: 'Menu',
+          leftButtonIcon: Icons.restaurant_menu,
+          rightButtonLabel: 'Users',
+          rightButtonIcon: Icons.groups,
+          centerButtonLabel: Text.rich(
+            TextSpan(
+              text: 'Close\n',
+              style: TextStyle(
+                color: AppColors.white,
+                fontSize: size.height * .046,
+              ),
+              children: [
+                TextSpan(
+                  text: 'Session',
+                  style: TextStyle(
+                      color: AppColors.white, fontSize: size.height * .028),
+                )
+              ],
+            ),
+            textAlign: TextAlign.center,
+          ),
+          centerButtonTap: () async {
+            Navigator.pushNamed(context, 'resume_page');
+            // var sucess = await widget.sessionController.closeSession(context);
+            // if (sucess) {
+            //   var prefs = await SharedPreferences.getInstance();
+            //   prefs.remove('session_id');
+            //
+            //   Navigator.of(context).pushNamedAndRemoveUntil(
+            //       '/home_page', (Route<dynamic> route) => false,
+            //       arguments: widget.sessionController.sessionModel.userList[0]);
+            // }
           },
         )
       ],

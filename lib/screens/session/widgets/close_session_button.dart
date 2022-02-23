@@ -1,9 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:partypay/shared/utils/AppColors.dart';
 
-class CloseSessionButton extends StatelessWidget {
+class MainSessionButton extends StatelessWidget {
+  final Widget label;
   final VoidCallback onTap;
-  const CloseSessionButton({Key? key, required this.onTap}) : super(key: key);
+
+  const MainSessionButton({
+    Key? key,
+    required this.onTap,
+    required this.label,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -32,23 +38,7 @@ class CloseSessionButton extends StatelessWidget {
             borderRadius: borderRadius,
           ),
           child: Center(
-            child: Text.rich(
-              TextSpan(
-                text: 'Close\n',
-                style: TextStyle(
-                  color: AppColors.white,
-                  fontSize: size.height * .046,
-                ),
-                children: [
-                  TextSpan(
-                    text: 'Session',
-                    style: TextStyle(
-                        color: AppColors.white, fontSize: size.height * .028),
-                  )
-                ],
-              ),
-              textAlign: TextAlign.center,
-            ),
+            child: label
           ),
         ),
       ),
