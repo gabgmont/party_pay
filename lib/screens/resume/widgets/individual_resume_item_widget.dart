@@ -29,7 +29,7 @@ class IndividualResumeItem extends StatelessWidget {
                   child: Container(
                     width: 1,
                     height: 50,
-                    color: AppColors.primary,
+                    color: AppColors.secondary,
                   ),
                 ),
                 Text(
