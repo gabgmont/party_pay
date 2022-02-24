@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart';
 import 'package:partypay/model/session/session_model.dart';
 import 'package:partypay/model/session/session_order_model.dart';
+import 'package:partypay/model/session/session_resume_model.dart';
 import 'package:partypay/model/user/user_model.dart';
 import 'package:partypay/rest/partypay_api_service.dart';
 import 'package:partypay/shared/utils/AppColors.dart';
@@ -82,7 +83,7 @@ class SessionClient {
     return (body['order_list'] as List).map((orderJson) => SessionOrderModel.fromJson(orderJson)).toList();
   }
 
-  Future<bool> closeSession(
+  Future<SessionResumeModel?> closeSession(
       BuildContext context, int sessionId, bool forceClose) async {
     var path =
         PartyPayService.closeSession.replaceAll('{sessionId}', '$sessionId');
@@ -90,8 +91,9 @@ class SessionClient {
 
     var response = await service.put(path, null);
     var body = checkResponse(context, response);
-    if (body == null) return false;
-    return true;
+    if (body == null) return null;
+
+    return SessionResumeModel.fromJson(body);
   }
 
   Map<String, dynamic>? checkResponse(

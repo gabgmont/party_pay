@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:partypay/model/session/session_resume_model.dart';
 
 import '../widgets/group_user_resume_widget.dart';
 import '../widgets/resume_header_widget.dart';
@@ -6,7 +7,8 @@ import '../widgets/resume_header_widget.dart';
 const groupResume = 'Resumo Geral';
 
 class GroupResumePage extends StatelessWidget {
-  const GroupResumePage({Key? key}) : super(key: key);
+  final SessionResumeModel sesionResume;
+  const GroupResumePage({Key? key, required this.sesionResume}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -18,13 +20,14 @@ class GroupResumePage extends StatelessWidget {
         SizedBox(
           height: size.height * .616,
           child: ListView(
-            children: [
-              GroupUserResumeWidget(),
-              GroupUserResumeWidget(),
-            ],
+            children: getUsersResume(),
           ),
         )
       ],
     );
+  }
+
+  List<GroupUserResumeWidget> getUsersResume(){
+    return sesionResume.userList.map((e) => GroupUserResumeWidget(sessionUserModel: e)).toList();
   }
 }

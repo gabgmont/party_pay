@@ -37,12 +37,6 @@ class UserClient {
       return null;
     }
 
-    return UserModel(
-      name: json[0]['name'],
-      cpf: json[0]['cpf'],
-      email: json[0]['email'],
-      phone: json[0]['phone'],
-      // photo: json[0]['photo'],
-    );
+    return UserModel.fromJson(json[0]);
   }
 }

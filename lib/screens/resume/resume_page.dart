@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:partypay/screens/resume/pages/individual_resume_page.dart';
+import 'package:partypay/screens/session/controller/session_controller.dart';
 import 'package:partypay/screens/session/widgets/session_bottom_navigation_bar.dart';
 import 'package:partypay/shared/utils/AppColors.dart';
 
@@ -11,20 +12,33 @@ const pay = 'Pagar';
 const payment = 'Pagamento';
 
 class ResumePage extends StatefulWidget {
-  const ResumePage({Key? key}) : super(key: key);
+  final SessionController sessionController;
+
+  const ResumePage({Key? key, required this.sessionController})
+      : super(key: key);
 
   @override
   State<ResumePage> createState() => _ResumePageState();
 }
 
 class _ResumePageState extends State<ResumePage> {
+
   Color leftButtonColor = AppColors.primary;
   Color rightButtonColor = AppColors.gray;
-  final pages = [IndividualResumePage(), GroupResumePage()];
   int index = 0;
 
   @override
   Widget build(BuildContext context) {
+    final pages = [
+      IndividualResumePage(
+        sessionOrderModel: widget.sessionController.sessionModel.sessionOrderList,
+        sessionUserModel: widget.sessionController.sessionResume.userList[0],
+      ),
+      GroupResumePage(
+        sesionResume: widget.sessionController.sessionResume,
+      )
+    ];
+
     final size = MediaQuery.of(context).size;
 
     return Scaffold(

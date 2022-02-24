@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:partypay/model/session/session_order_model.dart';
 
 import '../../../shared/utils/AppColors.dart';
 
 class IndividualResumeItem extends StatelessWidget {
-  const IndividualResumeItem({Key? key}) : super(key: key);
+  final SessionOrderModel sessionOrder;
+  const IndividualResumeItem({Key? key, required this.sessionOrder}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -33,14 +35,14 @@ class IndividualResumeItem extends StatelessWidget {
                   ),
                 ),
                 Text(
-                  'Onion Rings',
-                  style: TextStyle(fontSize: 18),
+                  sessionOrder.order.name,
+                  style: const TextStyle(fontSize: 14),
                 )
               ],
             ),
             Text(
-              'R\$100,00',
-              style: TextStyle(fontSize: 18),
+              "R\$${sessionOrder.order.value/sessionOrder.userList.length}",
+              style: const TextStyle(fontSize: 18),
             )
           ],
         ),

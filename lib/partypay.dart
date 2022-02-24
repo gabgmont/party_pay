@@ -6,6 +6,7 @@ import 'package:partypay/screens/home/home_page.dart';
 import 'package:partypay/screens/login/login_page.dart';
 import 'package:partypay/screens/profile/profile_page.dart';
 import 'package:partypay/screens/resume/resume_page.dart';
+import 'package:partypay/screens/session/controller/session_controller.dart';
 import 'package:partypay/screens/session/session_page.dart';
 
 import 'screens/splash/splash_page.dart';
@@ -20,7 +21,6 @@ class PartyPayApp extends StatelessWidget {
       initialRoute: '/splash_page',
       routes: {
         '/splash_page': (context) => const SplashPage(),
-
         '/login_page': (context) => LoginPage(),
 
         '/home_page': (context) => HomePage(
@@ -42,10 +42,12 @@ class PartyPayApp extends StatelessWidget {
             ),
 
         '/session_page': (context) => SessionPage(
-              sessionModel: ModalRoute.of(context)?.settings.arguments as SessionModel
-            ),
+            sessionModel:
+                ModalRoute.of(context)?.settings.arguments as SessionModel),
 
-        'resume_page' : (context) => ResumePage()
+        '/resume_page': (context) => ResumePage(
+              sessionController: ModalRoute.of(context)?.settings.arguments as SessionController
+            )
       },
     );
   }

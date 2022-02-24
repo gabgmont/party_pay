@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
 
+import '../../../model/session/session_user_model.dart';
 import '../../../shared/utils/AppColors.dart';
 import 'group_resume_item_widget.dart';
 
 class GroupUserResumeWidget extends StatelessWidget {
-  const GroupUserResumeWidget({Key? key}) : super(key: key);
+  final SessionUserModel sessionUserModel;
+
+  const GroupUserResumeWidget({Key? key, required this.sessionUserModel})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -29,11 +33,11 @@ class GroupUserResumeWidget extends StatelessWidget {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    const Padding(
-                      padding: EdgeInsets.all(4.0),
+                    Padding(
+                      padding: const EdgeInsets.all(4.0),
                       child: Text(
-                        'Usuario 1',
-                        style: TextStyle(
+                        sessionUserModel.user.name,
+                        style: const TextStyle(
                             color: AppColors.white, fontSize: 24),
                       ),
                     ),
@@ -45,8 +49,7 @@ class GroupUserResumeWidget extends StatelessWidget {
                           color: AppColors.white,
                         ),
                         const Padding(
-                          padding: EdgeInsets.symmetric(
-                              horizontal: 8.0),
+                          padding: EdgeInsets.symmetric(horizontal: 8.0),
                           child: SizedBox(
                             width: 40,
                             child: Icon(
@@ -62,8 +65,7 @@ class GroupUserResumeWidget extends StatelessWidget {
                           color: AppColors.white,
                         ),
                         const Padding(
-                          padding: EdgeInsets.symmetric(
-                              horizontal: 8.0),
+                          padding: EdgeInsets.symmetric(horizontal: 8.0),
                           child: SizedBox(
                             width: 40,
                             child: Icon(
@@ -79,17 +81,18 @@ class GroupUserResumeWidget extends StatelessWidget {
                 ),
               ),
             ),
-            GroupResumeItemWidget(),
-            GroupResumeItemWidget(),
-            GroupResumeItemWidget(),
-            GroupResumeItemWidget(),
-            GroupResumeItemWidget(),
-            GroupResumeItemWidget(),
-            GroupResumeItemWidget(),
-
+            Column(
+              children: getResumeItens(),
+            )
           ],
         ),
       ),
     );
+  }
+
+  List<GroupResumeItemWidget> getResumeItens() {
+    return sessionUserModel.orders
+        .map((e) => GroupResumeItemWidget(orderModel: e))
+        .toList();
   }
 }

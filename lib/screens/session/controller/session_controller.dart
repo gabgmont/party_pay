@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:partypay/model/session/session_model.dart';
 import 'package:partypay/model/session/session_order_model.dart';
+import 'package:partypay/model/session/session_resume_model.dart';
 import 'package:partypay/model/user/user_model.dart';
 
 import '../../../model/session/menu_model.dart';
@@ -10,6 +11,7 @@ import '../../../rest/client/session_client.dart';
 
 class SessionController {
   late SessionModel sessionModel;
+  late SessionResumeModel sessionResume;
   MenuModel? menu;
 
   var sessionClient = SessionClient();
@@ -45,7 +47,11 @@ class SessionController {
   }
 
   Future<bool> closeSession(BuildContext context) async {
-    return await sessionClient.closeSession(context, sessionModel.id, true);
+    var resume = await sessionClient.closeSession(context, sessionModel.id, true);
+    if (resume == null) return false;
+
+    sessionResume = resume;
+    return true;
   }
 
   double getTotalValue() {

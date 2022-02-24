@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 
+import '../../../model/session/order_model.dart';
 import '../../../shared/utils/AppColors.dart';
 
 class GroupResumeItemWidget extends StatelessWidget {
-  const GroupResumeItemWidget({Key? key}) : super(key: key);
+  final OrderModel orderModel;
+  const GroupResumeItemWidget({Key? key, required this.orderModel}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -28,9 +30,9 @@ class GroupResumeItemWidget extends StatelessWidget {
                     color: AppColors.secondary,
                   ),
                 ),
-                const Text(
-                  'Onion Rings',
-                  style: TextStyle(fontSize: 14),
+                Text(
+                  orderModel.name,
+                  style: const TextStyle(fontSize: 14),
                 )
               ],
             ),
@@ -47,7 +49,7 @@ class GroupResumeItemWidget extends StatelessWidget {
                   child: SizedBox(
                       width: 40,
                       child: Center(
-                        child: Text('9999,00',
+                        child: Text('',
                             style: TextStyle(fontSize: 10)),
                       )),
                 ),
@@ -56,14 +58,14 @@ class GroupResumeItemWidget extends StatelessWidget {
                   height: 24,
                   color: AppColors.secondary,
                 ),
-                const Padding(
-                  padding: EdgeInsets.symmetric(
+                Padding(
+                  padding: const EdgeInsets.symmetric(
                       horizontal: 8.0),
                   child: SizedBox(
                       width: 40,
                       child: Center(
-                        child: Text('9999,00',
-                            style: TextStyle(fontSize: 10)),
+                        child: Text("${orderModel.value}",
+                            style: const TextStyle(fontSize: 10)),
                       )),
                 ),
               ],

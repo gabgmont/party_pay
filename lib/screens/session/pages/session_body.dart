@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:partypay/screens/session/controller/session_controller.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../shared/utils/AppColors.dart';
 import '../widgets/alert_widget.dart';
@@ -39,8 +40,7 @@ class _SessionBodyState extends State<SessionBody> {
           height: size.height * .61,
           child: sessionOrders.isEmpty
               ? const AlertWidget(
-                  message: clickMenuToOrder,
-                  icon: Icons.lunch_dining)
+                  message: clickMenuToOrder, icon: Icons.lunch_dining)
               : ListView(children: sessionOrders),
         ),
         SessionBottomNavigationBar(
@@ -66,16 +66,15 @@ class _SessionBodyState extends State<SessionBody> {
             textAlign: TextAlign.center,
           ),
           centerButtonTap: () async {
-            Navigator.pushNamed(context, 'resume_page');
-            // var sucess = await widget.sessionController.closeSession(context);
-            // if (sucess) {
-            //   var prefs = await SharedPreferences.getInstance();
-            //   prefs.remove('session_id');
-            //
-            //   Navigator.of(context).pushNamedAndRemoveUntil(
-            //       '/home_page', (Route<dynamic> route) => false,
-            //       arguments: widget.sessionController.sessionModel.userList[0]);
-            // }
+
+            var sucess = await widget.sessionController.closeSession(context);
+            if (sucess) {
+              var prefs = await SharedPreferences.getInstance();
+              prefs.remove('session_id');
+
+              Navigator.of(context).pushReplacementNamed('/resume_page',
+                  arguments: widget.sessionController);
+            }
           },
         )
       ],
