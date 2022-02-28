@@ -5,10 +5,14 @@ import '../../../shared/utils/AppColors.dart';
 
 class GroupResumeItemWidget extends StatelessWidget {
   final OrderModel orderModel;
-  const GroupResumeItemWidget({Key? key, required this.orderModel}) : super(key: key);
+
+  const GroupResumeItemWidget({Key? key, required this.orderModel})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
+
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 4.0),
       child: SizedBox(
@@ -30,9 +34,15 @@ class GroupResumeItemWidget extends StatelessWidget {
                     color: AppColors.secondary,
                   ),
                 ),
-                Text(
-                  orderModel.name,
-                  style: const TextStyle(fontSize: 14),
+                Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 2.0),
+                  child: SizedBox(
+                    width: size.width*.5,
+                    child: Text(
+                      orderModel.name,
+                      style: const TextStyle(fontSize: 14),
+                    ),
+                  ),
                 )
               ],
             ),
@@ -43,14 +53,13 @@ class GroupResumeItemWidget extends StatelessWidget {
                   height: 24,
                   color: AppColors.secondary,
                 ),
-                const Padding(
-                  padding: EdgeInsets.symmetric(
-                      horizontal: 8.0),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 8.0),
                   child: SizedBox(
                       width: 40,
                       child: Center(
-                        child: Text('',
-                            style: TextStyle(fontSize: 10)),
+                        child: Text(orderModel.valuePerUser.toStringAsFixed(2),
+                            style: const TextStyle(fontSize: 10)),
                       )),
                 ),
                 Container(
@@ -59,12 +68,11 @@ class GroupResumeItemWidget extends StatelessWidget {
                   color: AppColors.secondary,
                 ),
                 Padding(
-                  padding: const EdgeInsets.symmetric(
-                      horizontal: 8.0),
+                  padding: const EdgeInsets.symmetric(horizontal: 8.0),
                   child: SizedBox(
                       width: 40,
                       child: Center(
-                        child: Text("${orderModel.value}",
+                        child: Text(orderModel.value.toStringAsFixed(2),
                             style: const TextStyle(fontSize: 10)),
                       )),
                 ),

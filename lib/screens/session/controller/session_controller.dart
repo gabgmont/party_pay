@@ -64,7 +64,7 @@ class SessionController {
     return double.parse(value);
   }
 
-  double getUserValue() {
+  double getLoggedUserValue() {
     double userValue = 0.0;
     var loggedUser = sessionModel.userList[0];
     var loggedUserOrders = <SessionOrderModel>[];

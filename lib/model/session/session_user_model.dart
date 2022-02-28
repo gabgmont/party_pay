@@ -13,6 +13,10 @@ class SessionUserModel {
       : value = json['total_value'],
         user = UserModel.fromJson(json['user']),
         orders = (json['order_list'] as List)
-            .map((orderJson) => OrderModel.fromResumeJson(orderJson))
+            .map((orderJson) {
+          var order = OrderModel.fromResumeJson(orderJson['order']);
+          order.valuePerUser = orderJson['value_per_user'];
+          return order;
+        })
             .toList();
 }

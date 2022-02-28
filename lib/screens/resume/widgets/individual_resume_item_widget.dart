@@ -5,7 +5,9 @@ import '../../../shared/utils/AppColors.dart';
 
 class IndividualResumeItem extends StatelessWidget {
   final SessionOrderModel sessionOrder;
-  const IndividualResumeItem({Key? key, required this.sessionOrder}) : super(key: key);
+
+  const IndividualResumeItem({Key? key, required this.sessionOrder})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -34,15 +36,23 @@ class IndividualResumeItem extends StatelessWidget {
                     color: AppColors.secondary,
                   ),
                 ),
-                Text(
-                  sessionOrder.order.name,
-                  style: const TextStyle(fontSize: 14),
+                SizedBox(
+                  width: size.width * .5,
+                  child: Text(
+                    sessionOrder.order.name,
+                    style: const TextStyle(fontSize: 14),
+                  ),
                 )
               ],
             ),
-            Text(
-              "R\$${sessionOrder.order.value/sessionOrder.userList.length}",
-              style: const TextStyle(fontSize: 18),
+            SizedBox(
+              width: 88,
+              child: Center(
+                child: Text(
+                  "R\$${(sessionOrder.order.value / sessionOrder.userList.length).toStringAsFixed(2)}",
+                  style: const TextStyle(fontSize: 18),
+                ),
+              ),
             )
           ],
         ),

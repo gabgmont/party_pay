@@ -35,7 +35,7 @@ class _SessionPageState extends State<SessionPage> {
         child: SessionPageAppBar(
           restaurant: sessionController.sessionModel.restaurant,
           table: sessionController.sessionModel.table,
-          individualValue: sessionController.getUserValue(),
+          individualValue: sessionController.getLoggedUserValue(),
           totalValue: sessionController.getTotalValue(),
         ),
       ),

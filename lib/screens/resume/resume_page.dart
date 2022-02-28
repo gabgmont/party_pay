@@ -8,7 +8,7 @@ import 'pages/group_resume_page.dart';
 
 const myLabel = 'Meu';
 const groupLabel = 'Geral';
-const pay = 'Pagar';
+const end = 'Finalizar';
 const payment = 'Pagamento';
 
 class ResumePage extends StatefulWidget {
@@ -95,10 +95,15 @@ class _ResumePageState extends State<ResumePage> {
                 });
               },
               centerButtonLabel: const Text(
-                pay,
+                end,
                 style: TextStyle(color: AppColors.white, fontSize: 32),
               ),
-              centerButtonTap: () {},
+              centerButtonTap: () {
+
+                Navigator.of(context).pushNamedAndRemoveUntil(
+                    '/home_page', (Route<dynamic> route) => false,
+                    arguments: widget.sessionController.sessionModel.userList[0]);
+              },
             )
           ],
         ),

@@ -3,6 +3,8 @@ class OrderModel {
   final String description;
   final double value;
 
+  late double valuePerUser;
+
   OrderModel(this.name, this.description, this.value);
 
   OrderModel.fromJson(Map<String, dynamic> json)

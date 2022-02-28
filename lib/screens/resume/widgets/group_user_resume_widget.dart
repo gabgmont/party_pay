@@ -83,11 +83,42 @@ class GroupUserResumeWidget extends StatelessWidget {
             ),
             Column(
               children: getResumeItens(),
+            ),
+            Container(
+              height: 30,
+              color: AppColors.primary,
+              child: Center(
+                child: Text.rich(
+                  TextSpan(
+                    text: "Total: ",
+                    style: const TextStyle(
+                        color: AppColors.white,
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold),
+                    children: [
+                      TextSpan(
+                        text: "R\$${getUserTotal().toStringAsFixed(2)}",
+                        style: const TextStyle(
+                          fontWeight: FontWeight.normal,
+                        ),
+                      )
+                    ],
+                  ),
+                ),
+              ),
             )
           ],
         ),
       ),
     );
+  }
+
+  double getUserTotal() {
+    double total = 0.0;
+    for (var order in sessionUserModel.orders) {
+      total += order.valuePerUser;
+    }
+    return total;
   }
 
   List<GroupResumeItemWidget> getResumeItens() {
