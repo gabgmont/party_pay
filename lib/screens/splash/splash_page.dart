@@ -3,8 +3,6 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:partypay/model/user/user_model.dart';
-import 'package:partypay/screens/home/home_page.dart';
-import 'package:partypay/screens/login/login_page.dart';
 import 'package:partypay/shared/utils/AppColors.dart';
 import 'package:partypay/shared/utils/AppImages.dart';
 import 'package:shared_preferences/shared_preferences.dart';

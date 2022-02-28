@@ -1,9 +1,12 @@
+import 'dart:convert';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:partypay/model/session/session_model.dart';
 import 'package:partypay/model/session/session_order_model.dart';
 import 'package:partypay/model/session/session_resume_model.dart';
 import 'package:partypay/model/user/user_model.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../model/session/menu_model.dart';
 import '../../../rest/client/menu_client.dart';
@@ -11,6 +14,7 @@ import '../../../rest/client/session_client.dart';
 
 class SessionController {
   late SessionModel sessionModel;
+  late UserModel loggedUser;
   late SessionResumeModel sessionResume;
   MenuModel? menu;
 
@@ -19,6 +23,10 @@ class SessionController {
 
   Future<MenuModel?> init(BuildContext context, SessionModel model) async {
     sessionModel = model;
+    var prefs = await SharedPreferences.getInstance();
+    var userJson = jsonDecode(prefs.getString('user')!);
+    loggedUser = UserModel.fromJson(userJson);
+
     if (menu != null) return null;
 
     var future = menuClient.getMenu(context, model.restaurant);
@@ -35,11 +43,11 @@ class SessionController {
     return true;
   }
 
-  Future<bool> addOrder(
-      BuildContext context, String orderName, List<UserModel> users) async {
+  Future<bool> addOrder(BuildContext context, String orderName,
+      List<UserModel> users) async {
     var cpfs = users.map((e) => e.cpf!).toList();
     var sessionOrder =
-        await sessionClient.addOrder(context, sessionModel.id, orderName, cpfs);
+    await sessionClient.addOrder(context, sessionModel.id, orderName, cpfs);
 
     if (sessionOrder == null) return false;
     sessionModel.sessionOrderList = sessionOrder;
@@ -57,7 +65,7 @@ class SessionController {
 
   Future<bool> closeSession(BuildContext context) async {
     var resume =
-        await sessionClient.closeSession(context, sessionModel.id, true);
+    await sessionClient.closeSession(context, sessionModel.id, true);
     if (resume == null) return false;
 
     sessionResume = resume;
@@ -76,7 +84,6 @@ class SessionController {
 
   double getLoggedUserValue() {
     double userValue = 0.0;
-    var loggedUser = sessionModel.userList[0];
     var loggedUserOrders = <SessionOrderModel>[];
 
     loggedUserOrders = sessionModel.sessionOrderList

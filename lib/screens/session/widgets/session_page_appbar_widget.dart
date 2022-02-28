@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:partypay/screens/session/controller/session_controller.dart';
 import 'package:partypay/shared/utils/AppColors.dart';
 
 import 'header_tile_widget.dart';
@@ -6,17 +7,11 @@ import 'header_tile_widget.dart';
 const moneyPrefix = 'R\$';
 
 class SessionPageAppBar extends StatelessWidget {
-  final int table;
-  final String restaurant;
-  final double individualValue;
-  final double totalValue;
+  final SessionController sessionController;
 
   const SessionPageAppBar(
       {Key? key,
-      required this.table,
-      required this.restaurant,
-      required this.individualValue,
-      required this.totalValue})
+      required this.sessionController})
       : super(key: key);
 
   @override
@@ -36,7 +31,7 @@ class SessionPageAppBar extends StatelessWidget {
               Align(
                 alignment: Alignment.topLeft,
                 child: Text(
-                  restaurant,
+                  sessionController.sessionModel.restaurant,
                   style: TextStyle(
                       color: AppColors.white,
                       fontSize: size.height * .035,
@@ -49,17 +44,17 @@ class SessionPageAppBar extends StatelessWidget {
                   HeaderTileWidget(
                     height: size.height * 0.054,
                     icon: Icons.restaurant,
-                    data: '$table',
+                    data: '${sessionController.sessionModel.table}',
                   ),
                   HeaderTileWidget(
                     height: size.height * 0.054,
                     icon: Icons.person,
-                    data: '$moneyPrefix$individualValue',
+                    data: '$moneyPrefix${sessionController.getLoggedUserValue()}',
                   ),
                   HeaderTileWidget(
                     height: size.height * 0.054,
                     icon: Icons.group,
-                    data: '$moneyPrefix$totalValue',
+                    data: '$moneyPrefix${sessionController.getTotalValue()}',
                   )
                 ],
               ),

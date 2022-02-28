@@ -9,6 +9,7 @@ class PartyPayService {
   static const String getCategory = '/menu/{restaurant}/category/{category}';
   static const String getOrder = '/menu/{restaurant}/order/{order}';
   static const String getSession = '/session/{sessionId}';
+  static const String getUserSession = '/session/user/online/{cpf}';
   static const String addOrder = '/session/{sessionId}/add/order/{orderName}';
   static const String addUser = '/session/{sessionId}/add/user/cpf';
   static const String sessionResume = '/session/resume/{sessionId}';

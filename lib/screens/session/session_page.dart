@@ -32,12 +32,24 @@ class _SessionPageState extends State<SessionPage> {
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(size.height * .13),
-        child: SessionPageAppBar(
-          restaurant: sessionController.sessionModel.restaurant,
-          table: sessionController.sessionModel.table,
-          individualValue: sessionController.getLoggedUserValue(),
-          totalValue: sessionController.getTotalValue(),
-        ),
+        child: FutureBuilder(
+          future: _futureMenu,
+          builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
+            switch (snapshot.connectionState) {
+              case ConnectionState.none:
+                break;
+              case ConnectionState.waiting:
+                break;
+              case ConnectionState.active:
+                break;
+              case ConnectionState.done:
+                return SessionPageAppBar(
+                  sessionController: sessionController,
+                );
+            }
+            return Container();
+          },
+        )
       ),
       drawer: FutureBuilder(
         future: _futureMenu,

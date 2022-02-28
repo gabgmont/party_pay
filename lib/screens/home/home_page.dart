@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:partypay/model/restaurant/restaurant_model.dart';
 import 'package:partypay/model/session/session_model.dart';
@@ -120,9 +122,25 @@ class _HomePageState extends State<HomePage> {
 
   Future checkSession() async {
     var prefs = await SharedPreferences.getInstance();
+
     var sessionId = prefs.getInt('session_id');
     if (sessionId != null) {
-      _sessionModel = await _sessionClient.getSession(context, sessionId);
+      var session = await _sessionClient.getSession(context, sessionId);
+      if (session == null) return prefs;
+
+      _sessionModel = session;
+      return _sessionModel;
+    }
+
+    var user = prefs.getString('user');
+    if (user != null) {
+      var session =
+          await _sessionClient.getUserSession(context, jsonDecode(user)['cpf']);
+      if (session == null) return prefs;
+
+      _sessionModel = session;
+      prefs.setInt('session_id', _sessionModel!.id);
+      return _sessionModel;
     }
 
     return prefs;
@@ -134,9 +152,7 @@ class _HomePageState extends State<HomePage> {
       onTap: () {
         Navigator.pushNamed(context, '/session_create_page',
                 arguments: widget.user)
-            .then((value) => setState(() {
-                  print('CREATE SESSION PAGE');
-                }));
+            .then((value) => setState(() {}));
       },
     );
   }
@@ -146,9 +162,7 @@ class _HomePageState extends State<HomePage> {
       label: enterSession,
       onTap: () {
         Navigator.pushNamed(context, '/session_page', arguments: _sessionModel)
-            .then((value) => setState(() {
-                  print('SESSION PAGE');
-                }));
+            .then((value) => setState(() {}));
       },
     );
   }

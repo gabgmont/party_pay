@@ -10,13 +10,13 @@ import 'package:partypay/rest/partypay_api_service.dart';
 import 'package:partypay/shared/utils/AppColors.dart';
 
 class SessionClient {
-  final service = PartyPayService();
+  final _service = PartyPayService();
 
   Future<SessionModel?> getSession(BuildContext context, int sessionId) async {
     var path =
         PartyPayService.getSession.replaceAll('{sessionId}', '$sessionId');
 
-    var response = await service.get(path);
+    var response = await _service.get(path);
 
     if (response == null) {
       ScaffoldMessenger.of(context).showSnackBar(
@@ -43,13 +43,23 @@ class SessionClient {
     return SessionModel.fromJson(body);
   }
 
+  Future<SessionModel?> getUserSession(BuildContext context, String cpf) async {
+    var path = PartyPayService.getUserSession.replaceAll("{cpf}", cpf);
+
+    var response = await _service.get(path);
+    var body = checkResponse(context, response, false);
+
+    if (body == null) return null;
+    return SessionModel.fromJson(body);
+  }
+
   Future<SessionModel?> createSession(
       BuildContext context, String restaurant, int table) async {
     var json = {'"restaurant"': '"$restaurant"', '"table"': table};
 
-    var response = await service.post(PartyPayService.createSession, json);
+    var response = await _service.post(PartyPayService.createSession, json);
 
-    var body = checkResponse(context, response);
+    var body = checkResponse(context, response, true);
     if (body == null) return null;
     return SessionModel.fromJson(body);
   }
@@ -58,9 +68,9 @@ class SessionClient {
       BuildContext context, int sessionId, List<String?> cpfs) async {
     var path = PartyPayService.addUser.replaceAll('{sessionId}', '$sessionId');
     var json = {'"cpf_list"': jsonEncode(cpfs)};
-    var response = await service.put(path, json);
+    var response = await _service.put(path, json);
 
-    var body = checkResponse(context, response);
+    var body = checkResponse(context, response, true);
 
     if (body == null) return null;
 
@@ -76,19 +86,22 @@ class SessionClient {
         .replaceAll('{orderName}', orderName);
 
     var json = {'"cpf_list"': jsonEncode(cpfs)};
-    var response = await service.put(path, json);
-    var body = checkResponse(context, response);
+    var response = await _service.put(path, json);
+    var body = checkResponse(context, response, true);
     if (body == null) return null;
 
-    return (body['order_list'] as List).map((orderJson) => SessionOrderModel.fromJson(orderJson)).toList();
+    return (body['order_list'] as List)
+        .map((orderJson) => SessionOrderModel.fromJson(orderJson))
+        .toList();
   }
 
-  Future<SessionResumeModel?> getSessionResume(BuildContext context, int sessionId) async {
+  Future<SessionResumeModel?> getSessionResume(
+      BuildContext context, int sessionId) async {
     var path =
-    PartyPayService.sessionResume.replaceAll('{sessionId}', '$sessionId');
+        PartyPayService.sessionResume.replaceAll('{sessionId}', '$sessionId');
 
-    var response = await service.get(path);
-    var body = checkResponse(context, response);
+    var response = await _service.get(path);
+    var body = checkResponse(context, response, true);
     if (body == null) return null;
 
     return SessionResumeModel.fromJson(body);
@@ -100,33 +113,37 @@ class SessionClient {
         PartyPayService.closeSession.replaceAll('{sessionId}', '$sessionId');
     path = forceClose ? '$path?forceClose=$forceClose' : path;
 
-    var response = await service.put(path, null);
-    var body = checkResponse(context, response);
+    var response = await _service.put(path, null);
+    var body = checkResponse(context, response, true);
     if (body == null) return null;
 
     return SessionResumeModel.fromJson(body);
   }
 
   Map<String, dynamic>? checkResponse(
-      BuildContext context, Response? response) {
+      BuildContext context, Response? response, bool showMessages) {
     if (response == null) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          backgroundColor: AppColors.secondary,
-          content: Text('Ocorreu um erro no servidor da aplicacao.'),
-        ),
-      );
+      if (showMessages) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            backgroundColor: AppColors.secondary,
+            content: Text('Ocorreu um erro no servidor da aplicacao.'),
+          ),
+        );
+      }
       return null;
     }
     var body = jsonDecode(utf8.decode(response.bodyBytes));
 
     if (response.statusCode != 200) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          backgroundColor: AppColors.secondary,
-          content: Text(body['message']),
-        ),
-      );
+      if (showMessages) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            backgroundColor: AppColors.secondary,
+            content: Text(body['message']),
+          ),
+        );
+      }
       return null;
     }
     return body;
