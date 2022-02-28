@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:partypay/screens/session/controller/session_controller.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../shared/utils/AppColors.dart';
 import '../widgets/alert_widget.dart';
@@ -50,14 +49,14 @@ class _SessionBodyState extends State<SessionBody> {
           rightButtonIcon: Icons.groups,
           centerButtonLabel: Text.rich(
             TextSpan(
-              text: 'Encerrar\n',
+              text: 'Ver\n',
               style: TextStyle(
                 color: AppColors.white,
                 fontSize: size.height * .033,
               ),
               children: [
                 TextSpan(
-                  text: 'Sessão',
+                  text: 'Resumo',
                   style: TextStyle(
                       color: AppColors.white, fontSize: size.height * .028),
                 )
@@ -67,12 +66,9 @@ class _SessionBodyState extends State<SessionBody> {
           ),
           centerButtonTap: () async {
 
-            var sucess = await widget.sessionController.closeSession(context);
+            var sucess = await widget.sessionController.showSessionResume(context);
             if (sucess) {
-              var prefs = await SharedPreferences.getInstance();
-              prefs.remove('session_id');
-
-              Navigator.of(context).pushReplacementNamed('/resume_page',
+              Navigator.of(context).pushNamed('/resume_page',
                   arguments: widget.sessionController);
             }
           },

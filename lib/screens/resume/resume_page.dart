@@ -3,6 +3,7 @@ import 'package:partypay/screens/resume/pages/individual_resume_page.dart';
 import 'package:partypay/screens/session/controller/session_controller.dart';
 import 'package:partypay/screens/session/widgets/session_bottom_navigation_bar.dart';
 import 'package:partypay/shared/utils/AppColors.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import 'pages/group_resume_page.dart';
 
@@ -22,7 +23,6 @@ class ResumePage extends StatefulWidget {
 }
 
 class _ResumePageState extends State<ResumePage> {
-
   Color leftButtonColor = AppColors.primary;
   Color rightButtonColor = AppColors.gray;
   int index = 0;
@@ -31,7 +31,8 @@ class _ResumePageState extends State<ResumePage> {
   Widget build(BuildContext context) {
     final pages = [
       IndividualResumePage(
-        sessionOrderModel: widget.sessionController.sessionModel.sessionOrderList,
+        sessionOrderModel:
+            widget.sessionController.sessionModel.sessionOrderList,
         sessionUserModel: widget.sessionController.sessionResume.userList[0],
       ),
       GroupResumePage(
@@ -98,11 +99,19 @@ class _ResumePageState extends State<ResumePage> {
                 end,
                 style: TextStyle(color: AppColors.white, fontSize: 32),
               ),
-              centerButtonTap: () {
+              centerButtonTap: () async {
+                var sucess =
+                    await widget.sessionController.closeSession(context);
 
-                Navigator.of(context).pushNamedAndRemoveUntil(
-                    '/home_page', (Route<dynamic> route) => false,
-                    arguments: widget.sessionController.sessionModel.userList[0]);
+                if (sucess) {
+                  var prefs = await SharedPreferences.getInstance();
+                  prefs.remove('session_id');
+
+                  Navigator.of(context).pushNamedAndRemoveUntil(
+                      '/home_page', (Route<dynamic> route) => false,
+                      arguments:
+                          widget.sessionController.sessionModel.userList[0]);
+                }
               },
             )
           ],

@@ -83,6 +83,17 @@ class SessionClient {
     return (body['order_list'] as List).map((orderJson) => SessionOrderModel.fromJson(orderJson)).toList();
   }
 
+  Future<SessionResumeModel?> getSessionResume(BuildContext context, int sessionId) async {
+    var path =
+    PartyPayService.sessionResume.replaceAll('{sessionId}', '$sessionId');
+
+    var response = await service.get(path);
+    var body = checkResponse(context, response);
+    if (body == null) return null;
+
+    return SessionResumeModel.fromJson(body);
+  }
+
   Future<SessionResumeModel?> closeSession(
       BuildContext context, int sessionId, bool forceClose) async {
     var path =

@@ -46,8 +46,18 @@ class SessionController {
     return true;
   }
 
+  Future<bool> showSessionResume(BuildContext context) async {
+    var resume =
+    await sessionClient.getSessionResume(context, sessionModel.id);
+    if (resume == null) return false;
+
+    sessionResume = resume;
+    return true;
+  }
+
   Future<bool> closeSession(BuildContext context) async {
-    var resume = await sessionClient.closeSession(context, sessionModel.id, true);
+    var resume =
+        await sessionClient.closeSession(context, sessionModel.id, true);
     if (resume == null) return false;
 
     sessionResume = resume;

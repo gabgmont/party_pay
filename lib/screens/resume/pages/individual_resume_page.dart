@@ -43,7 +43,7 @@ class IndividualResumePage extends StatelessWidget {
                     color: AppColors.white),
                 children: [
                   TextSpan(
-                    text: "R\$${getUserTotal()}",
+                    text: "R\$${getUserTotal().toStringAsFixed(2)}",
                     style: TextStyle(
                       fontSize: size.height * .02,
                       fontWeight: FontWeight.normal,
