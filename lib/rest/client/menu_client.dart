@@ -9,9 +9,8 @@ import '../partypay_api_service.dart';
 class MenuClient {
   final _service = PartyPayService();
 
-  Future<MenuModel?> getMenu(BuildContext context, String restaurant) async {
-    var url = PartyPayService.getMenu.replaceAll('{restaurant}', restaurant);
-    print('URL ----------------- $url');
+  Future<MenuModel?> getMenu(BuildContext context, int restaurantId) async {
+    var url = PartyPayService.getMenu.replaceAll('{id}', '$restaurantId');
     var response = await _service.get(url);
     if (response == null) {
       ScaffoldMessenger.of(context).showSnackBar(
@@ -23,7 +22,6 @@ class MenuClient {
       return null;
     }
     var body = jsonDecode(utf8.decode(response.bodyBytes));
-    print('BODY ------------------ $body');
     if (response.statusCode != 200) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(

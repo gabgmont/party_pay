@@ -65,6 +65,7 @@ class _SessionMenuDrawerState extends State<SessionMenuDrawer> {
                   Scaffold.of(context).showBottomSheet(
                     (context) => AddOrderButtonBottomSheet(
                       orderName: order.name,
+                      orderId: order.orderId,
                       sessionController: widget.sessionController,
                       userList: widget.sessionController.sessionModel.userList,
                         onConfirmOrder: widget.onConfirmOrder

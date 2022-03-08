@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import '../../../model/session/session_user_model.dart';
@@ -33,12 +34,15 @@ class GroupUserResumeWidget extends StatelessWidget {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Padding(
-                      padding: const EdgeInsets.all(4.0),
-                      child: Text(
-                        sessionUserModel.user.name,
-                        style: const TextStyle(
-                            color: AppColors.white, fontSize: 24),
+                    SizedBox(
+                      width: size.width *.6,
+                      child: Padding(
+                        padding: const EdgeInsets.all(4.0),
+                        child: Text(
+                          sessionUserModel.user.name,
+                          style: const TextStyle(
+                              color: AppColors.white, fontSize: 16, fontWeight: FontWeight.bold),
+                        ),
                       ),
                     ),
                     Row(

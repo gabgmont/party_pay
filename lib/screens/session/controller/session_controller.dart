@@ -13,25 +13,26 @@ import '../../../rest/client/menu_client.dart';
 import '../../../rest/client/session_client.dart';
 
 class SessionController {
+  bool initialized = false;
   late SessionModel sessionModel;
   late UserModel loggedUser;
   late SessionResumeModel sessionResume;
-  MenuModel? menu;
+  late MenuModel menu;
 
   var sessionClient = SessionClient();
   var menuClient = MenuClient();
 
-  Future<MenuModel?> init(BuildContext context, SessionModel model) async {
+  Future init(BuildContext context, SessionModel model) async {
     sessionModel = model;
     var prefs = await SharedPreferences.getInstance();
     var userJson = jsonDecode(prefs.getString('user')!);
     loggedUser = UserModel.fromJson(userJson);
 
-    if (menu != null) return null;
-
-    var future = menuClient.getMenu(context, model.restaurant);
-    future.then((futureMenu) => menu = futureMenu);
-    return future;
+    var futureMenu = await menuClient.getMenu(context, model.menuId);
+    if(futureMenu == null) return;
+    menu = futureMenu;
+    initialized = true;
+    return;
   }
 
   Future<bool> addUsers(BuildContext context, List<UserModel> users) async {
@@ -43,11 +44,11 @@ class SessionController {
     return true;
   }
 
-  Future<bool> addOrder(BuildContext context, String orderName,
+  Future<bool> addOrder(BuildContext context, int orderId,
       List<UserModel> users) async {
     var cpfs = users.map((e) => e.cpf!).toList();
     var sessionOrder =
-    await sessionClient.addOrder(context, sessionModel.id, orderName, cpfs);
+    await sessionClient.addOrder(context, sessionModel.id, orderId, cpfs);
 
     if (sessionOrder == null) return false;
     sessionModel.sessionOrderList = sessionOrder;

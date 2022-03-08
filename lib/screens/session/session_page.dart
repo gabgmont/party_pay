@@ -23,17 +23,20 @@ class SessionPage extends StatefulWidget {
 
 class _SessionPageState extends State<SessionPage> {
   final SessionController sessionController = SessionController();
+  late Future _future;
 
   @override
   Widget build(BuildContext context) {
-    var _futureMenu = sessionController.init(context, widget.sessionModel);
+    if(!sessionController.initialized) {
+      _future = sessionController.init(context, widget.sessionModel);
+    }
     final size = MediaQuery.of(context).size;
 
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(size.height * .13),
         child: FutureBuilder(
-          future: _futureMenu,
+          future: _future,
           builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
             switch (snapshot.connectionState) {
               case ConnectionState.none:
@@ -52,7 +55,7 @@ class _SessionPageState extends State<SessionPage> {
         )
       ),
       drawer: FutureBuilder(
-        future: _futureMenu,
+        future: _future,
         builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
           switch (snapshot.connectionState) {
             case ConnectionState.none:
@@ -67,7 +70,7 @@ class _SessionPageState extends State<SessionPage> {
               break;
             case ConnectionState.done:
               return SessionMenuDrawer(
-                menu: sessionController.menu!,
+                menu: sessionController.menu,
                 sessionController: sessionController,
                 onConfirmOrder: () {
                   setState(() {});
@@ -78,7 +81,7 @@ class _SessionPageState extends State<SessionPage> {
         },
       ),
       endDrawer: FutureBuilder(
-        future: _futureMenu,
+        future: _future,
         builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
           switch (snapshot.connectionState) {
             case ConnectionState.none:
@@ -105,7 +108,7 @@ class _SessionPageState extends State<SessionPage> {
       ),
       body: SingleChildScrollView(
         child: FutureBuilder(
-          future: _futureMenu,
+          future: _future,
           builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
             switch (snapshot.connectionState) {
               case ConnectionState.none:

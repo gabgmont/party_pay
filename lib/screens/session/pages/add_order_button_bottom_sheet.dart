@@ -10,6 +10,7 @@ const selectUsersToShare = 'Selecione usuários para dividir';
 
 class AddOrderButtonBottomSheet extends StatefulWidget {
   final String orderName;
+  final int orderId;
   final SessionController sessionController;
   final List<UserModel> userList;
   final VoidCallback onConfirmOrder;
@@ -17,6 +18,7 @@ class AddOrderButtonBottomSheet extends StatefulWidget {
   const AddOrderButtonBottomSheet({
     Key? key,
     required this.orderName,
+    required this.orderId,
     required this.sessionController,
     required this.userList,
     required this.onConfirmOrder,
@@ -140,7 +142,7 @@ class _AddOrderButtonBottomSheetState extends State<AddOrderButtonBottomSheet>
                   return;
                 }
                 var sucess = await widget.sessionController
-                    .addOrder(context, widget.orderName, selectedUsers);
+                    .addOrder(context, widget.orderId, selectedUsers);
                 if (sucess) {
                   Navigator.pop(context);
                   widget.onConfirmOrder();

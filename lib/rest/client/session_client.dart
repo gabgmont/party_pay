@@ -71,10 +71,10 @@ class SessionClient {
   }
 
   Future<List<SessionOrderModel>?> addOrder(BuildContext context, int sessionId,
-      String orderName, List<String> cpfs) async {
+      int orderId, List<String> cpfs) async {
     var path = PartyPayService.addOrder
         .replaceAll('{sessionId}', '$sessionId')
-        .replaceAll('{orderName}', orderName);
+        .replaceAll('{orderId}', '$orderId');
 
     var json = {'"cpf_list"': jsonEncode(cpfs)};
     var response = await _service.put(path, json);

@@ -10,7 +10,7 @@ class SessionUserModel {
       {required this.value, required this.user, required this.orders});
 
   SessionUserModel.fromJson(Map<String, dynamic> json)
-      : value = json['total_value'],
+      : value = double.parse(json['total_value'].toString()),
         user = UserModel.fromJson(json['user']),
         orders = (json['order_list'] as List)
             .map((orderJson) {
