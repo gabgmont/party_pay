@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:partypay/model/restaurant/restaurant_model.dart';
 import 'package:partypay/shared/utils/AppColors.dart';
 
 class RoundRestaurantCardWidget extends StatelessWidget {
-  final Map restaurant;
+  final RestaurantModel restaurant;
   final Shape shape;
   final bool selected;
   final VoidCallback onTap;
@@ -19,7 +20,7 @@ class RoundRestaurantCardWidget extends StatelessWidget {
           height: 70,
           decoration: BoxDecoration(
             image: DecorationImage(
-              image: AssetImage(restaurant['image']),
+              image: AssetImage(restaurant.image),
             ),
             color: AppColors.white,
             borderRadius: BorderRadius.circular(shape == Shape.ROUND ? 100 : 20),

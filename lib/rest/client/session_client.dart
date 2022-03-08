@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:http/http.dart';
+import 'package:partypay/model/restaurant/restaurant_model.dart';
 import 'package:partypay/model/session/session_model.dart';
 import 'package:partypay/model/session/session_order_model.dart';
 import 'package:partypay/model/session/session_resume_model.dart';
@@ -12,39 +13,29 @@ import 'package:partypay/shared/utils/AppColors.dart';
 class SessionClient {
   final _service = PartyPayService();
 
+  Future<List<RestaurantModel>?> getRestaurants(BuildContext context) async {
+    var response = await _service.get(PartyPayService.getRestaurants);
+
+    var body = checkResponse(context, response, true);
+
+    if(body== null) return null;
+    return (body as List).map((json) => RestaurantModel.fromJson(json)).toList();
+  }
+
   Future<SessionModel?> getSession(BuildContext context, int sessionId) async {
-    var path =
+    String path =
         PartyPayService.getSession.replaceAll('{sessionId}', '$sessionId');
 
     var response = await _service.get(path);
 
-    if (response == null) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          backgroundColor: AppColors.secondary,
-          content: Text('Ocorreu um erro no servidor da aplicacao.'),
-        ),
-      );
-      return null;
-    }
+    var body = checkResponse(context, response, true);
 
-    var body = jsonDecode(utf8.decode(response.bodyBytes));
-
-    if (response.statusCode != 200) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          backgroundColor: AppColors.secondary,
-          content: Text(body['message']),
-        ),
-      );
-      return null;
-    }
-
+    if(body == null) return null;
     return SessionModel.fromJson(body);
   }
 
   Future<SessionModel?> getUserSession(BuildContext context, String cpf) async {
-    var path = PartyPayService.getUserSession.replaceAll("{cpf}", cpf);
+    String path = PartyPayService.getUserSession.replaceAll("{cpf}", cpf);
 
     var response = await _service.get(path);
     var body = checkResponse(context, response, false);
@@ -120,7 +111,7 @@ class SessionClient {
     return SessionResumeModel.fromJson(body);
   }
 
-  Map<String, dynamic>? checkResponse(
+  dynamic checkResponse(
       BuildContext context, Response? response, bool showMessages) {
     if (response == null) {
       if (showMessages) {

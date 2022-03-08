@@ -1,7 +1,6 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:partypay/model/restaurant/restaurant_model.dart';
 import 'package:partypay/model/session/session_model.dart';
 import 'package:partypay/model/user/user_model.dart';
 import 'package:partypay/rest/client/session_client.dart';
@@ -11,7 +10,6 @@ import 'package:partypay/shared/utils/AppColors.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'widgets/double_big_button_wlist_widget.dart';
-import 'widgets/round_restaurant_card_widget.dart';
 
 const recentActivity = 'Atividade Recente';
 const restaurants = 'Restaurantes';
@@ -79,11 +77,11 @@ class _HomePageState extends State<HomePage> {
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceAround,
                           children: [
-                            RoundRestaurantCardWidget(
-                              restaurant: RestaurantModel.outback,
-                              shape: Shape.ROUND,
-                              onTap: () {},
-                            ),
+                            // RoundRestaurantCardWidget(
+                            //   restaurant: RestaurantModel.outback,
+                            //   shape: Shape.ROUND,
+                            //   onTap: () {},
+                            // ),
                           ],
                         ),
                       ),

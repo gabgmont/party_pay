@@ -12,6 +12,7 @@ const addUser = 'Adicionar usuário na mesa';
 const createSession = 'Criar Sessão';
 const selectRestaurant = 'Selecione o restaurante';
 const table = 'Mesa';
+const error = 'Erro ao carregar restaurantes';
 
 class SessionCreatePage extends StatefulWidget {
   final UserModel user;
@@ -23,25 +24,19 @@ class SessionCreatePage extends StatefulWidget {
 }
 
 class _SessionCreatePageState extends State<SessionCreatePage> {
-  final textController = TextEditingController();
-  final sessionController = CreateSessionController();
+  final _textController = TextEditingController();
+  final _sessionController = CreateSessionController();
+  late Future _future;
   var tables = [10, 12, 14, 16, 18, 20, 22, 24, 26];
   int dropdownValue = 10;
-
   int selected = 0;
-
-  void checkOption(int index) {
-    setState(() {
-      selected = index;
-      sessionController.restaurant =
-          sessionController.restaurantList[selected - 1]['name'];
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
-    sessionController.init(widget.user);
-    sessionController.table = dropdownValue;
+    if(!_sessionController.initialized){
+      _future = _sessionController.init(context, widget.user);
+    }
+    _sessionController.table = dropdownValue;
     final size = MediaQuery.of(context).size;
 
     return Scaffold(
@@ -73,20 +68,41 @@ class _SessionCreatePageState extends State<SessionCreatePage> {
                 child: SizedBox(
                   height: 160,
                   width: size.width,
-                  child: GridView.count(
-                      crossAxisSpacing: 4,
-                      crossAxisCount: 4,
-                      children: <Widget>[
-                        for (var i = 0;
-                            i < sessionController.restaurantList.length;
-                            i++)
-                          RoundRestaurantCardWidget(
-                            restaurant: sessionController.restaurantList[i],
-                            shape: Shape.SQUARE,
-                            onTap: () => checkOption(i + 1),
-                            selected: i + 1 == selected,
-                          ),
-                      ]),
+                  child: FutureBuilder(
+                    future: _future,
+                    builder: (BuildContext context,
+                        AsyncSnapshot<dynamic> snapshot) {
+                      switch (snapshot.connectionState) {
+                        case ConnectionState.none:
+                          break;
+                        case ConnectionState.waiting:
+                          return const Center(
+                            child: CircularProgressIndicator(
+                              color: AppColors.secondary,
+                            ),
+                          );
+                        case ConnectionState.active:
+                          break;
+                        case ConnectionState.done:
+                          return GridView.count(
+                              crossAxisSpacing: 4,
+                              crossAxisCount: 4,
+                              children: <Widget>[
+                                for (var i = 0;
+                                    i < _sessionController.restaurantList.length;
+                                    i++)
+                                  RoundRestaurantCardWidget(
+                                    restaurant:
+                                        _sessionController.restaurantList[i],
+                                    shape: Shape.SQUARE,
+                                    onTap: () => checkOption(i + 1),
+                                    selected: i + 1 == selected,
+                                  ),
+                              ]);
+                      }
+                      return const Center(child: Text(error));
+                    },
+                  ),
                 ),
               ),
               const Divider(
@@ -99,13 +115,13 @@ class _SessionCreatePageState extends State<SessionCreatePage> {
                     child: Text(addUser, style: TextStyle(fontSize: 18))),
               ),
               CpfAddFormFieldWidget(
-                textController: textController,
+                textController: _textController,
                 onTap: () async {
-                  var user = await sessionController.getUser(
-                      context, textController.text);
+                  var user = await _sessionController.getUser(
+                      context, _textController.text);
                   if (user != null) {
                     setState(() {
-                      sessionController.userCardList.add(
+                      _sessionController.userCardList.add(
                         UserRoundCardWidget(
                           initials: user.getInitials(),
                           photo: user.photo,
@@ -124,7 +140,7 @@ class _SessionCreatePageState extends State<SessionCreatePage> {
                 child: SingleChildScrollView(
                   scrollDirection: Axis.horizontal,
                   child: Row(
-                    children: sessionController.userCardList,
+                    children: _sessionController.userCardList,
                   ),
                 ),
               ),
@@ -179,7 +195,7 @@ class _SessionCreatePageState extends State<SessionCreatePage> {
               EnterButtonWidget(
                 onTap: () async {
                   var sessionModel =
-                      await sessionController.startSession(context);
+                      await _sessionController.startSession(context);
                   if (sessionModel != null) {
                     Navigator.pushReplacementNamed(context, '/session_page',
                         arguments: sessionModel);
@@ -191,5 +207,13 @@ class _SessionCreatePageState extends State<SessionCreatePage> {
         ),
       ),
     );
+  }
+
+  void checkOption(int index) {
+    setState(() {
+      selected = index;
+      _sessionController.restaurant =
+          _sessionController.restaurantList[selected - 1].name;
+    });
   }
 }

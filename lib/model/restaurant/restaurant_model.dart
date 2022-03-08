@@ -1,14 +1,16 @@
+
+
 import 'package:partypay/shared/utils/AppImages.dart';
 
 class RestaurantModel {
-  static const outback = {
-    'id' : 1,
-    'name' : 'outback',
-    'image' : AppImages.smallOutback
-  };
-  static const cocoBambu = {
-    'id' : 2,
-    'name' : 'coco_bambu',
-    'image' : AppImages.smallCocoBambu
-  };
+  final int id;
+  final String name;
+  final String image;
+
+  RestaurantModel(this.id, this.name, this.image);
+
+  RestaurantModel.fromJson(Map<String, dynamic> json) :
+  id = json['id'],
+  name = json['restaurant'],
+  image = AppImages.smallOutback;
 }

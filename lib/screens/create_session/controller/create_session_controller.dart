@@ -18,25 +18,33 @@ class CreateSessionController {
   int sessionId = -1;
   String? restaurant;
   int? table;
+  bool initialized = false;
   var usersList = <UserModel>[];
 
   var userCardList = <Widget>[];
-  var restaurantList = <Map>[];
+  var restaurantList = <RestaurantModel>[];
 
   final _sessionService = SessionClient();
   final _userService = UserClient();
 
   var prefs = SharedPreferences.getInstance();
 
-  void init(UserModel user) {
+  Future init(BuildContext context, UserModel user) async {
     if (usersList.isNotEmpty) return;
 
     usersList.add(user);
     userCardList.add(
         UserRoundCardWidget(initials: user.getInitials(), photo: user.photo));
+    await getRestaurants(context);
+    initialized = true;
+    return;
+  }
 
-    restaurantList.add(RestaurantModel.outback);
-    restaurantList.add(RestaurantModel.cocoBambu);
+  getRestaurants(BuildContext context) async {
+    var list = await _sessionService.getRestaurants(context);
+
+    if (list == null) return;
+    restaurantList = list;
   }
 
   Future<SessionModel?> startSession(BuildContext context) async {
