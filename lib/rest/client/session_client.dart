@@ -45,8 +45,8 @@ class SessionClient {
   }
 
   Future<SessionModel?> createSession(
-      BuildContext context, String restaurant, int table) async {
-    var json = {'"restaurant"': '"$restaurant"', '"table"': table};
+      BuildContext context, int restaurantId, int table, List<String?> cpfs) async {
+    var json = {'"menu_id"': restaurantId, '"table"': table, '"users"' : {'"cpf_list"': jsonEncode(cpfs)}};
 
     var response = await _service.post(PartyPayService.createSession, json);
 

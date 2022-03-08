@@ -16,7 +16,7 @@ const userAlreadyAdded = 'Usuário já adicionado.';
 
 class CreateSessionController {
   int sessionId = -1;
-  String? restaurant;
+  RestaurantModel? restaurant;
   int? table;
   bool initialized = false;
   var usersList = <UserModel>[];
@@ -57,23 +57,15 @@ class CreateSessionController {
       );
       return null;
     }
+    var cpfs = usersList.map((e) => e.cpf).toList();
+    var sessionModel = await _sessionService.createSession(
+        context, restaurant!.id, table!, cpfs);
 
-    var sessionModel =
-        await _sessionService.createSession(context, restaurant!, table!);
     if (sessionModel == null) return null;
 
-    var cpfs = usersList.map((e) => e.cpf).toList();
-    var sucess = await _sessionService.addUsers(context, sessionModel.id, cpfs);
-    if (sucess != null) {
-      var prefs = await SharedPreferences.getInstance();
-      prefs.setInt('session_id', sessionModel.id);
-
-      sessionModel.userList.addAll(usersList);
-      return sessionModel;
-    }
-
-    _sessionService.closeSession(context, sessionModel.id, true);
-    return null;
+    var prefs = await SharedPreferences.getInstance();
+    prefs.setInt('session_id', sessionModel.id);
+    return sessionModel;
   }
 
   Future<UserModel?> getUser(BuildContext context, String cpf) async {

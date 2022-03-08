@@ -213,7 +213,7 @@ class _SessionCreatePageState extends State<SessionCreatePage> {
     setState(() {
       selected = index;
       _sessionController.restaurant =
-          _sessionController.restaurantList[selected - 1].name;
+          _sessionController.restaurantList[selected - 1];
     });
   }
 }
