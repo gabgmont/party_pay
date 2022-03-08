@@ -32,15 +32,18 @@ class _ResumePageState extends State<ResumePage> {
     final pages = [
       IndividualResumePage(
         sessionOrderModel:
-            widget.sessionController.sessionModel.sessionOrderList,
-        sessionUserModel: widget.sessionController.sessionResume.userList[0],
+        widget.sessionController.sessionModel.sessionOrderList,
+        sessionUserModel: widget.sessionController.sessionResume.userList
+            .where((_sessionUser) => _sessionUser.user == widget.sessionController.loggedUser).first,
       ),
       GroupResumePage(
         sesionResume: widget.sessionController.sessionResume,
       )
     ];
 
-    final size = MediaQuery.of(context).size;
+    final size = MediaQuery
+        .of(context)
+        .size;
 
     return Scaffold(
       appBar: AppBar(
@@ -101,7 +104,7 @@ class _ResumePageState extends State<ResumePage> {
               ),
               centerButtonTap: () async {
                 var sucess =
-                    await widget.sessionController.closeSession(context);
+                await widget.sessionController.closeSession(context);
 
                 if (sucess) {
                   var prefs = await SharedPreferences.getInstance();
@@ -110,7 +113,7 @@ class _ResumePageState extends State<ResumePage> {
                   Navigator.of(context).pushNamedAndRemoveUntil(
                       '/home_page', (Route<dynamic> route) => false,
                       arguments:
-                          widget.sessionController.sessionModel.userList[0]);
+                      widget.sessionController.sessionModel.userList[0]);
                 }
               },
             )
