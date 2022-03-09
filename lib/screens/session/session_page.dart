@@ -38,18 +38,13 @@ class _SessionPageState extends State<SessionPage> {
         child: FutureBuilder(
           future: _future,
           builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
-            switch (snapshot.connectionState) {
-              case ConnectionState.none:
-                break;
-              case ConnectionState.waiting:
-                break;
-              case ConnectionState.active:
-                break;
-              case ConnectionState.done:
+
+            if (snapshot.connectionState == ConnectionState.done) {
                 return SessionPageAppBar(
                   sessionController: sessionController,
                 );
             }
+
             return Container();
           },
         )

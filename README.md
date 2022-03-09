@@ -25,6 +25,10 @@ The prototype from the app was designed using Figma, and has all the screens of 
 
 -[Figma Prototype](https://www.figma.com/file/AZmnzcUVhgUo3rizPjnYcV/PartyPay!?node-id=0%3A1)
 
+##Firebase Initialization
+
+[FlutterFire Overview](https://firebase.flutter.dev/docs/overview)
+
 ###Generate android signing key
 
 -[Flutter keystore and app signing docs](https://docs.flutter.dev/deployment/android)
