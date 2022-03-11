@@ -1,13 +1,9 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
-import 'package:partypay/model/session/session_model.dart';
 import 'package:partypay/model/user/user_model.dart';
-import 'package:partypay/rest/client/session_client.dart';
+import 'package:partypay/screens/home/controller/home_controller.dart';
 import 'package:partypay/screens/home/widgets/double_big_button_widget.dart';
 import 'package:partypay/screens/home/widgets/hp_app_bar.dart';
 import 'package:partypay/shared/utils/AppColors.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 import 'widgets/double_big_button_wlist_widget.dart';
 
@@ -26,8 +22,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  SessionModel? _sessionModel;
-  final _sessionClient = SessionClient();
+  final _homeController = HomePageController();
 
   @override
   Widget build(BuildContext context) {
@@ -51,7 +46,7 @@ class _HomePageState extends State<HomePage> {
         ),
       ),
       body: FutureBuilder(
-        future: checkSession(),
+        future: _homeController.checkSession(context),
         builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
           switch (snapshot.connectionState) {
             case ConnectionState.none:
@@ -104,7 +99,7 @@ class _HomePageState extends State<HomePage> {
                       ),
                       Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                          child: _sessionModel == null
+                          child: _homeController.sessionModel == null
                               ? _createSession()
                               : _enterOpenSession()),
                     ],
@@ -116,32 +111,6 @@ class _HomePageState extends State<HomePage> {
         },
       ),
     );
-  }
-
-  Future checkSession() async {
-    var prefs = await SharedPreferences.getInstance();
-
-    var sessionId = prefs.getInt('session_id');
-    if (sessionId != null) {
-      var session = await _sessionClient.getSession(context, sessionId);
-      if (session == null) return prefs;
-
-      _sessionModel = session;
-      return _sessionModel;
-    }
-
-    var user = prefs.getString('user');
-    if (user != null) {
-      var session =
-          await _sessionClient.getUserSession(context, jsonDecode(user)['cpf']);
-      if (session == null) return prefs;
-
-      _sessionModel = session;
-      prefs.setInt('session_id', _sessionModel!.id);
-      return _sessionModel;
-    }
-
-    return prefs;
   }
 
   DoubleBigButtonWidget _createSession() {
@@ -159,7 +128,7 @@ class _HomePageState extends State<HomePage> {
     return DoubleBigButtonWidget(
       label: enterSession,
       onTap: () {
-        Navigator.pushNamed(context, '/session_page', arguments: _sessionModel)
+        Navigator.pushNamed(context, '/session_page', arguments: _homeController.sessionModel)
             .then((value) => setState(() {}));
       },
     );
