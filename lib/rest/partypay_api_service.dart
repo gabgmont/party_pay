@@ -10,9 +10,9 @@ class PartyPayService {
   static const String getOrder = '/menu/order/{orderId}';
   static const String getRestaurants = '/menu/restaurants';
   static const String getSession = '/session/{sessionId}';
-  static const String getUserSession = '/session/user/online/{cpf}';
+  static const String getUserSession = '/session/user/online/{username}';
   static const String addOrder = '/session/{sessionId}/add/order/{orderId}';
-  static const String addUser = '/session/{sessionId}/add/user/cpf';
+  static const String addUser = '/session/{sessionId}/add/user/username';
   static const String sessionResume = '/session/resume/{sessionId}';
   static const String closeSession = '/session/{sessionId}/close';
   static const String updateOrder = '/session/{sessionId}/update/order/{orderId}/status/{status}';

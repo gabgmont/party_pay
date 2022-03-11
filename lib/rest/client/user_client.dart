@@ -9,8 +9,8 @@ import '../partypay_api_service.dart';
 class UserClient {
   final service = PartyPayService();
 
-  Future<UserModel?> getUser(BuildContext context, String cpf) async {
-    var path = PartyPayService.getUser + '?cpf=$cpf';
+  Future<UserModel?> getUser(BuildContext context, String username) async {
+    var path = PartyPayService.getUser + '?username=$username';
 
     var response = await service.get(path);
     if (response == null) {

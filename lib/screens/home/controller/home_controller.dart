@@ -26,7 +26,7 @@ class HomePageController {
     var user = prefs.getString('user');
     if (user != null) {
       var session =
-      await _sessionClient.getUserSession(context, jsonDecode(user)['cpf']);
+      await _sessionClient.getUserSession(context, jsonDecode(user)['username']);
       if (session == null) return prefs;
 
       sessionModel = session;

@@ -4,7 +4,7 @@ import 'package:partypay/screens/create_session/widget/user_round_card_widget.da
 import 'package:partypay/screens/session/controller/session_controller.dart';
 import 'package:partypay/screens/session/widgets/enter_button_widget.dart';
 
-import '../../create_session/widget/cpf_add_form_field_widget.dart';
+import '../../create_session/widget/username_add_form_field_widget.dart';
 
 const addUserSession = 'Adicionar usuário na Sessão';
 
@@ -20,7 +20,7 @@ class AddUserBottomSheet extends StatefulWidget {
 
 class _AddUserBottomSheetState extends State<AddUserBottomSheet>
     with TickerProviderStateMixin {
-  final cpfTextController = TextEditingController();
+  final usernameTextController = TextEditingController();
   final CreateSessionController _createSessionController =
   CreateSessionController();
 
@@ -51,11 +51,11 @@ class _AddUserBottomSheetState extends State<AddUserBottomSheet>
                     addUserSession,
                     style: TextStyle(fontSize: size.height * .03),
                   ),
-                  CpfAddFormFieldWidget(
-                    textController: cpfTextController,
+                  UsernameAddFormFieldWidget(
+                    textController: usernameTextController,
                     onTap: () async {
                       var user = await _createSessionController.getUser(
-                          context, cpfTextController.text);
+                          context, usernameTextController.text);
                       if (user != null) {
                         setState(() {
                           _createSessionController.userCardList.add(

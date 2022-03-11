@@ -16,8 +16,8 @@ class LoginController {
   final PartyPayService _service = PartyPayService();
   final UserClient _userService = UserClient();
 
-  Future<bool> login(BuildContext context, String cpf, String secret) async {
-    if (cpf == '' || secret == '') {
+  Future<bool> login(BuildContext context, String username, String secret) async {
+    if (username == '' || secret == '') {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
           backgroundColor: AppColors.secondary,
@@ -30,7 +30,7 @@ class LoginController {
       return false;
     }
 
-    var authJson = AuthenticationModel(cpf, secret).toJson();
+    var authJson = AuthenticationModel(username, secret).toJson();
     var response = await _service.post(PartyPayService.auth, authJson);
     if (response == null) {
       ScaffoldMessenger.of(context).showSnackBar(
@@ -56,7 +56,7 @@ class LoginController {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     prefs.setString('token', json['token']);
 
-    var user = await _userService.getUser(context, cpf);
+    var user = await _userService.getUser(context, username);
     prefs.setString('user', user!.toJson().toString());
 
     Navigator.pushReplacementNamed(context, '/home_page', arguments: user);
@@ -73,7 +73,7 @@ class LoginController {
     try {
       final response = await _googleSignIn.signIn();
       final user = UserModel(name: response!.displayName!, email: response.email, photo: response.photoUrl);
-
+      // await _userService.getUser(context, user.email!);
       Navigator.pushReplacementNamed(context, '/home_page', arguments: user);
 
     } catch (error) {

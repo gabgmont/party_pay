@@ -34,8 +34,8 @@ class SessionClient {
     return SessionModel.fromJson(body);
   }
 
-  Future<SessionModel?> getUserSession(BuildContext context, String cpf) async {
-    String path = PartyPayService.getUserSession.replaceAll("{cpf}", cpf);
+  Future<SessionModel?> getUserSession(BuildContext context, String username) async {
+    String path = PartyPayService.getUserSession.replaceAll("{username}", username);
 
     var response = await _service.get(path);
     var body = checkResponse(context, response, false);
@@ -45,8 +45,8 @@ class SessionClient {
   }
 
   Future<SessionModel?> createSession(
-      BuildContext context, int restaurantId, int table, List<String?> cpfs) async {
-    var json = {'"menu_id"': restaurantId, '"table"': table, '"users"' : {'"cpf_list"': jsonEncode(cpfs)}};
+      BuildContext context, int restaurantId, int table, List<String?> usernames) async {
+    var json = {'"menu_id"': restaurantId, '"table"': table, '"users"' : {'"username_list"': jsonEncode(usernames)}};
 
     var response = await _service.post(PartyPayService.createSession, json);
 
@@ -56,9 +56,9 @@ class SessionClient {
   }
 
   Future<List<UserModel>?> addUsers(
-      BuildContext context, int sessionId, List<String?> cpfs) async {
+      BuildContext context, int sessionId, List<String?> usernames) async {
     var path = PartyPayService.addUser.replaceAll('{sessionId}', '$sessionId');
-    var json = {'"cpf_list"': jsonEncode(cpfs)};
+    var json = {'"username_list"': jsonEncode(usernames)};
     var response = await _service.put(path, json);
 
     var body = checkResponse(context, response, true);
@@ -66,17 +66,17 @@ class SessionClient {
     if (body == null) return null;
 
     return (body['user_list'] as List)
-        .map((json) => UserModel(name: json['name'], cpf: json['cpf']))
+        .map((json) => UserModel(name: json['name'], username: json['username']))
         .toList();
   }
 
   Future<List<SessionOrderModel>?> addOrder(BuildContext context, int sessionId,
-      int orderId, List<String> cpfs) async {
+      int orderId, List<String> usernames) async {
     var path = PartyPayService.addOrder
         .replaceAll('{sessionId}', '$sessionId')
         .replaceAll('{orderId}', '$orderId');
 
-    var json = {'"cpf_list"': jsonEncode(cpfs)};
+    var json = {'"username_list"': jsonEncode(usernames)};
     var response = await _service.put(path, json);
     var body = checkResponse(context, response, true);
     if (body == null) return null;

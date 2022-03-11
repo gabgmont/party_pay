@@ -11,7 +11,7 @@ import 'package:partypay/shared/utils/AppColors.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 const selectTableAndRestaurant = 'Selecione o restaurante e uma mesa.';
-const fillInCPF = 'Preencha o CPF antes de adicionar.';
+const fillInUsername = 'Preencha o usuario antes de adicionar.';
 const userAlreadyAdded = 'Usuário já adicionado.';
 
 class CreateSessionController {
@@ -57,9 +57,9 @@ class CreateSessionController {
       );
       return null;
     }
-    var cpfs = usersList.map((e) => e.cpf).toList();
+    var usernames = usersList.map((e) => e.username).toList();
     var sessionModel = await _sessionService.createSession(
-        context, restaurant!.id, table!, cpfs);
+        context, restaurant!.id, table!, usernames);
 
     if (sessionModel == null) return null;
 
@@ -68,19 +68,19 @@ class CreateSessionController {
     return sessionModel;
   }
 
-  Future<UserModel?> getUser(BuildContext context, String cpf) async {
-    if (cpf.isEmpty) {
+  Future<UserModel?> getUser(BuildContext context, String username) async {
+    if (username.isEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
           backgroundColor: AppColors.secondary,
-          content: Text(fillInCPF),
+          content: Text(fillInUsername),
         ),
       );
       return null;
     }
 
     for (var user in usersList) {
-      if (user.cpfValue() == cpf) {
+      if (user.usernameValue() == username) {
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(
             backgroundColor: AppColors.secondary,
@@ -91,7 +91,7 @@ class CreateSessionController {
       }
     }
 
-    var user = await _userService.getUser(context, cpf);
+    var user = await _userService.getUser(context, username);
     if (user == null) return null;
     usersList.add(user);
     return user;

@@ -73,7 +73,7 @@ class ProfileHeading extends StatelessWidget {
                               fontSize: 16, color: AppColors.gray),
                         ),
                         Text(
-                          user.cpf ?? '',
+                          user.username ?? '',
                           style: const TextStyle(color: AppColors.gray),
                         ),
                       ],

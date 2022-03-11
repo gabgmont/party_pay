@@ -12,7 +12,7 @@ import 'widgets/google_sign_in_widget.dart';
 const enter = 'Entrar';
 const forgotPassword = 'Esqueci a senha';
 const password = 'Senha';
-const username = 'CPF';
+const username = 'Username/Email';
 const login = 'Login';
 const String welcome = 'Bem Vindo!';
 
@@ -103,11 +103,11 @@ class LoginPage extends StatelessWidget {
                               DoubleButtonWidget(
                                 label: enter,
                                 onTap: () async {
-                                  var cpf = usernameController.text;
+                                  var username = usernameController.text;
                                   var secret = passwordController.text;
                                   loginController.login(
                                     context,
-                                    cpf,
+                                    username,
                                     secret,
                                   );
                                 },

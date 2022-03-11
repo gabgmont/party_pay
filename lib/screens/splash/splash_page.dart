@@ -62,7 +62,7 @@ void checkLogin(BuildContext context) async {
   var userMap = jsonDecode(user);
   var userModel = UserModel(
       name: userMap['name'],
-      cpf: userMap['cpf'],
+      username: userMap['username'],
       email: userMap['email'],
       phone: userMap['phone'],
       photo: userMap['photo']);

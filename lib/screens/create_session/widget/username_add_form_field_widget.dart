@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:partypay/shared/utils/AppColors.dart';
 
-class CpfAddFormFieldWidget extends StatelessWidget {
+class UsernameAddFormFieldWidget extends StatelessWidget {
   final TextEditingController textController;
   final VoidCallback onTap;
 
-  const CpfAddFormFieldWidget({Key? key, required this.onTap, required this.textController})
+  const UsernameAddFormFieldWidget({Key? key, required this.onTap, required this.textController})
       : super(key: key);
 
   @override
@@ -61,7 +61,7 @@ class CpfAddFormFieldWidget extends StatelessWidget {
                         style: TextStyle(fontSize: 16, color: AppColors.gray),
                         decoration: InputDecoration(
                             floatingLabelBehavior: FloatingLabelBehavior.always,
-                            labelText: 'CPF',
+                            labelText: 'Username',
                             labelStyle: const TextStyle(
                                 color: AppColors.gray, fontSize: 16),
                             border: InputBorder.none),

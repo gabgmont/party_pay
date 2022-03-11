@@ -5,7 +5,7 @@ import 'package:partypay/screens/session/widgets/enter_button_widget.dart';
 import 'package:partypay/shared/utils/AppColors.dart';
 
 import 'controller/create_session_controller.dart';
-import 'widget/cpf_add_form_field_widget.dart';
+import 'widget/username_add_form_field_widget.dart';
 import 'widget/user_round_card_widget.dart';
 
 const addUser = 'Adicionar usuário na mesa';
@@ -114,7 +114,7 @@ class _SessionCreatePageState extends State<SessionCreatePage> {
                     alignment: Alignment.topLeft,
                     child: Text(addUser, style: TextStyle(fontSize: 18))),
               ),
-              CpfAddFormFieldWidget(
+              UsernameAddFormFieldWidget(
                 textController: _textController,
                 onTap: () async {
                   var user = await _sessionController.getUser(

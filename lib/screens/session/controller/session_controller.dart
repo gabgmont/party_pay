@@ -36,8 +36,8 @@ class SessionController {
   }
 
   Future<bool> addUsers(BuildContext context, List<UserModel> users) async {
-    var cpfs = users.map((e) => e.cpf).toList();
-    var sucess = await sessionClient.addUsers(context, sessionModel.id, cpfs);
+    var usernames = users.map((e) => e.username).toList();
+    var sucess = await sessionClient.addUsers(context, sessionModel.id, usernames);
 
     if (sucess == null) return false;
     sessionModel.userList.addAll(users);
@@ -46,9 +46,9 @@ class SessionController {
 
   Future<bool> addOrder(BuildContext context, int orderId,
       List<UserModel> users) async {
-    var cpfs = users.map((e) => e.cpf!).toList();
+    var usernames = users.map((e) => e.username!).toList();
     var sessionOrder =
-    await sessionClient.addOrder(context, sessionModel.id, orderId, cpfs);
+    await sessionClient.addOrder(context, sessionModel.id, orderId, usernames);
 
     if (sessionOrder == null) return false;
     sessionModel.sessionOrderList = sessionOrder;

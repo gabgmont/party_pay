@@ -2,7 +2,7 @@ import 'package:partypay/shared/utils/AppImages.dart';
 
 class UserModel {
   final String name;
-  String? cpf;
+  String? username;
   String? secret;
   String? email;
   String? phone;
@@ -10,24 +10,24 @@ class UserModel {
 
   UserModel({
     required this.name,
-    this.cpf,
+    this.username,
     this.email,
     this.phone,
     this.photo = AppImages.userPicture,
   });
 
-  String cpfValue() => cpf!.replaceAll('.', '').replaceAll('-', '');
+  String usernameValue() => username!.replaceAll('.', '').replaceAll('-', '');
 
   UserModel.fromJson(Map<String, dynamic> json)
       : name = json['name'],
-        cpf = json['cpf'],
+        username = json['username'],
         email = json['email'],
         phone = json['phone'],
         photo = json['photo'];
 
   Map<String, dynamic> toJson() => {
         '"name"': '"$name"',
-        '"cpf"': '"$cpf"',
+        '"username"': '"$username"',
         '"email"': '"$email"',
         '"phone"': '"$phone"',
         '"photo"': '"$photo"',
@@ -35,7 +35,7 @@ class UserModel {
 
   Map<String, dynamic> toMap() => {
         'name': name,
-        'cpf': cpf,
+        'username': username,
         'email': email,
         'phone': phone,
         'photo': photo
@@ -60,8 +60,8 @@ class UserModel {
       identical(this, other) ||
       other is UserModel &&
           runtimeType == other.runtimeType &&
-          cpf == other.cpf;
+          username == other.username;
 
   @override
-  int get hashCode => cpf.hashCode;
+  int get hashCode => username.hashCode;
 }
