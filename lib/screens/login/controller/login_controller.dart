@@ -1,12 +1,14 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:partypay/model/auth/auth_model.dart';
-import 'package:partypay/rest/partypay_api_service.dart';
 import 'package:partypay/rest/client/user_client.dart';
-import 'package:partypay/screens/home/home_page.dart';
+import 'package:partypay/rest/partypay_api_service.dart';
 import 'package:partypay/shared/utils/AppColors.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
+import '../../../model/user/user_model.dart';
 
 const fillAllFields = 'Preencha todos os campos.';
 
@@ -60,5 +62,27 @@ class LoginController {
     Navigator.pushReplacementNamed(context, '/home_page', arguments: user);
 
     return true;
+  }
+
+  Future<void> googleSignIn(BuildContext context) async {
+    GoogleSignIn _googleSignIn = GoogleSignIn(
+      scopes: [
+        'email',
+      ],
+    );
+    try {
+      final response = await _googleSignIn.signIn();
+      final user = UserModel(name: response!.displayName!, photo: response.photoUrl);
+
+      Navigator.pushReplacementNamed(context, '/home_page', arguments: user);
+
+    } catch (error) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          backgroundColor: AppColors.secondary,
+          content: Text("Erro ao realizar login."),
+        ),
+      );
+    }
   }
 }

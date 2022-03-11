@@ -1,6 +1,7 @@
 class AppImages {
 
   static const logo = "assets/images/partypay.png";
+  static const google = "assets/images/google.svg";
   static const userPicture = "assets/images/user_picture.png";
 
   static const outback = "assets/images/news/outback.png";
