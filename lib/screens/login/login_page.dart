@@ -123,7 +123,7 @@ class LoginPage extends StatelessWidget {
                   padding: EdgeInsets.all(size.height * .05),
                   child: GoogleSignInWidget(
                     onTap: () {
-
+                      loginController.googleSignIn(context);
                     },
                   ),
                 ),

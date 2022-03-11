@@ -52,8 +52,8 @@ class UserRoundCardWidget extends StatelessWidget {
     return BoxDecoration(
         borderRadius: BorderRadius.circular(100),
         border: const Border.fromBorderSide(
-            BorderSide(width: 1, color: AppColors.primary)),
-        image: DecorationImage(image: AssetImage(photo), fit: BoxFit.fill),
+            BorderSide(width: 1, color: AppColors.secondary)),
+        image: DecorationImage(image: NetworkImage(photo), fit: BoxFit.fill),
     boxShadow: [
         BoxShadow(
           offset: Offset.fromDirection(1, 1.5),

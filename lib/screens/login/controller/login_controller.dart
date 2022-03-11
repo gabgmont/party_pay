@@ -72,7 +72,7 @@ class LoginController {
     );
     try {
       final response = await _googleSignIn.signIn();
-      final user = UserModel(name: response!.displayName!, photo: response.photoUrl);
+      final user = UserModel(name: response!.displayName!, email: response.email, photo: response.photoUrl);
 
       Navigator.pushReplacementNamed(context, '/home_page', arguments: user);
 
