@@ -73,12 +73,6 @@ class _ProfilePageState extends State<ProfilePage> {
             ),
             IconTextFieldWidget(
               active: active,
-              label: phoneLabel,
-              icon: Icons.phone,
-              value: widget.user.phone ?? '',
-            ),
-            IconTextFieldWidget(
-              active: active,
               label: passwordLabel,
               icon: Icons.password,
               value: widget.user.secret ?? '',

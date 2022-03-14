@@ -64,7 +64,6 @@ void checkLogin(BuildContext context) async {
       name: userMap['name'],
       username: userMap['username'],
       email: userMap['email'],
-      phone: userMap['phone'],
       photo: userMap['photo']);
 
   Navigator.pushReplacementNamed(context, '/home_page', arguments: userModel);

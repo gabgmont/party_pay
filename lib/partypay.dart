@@ -8,6 +8,7 @@ import 'package:partypay/screens/profile/profile_page.dart';
 import 'package:partypay/screens/resume/resume_page.dart';
 import 'package:partypay/screens/session/controller/session_controller.dart';
 import 'package:partypay/screens/session/session_page.dart';
+import 'package:partypay/screens/signup/signup_page.dart';
 
 import 'screens/splash/splash_page.dart';
 
@@ -47,7 +48,9 @@ class PartyPayApp extends StatelessWidget {
 
         '/resume_page': (context) => ResumePage(
               sessionController: ModalRoute.of(context)?.settings.arguments as SessionController
-            )
+            ),
+
+        '/signup_page' :(context) => SignUpPage()
       },
     );
   }

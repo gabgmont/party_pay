@@ -5,14 +5,12 @@ class UserModel {
   String? username;
   String? secret;
   String? email;
-  String? phone;
   String? photo;
 
   UserModel({
     required this.name,
     this.username,
     this.email,
-    this.phone,
     this.photo = AppImages.userPicture,
   });
 
@@ -22,14 +20,12 @@ class UserModel {
       : name = json['name'],
         username = json['username'],
         email = json['email'],
-        phone = json['phone'],
         photo = json['photo'];
 
   Map<String, dynamic> toJson() => {
         '"name"': '"$name"',
         '"username"': '"$username"',
         '"email"': '"$email"',
-        '"phone"': '"$phone"',
         '"photo"': '"$photo"',
       };
 
@@ -37,7 +33,6 @@ class UserModel {
         'name': name,
         'username': username,
         'email': email,
-        'phone': phone,
         'photo': photo
       };
 
