@@ -1,42 +1,29 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:partypay/model/user/user_model.dart';
-import 'package:partypay/shared/utils/AppColors.dart';
 
 import '../partypay_api_service.dart';
 
 class UserClient {
-  final service = PartyPayService();
+  final _service = PartyPayService();
 
   Future<UserModel?> getUser(BuildContext context, String username) async {
     var path = PartyPayService.getUser + '?username=$username';
 
-    var response = await service.get(path);
-    if (response == null) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          backgroundColor: AppColors.secondary,
-          content: Text('Ocorreu um erro no servidor da aplicacao.'),
-        ),
-      );
-      return null;
-    }
+    var response = await _service.get(path);
+    var body = _service.checkResponse(context, response, true);
+    if (body == null) return null;
 
-    var json = jsonDecode(utf8.decode(response.bodyBytes));
-    if (response.statusCode != 200) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          backgroundColor: AppColors.secondary,
-          content: Text(
-            json['message'],
-            style: TextStyle(fontSize: 18),
-          ),
-        ),
-      );
-      return null;
-    }
+    return UserModel.fromJson(body[0]);
+  }
 
-    return UserModel.fromJson(json[0]);
+  Future<UserModel?> registerSocialUser(
+      BuildContext context, String name, String email, String photoUrl) async {
+    var json = {'"name"': '"$name"', '"email"': '"$email"', '"photo"': '"$photoUrl"'};
+
+    var response = await _service.post(PartyPayService.registerUserSocial, json);
+    var body = _service.checkResponse(context, response, true);
+    if (body == null) return null;
+
+    return UserModel.fromJson(body);
   }
 }

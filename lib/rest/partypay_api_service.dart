@@ -1,5 +1,11 @@
+import 'dart:convert';
+
+import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:http/http.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
+import '../shared/utils/AppColors.dart';
 
 const String url = 'https://partypay.herokuapp.com';
 
@@ -19,6 +25,7 @@ class PartyPayService {
   static const String createSession = '/session/create';
   static const String getUser = '/user';
   static const String registerUser = '/user/register';
+  static const String registerUserSocial = '/user/register/social';
 
   late SharedPreferences prefs;
 
@@ -41,7 +48,6 @@ class PartyPayService {
       var token = prefs.getString('token');
 
       var uri = Uri.parse(url + path);
-
       return await http.post(uri, body: json.toString(), headers: {
         'Content-Type': 'application/json',
         'Authorization': 'Bearer $token'
@@ -65,5 +71,34 @@ class PartyPayService {
     } on Exception catch (_) {
       return null;
     }
+  }
+
+  dynamic checkResponse(
+      BuildContext context, Response? response, bool showMessages) {
+    if (response == null) {
+      if (showMessages) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            backgroundColor: AppColors.secondary,
+            content: Text('Ocorreu um erro no servidor da aplicacao.'),
+          ),
+        );
+      }
+      return null;
+    }
+    var body = jsonDecode(utf8.decode(response.bodyBytes));
+
+    if (response.statusCode != 200) {
+      if (showMessages) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            backgroundColor: AppColors.secondary,
+            content: Text(body['message']),
+          ),
+        );
+      }
+      return null;
+    }
+    return body;
   }
 }

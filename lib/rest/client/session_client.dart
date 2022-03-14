@@ -1,14 +1,12 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:http/http.dart';
 import 'package:partypay/model/restaurant/restaurant_model.dart';
 import 'package:partypay/model/session/session_model.dart';
 import 'package:partypay/model/session/session_order_model.dart';
 import 'package:partypay/model/session/session_resume_model.dart';
 import 'package:partypay/model/user/user_model.dart';
 import 'package:partypay/rest/partypay_api_service.dart';
-import 'package:partypay/shared/utils/AppColors.dart';
 
 class SessionClient {
   final _service = PartyPayService();
@@ -16,7 +14,7 @@ class SessionClient {
   Future<List<RestaurantModel>?> getRestaurants(BuildContext context) async {
     var response = await _service.get(PartyPayService.getRestaurants);
 
-    var body = checkResponse(context, response, true);
+    var body = _service.checkResponse(context, response, true);
 
     if(body== null) return null;
     return (body as List).map((json) => RestaurantModel.fromJson(json)).toList();
@@ -28,7 +26,7 @@ class SessionClient {
 
     var response = await _service.get(path);
 
-    var body = checkResponse(context, response, true);
+    var body = _service.checkResponse(context, response, true);
 
     if(body == null) return null;
     return SessionModel.fromJson(body);
@@ -38,7 +36,7 @@ class SessionClient {
     String path = PartyPayService.getUserSession.replaceAll("{username}", username);
 
     var response = await _service.get(path);
-    var body = checkResponse(context, response, false);
+    var body = _service.checkResponse(context, response, false);
 
     if (body == null) return null;
     return SessionModel.fromJson(body);
@@ -50,7 +48,7 @@ class SessionClient {
 
     var response = await _service.post(PartyPayService.createSession, json);
 
-    var body = checkResponse(context, response, true);
+    var body = _service.checkResponse(context, response, true);
     if (body == null) return null;
     return SessionModel.fromJson(body);
   }
@@ -61,7 +59,7 @@ class SessionClient {
     var json = {'"username_list"': jsonEncode(usernames)};
     var response = await _service.put(path, json);
 
-    var body = checkResponse(context, response, true);
+    var body = _service.checkResponse(context, response, true);
 
     if (body == null) return null;
 
@@ -78,7 +76,7 @@ class SessionClient {
 
     var json = {'"username_list"': jsonEncode(usernames)};
     var response = await _service.put(path, json);
-    var body = checkResponse(context, response, true);
+    var body = _service.checkResponse(context, response, true);
     if (body == null) return null;
 
     return (body['order_list'] as List)
@@ -92,7 +90,7 @@ class SessionClient {
         PartyPayService.sessionResume.replaceAll('{sessionId}', '$sessionId');
 
     var response = await _service.get(path);
-    var body = checkResponse(context, response, true);
+    var body = _service.checkResponse(context, response, true);
     if (body == null) return null;
 
     return SessionResumeModel.fromJson(body);
@@ -105,38 +103,10 @@ class SessionClient {
     path = forceClose ? '$path?forceClose=$forceClose' : path;
 
     var response = await _service.put(path, null);
-    var body = checkResponse(context, response, true);
+    var body = _service.checkResponse(context, response, true);
     if (body == null) return null;
 
     return SessionResumeModel.fromJson(body);
   }
 
-  dynamic checkResponse(
-      BuildContext context, Response? response, bool showMessages) {
-    if (response == null) {
-      if (showMessages) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
-            backgroundColor: AppColors.secondary,
-            content: Text('Ocorreu um erro no servidor da aplicacao.'),
-          ),
-        );
-      }
-      return null;
-    }
-    var body = jsonDecode(utf8.decode(response.bodyBytes));
-
-    if (response.statusCode != 200) {
-      if (showMessages) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            backgroundColor: AppColors.secondary,
-            content: Text(body['message']),
-          ),
-        );
-      }
-      return null;
-    }
-    return body;
-  }
 }

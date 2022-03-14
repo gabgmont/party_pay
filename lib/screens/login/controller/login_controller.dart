@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:partypay/model/auth/auth_model.dart';
@@ -8,21 +6,23 @@ import 'package:partypay/rest/partypay_api_service.dart';
 import 'package:partypay/shared/utils/AppColors.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import '../../../model/user/user_model.dart';
-
-const fillAllFields = 'Preencha todos os campos.';
+const _fillAllFields = 'Preencha todos os campos.';
+const _loginError = 'Erro ao realizar login.';
+const _socialSecret = 'Qa#9#eMLNx3?JR3.2zr~v)gYF^88>XfBWw75Nemt9YjbQMNCWwW';
 
 class LoginController {
   final PartyPayService _service = PartyPayService();
   final UserClient _userService = UserClient();
 
-  Future<bool> login(BuildContext context, String username, String secret) async {
+  Future<bool> login(BuildContext context, String username,
+      String secret) async {
+    SharedPreferences _prefs = await SharedPreferences.getInstance();
     if (username == '' || secret == '') {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
           backgroundColor: AppColors.secondary,
           content: Text(
-            fillAllFields,
+            _fillAllFields,
             style: TextStyle(fontSize: 18),
           ),
         ),
@@ -30,34 +30,10 @@ class LoginController {
       return false;
     }
 
-    var authJson = AuthenticationModel(username, secret).toJson();
-    var response = await _service.post(PartyPayService.auth, authJson);
-    if (response == null) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          backgroundColor: AppColors.secondary,
-          content: Text('Ocorreu um erro no servidor da aplicacao.'),
-        ),
-      );
-      return false;
-    }
-
-    var json = jsonDecode(utf8.decode(response.bodyBytes));
-
-    if (response.statusCode != 200) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          backgroundColor: AppColors.secondary,
-          content: Text(json['message']),
-        ),
-      );
-      return false;
-    }
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    prefs.setString('token', json['token']);
+    _generateToken(context, username, secret);
 
     var user = await _userService.getUser(context, username);
-    prefs.setString('user', user!.toJson().toString());
+    _prefs.setString('user', user!.toJson().toString());
 
     Navigator.pushReplacementNamed(context, '/home_page', arguments: user);
 
@@ -65,6 +41,7 @@ class LoginController {
   }
 
   Future<void> googleSignIn(BuildContext context) async {
+    SharedPreferences _prefs = await SharedPreferences.getInstance();
     GoogleSignIn _googleSignIn = GoogleSignIn(
       scopes: [
         'email',
@@ -72,17 +49,44 @@ class LoginController {
     );
     try {
       final response = await _googleSignIn.signIn();
-      final user = UserModel(name: response!.displayName!, email: response.email, photo: response.photoUrl);
-      // await _userService.getUser(context, user.email!);
+      if (response == null) throw Exception();
+
+      var hasToken = await _generateToken(context, response.email, _socialSecret);
+
+      if(hasToken) {
+        var user = await _userService.getUser(context, response.email);
+        _prefs.setString('user', user!.toJson().toString());
+        Navigator.pushReplacementNamed(context, '/home_page', arguments: user);
+        return;
+      }
+
+      var user = await _userService.registerSocialUser(context,
+          response.displayName!, response.email, response.photoUrl ?? "");
+
+      if (user == null) return;
+      _generateToken(context, user.email!, _socialSecret);
+      _prefs.setString('user', user.toJson().toString());
       Navigator.pushReplacementNamed(context, '/home_page', arguments: user);
 
     } catch (error) {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
           backgroundColor: AppColors.secondary,
-          content: Text("Erro ao realizar login."),
+          content: Text(_loginError),
         ),
       );
     }
+  }
+
+  Future<bool> _generateToken(BuildContext context, String username, String secret) async {
+    SharedPreferences _prefs = await SharedPreferences.getInstance();
+    var authJson = AuthenticationModel(username, secret).toJson();
+    var response = await _service.post(PartyPayService.auth, authJson);
+
+    var body = _service.checkResponse(context, response, true);
+    if (body == null) return false;
+
+    _prefs.setString('token', body['token']);
+    return true;
   }
 }
