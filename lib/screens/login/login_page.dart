@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:partypay/rest/client/user_client.dart';
 import 'package:partypay/screens/login/controller/login_controller.dart';
 import 'package:partypay/screens/login/widgets/double_button_widget.dart';
 import 'package:partypay/screens/login/widgets/double_input_text_widget.dart';
@@ -9,18 +8,16 @@ import 'package:partypay/shared/utils/AppImages.dart';
 
 import 'widgets/google_sign_in_widget.dart';
 
-const enter = 'Entrar';
-const forgotPassword = 'Esqueci a senha';
-const password = 'Senha';
-const username = 'Usuário/Email';
-const login = 'Login';
-const String welcome = 'Bem Vindo!';
+const _enter = 'Entrar';
+const _register = 'Cadastrar';
+const _password = 'Senha';
+const _username = 'Usuário/Email';
+const _login = 'Login';
 
 class LoginPage extends StatelessWidget {
-  final usernameController = TextEditingController();
-  final passwordController = TextEditingController();
-  final loginController = LoginController();
-  final userService = UserClient();
+  final _usernameController = TextEditingController();
+  final _passwordController = TextEditingController();
+  final _loginController = LoginController();
 
   LoginPage({Key? key}) : super(key: key);
 
@@ -69,7 +66,7 @@ class LoginPage extends StatelessWidget {
                                 height: 20,
                               ),
                               Text(
-                                login,
+                                _login,
                                 style: GoogleFonts.roboto(
                                     fontSize: 48, color: AppColors.white),
                               ),
@@ -77,22 +74,22 @@ class LoginPage extends StatelessWidget {
                                 height: 20,
                               ),
                               DoubleInputTextWidgetWidget(
-                                textController: usernameController,
-                                hint: username,
+                                textController: _usernameController,
+                                hint: _username,
                               ),
                               const SizedBox(
                                 height: 20,
                               ),
                               DoubleInputTextWidgetWidget(
-                                textController: passwordController,
-                                hint: password,
+                                textController: _passwordController,
+                                hint: _password,
                                 obscureText: true,
                               ),
                               const SizedBox(
                                 height: 20,
                               ),
                               const Text(
-                                forgotPassword,
+                                _register,
                                 style: TextStyle(
                                     decoration: TextDecoration.underline,
                                     color: AppColors.white),
@@ -101,11 +98,11 @@ class LoginPage extends StatelessWidget {
                                 height: 20,
                               ),
                               DoubleButtonWidget(
-                                label: enter,
+                                label: _enter,
                                 onTap: () async {
-                                  var username = usernameController.text;
-                                  var secret = passwordController.text;
-                                  loginController.login(
+                                  var username = _usernameController.text;
+                                  var secret = _passwordController.text;
+                                  _loginController.login(
                                     context,
                                     username,
                                     secret,
@@ -123,7 +120,7 @@ class LoginPage extends StatelessWidget {
                   padding: EdgeInsets.all(size.height * .05),
                   child: GoogleSignInWidget(
                     onTap: () {
-                      loginController.googleSignIn(context);
+                      _loginController.googleSignIn(context);
                     },
                   ),
                 ),
