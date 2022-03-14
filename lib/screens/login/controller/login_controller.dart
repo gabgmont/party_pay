@@ -30,7 +30,7 @@ class LoginController {
       return false;
     }
 
-    _generateToken(context, username, secret);
+    await _generateToken(context, username, secret);
 
     var user = await _userService.getUser(context, username);
     _prefs.setString('user', user!.toJson().toString());

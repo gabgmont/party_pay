@@ -12,7 +12,7 @@ import 'widgets/google_sign_in_widget.dart';
 const enter = 'Entrar';
 const forgotPassword = 'Esqueci a senha';
 const password = 'Senha';
-const username = 'Username/Email';
+const username = 'Usuário/Email';
 const login = 'Login';
 const String welcome = 'Bem Vindo!';
 
