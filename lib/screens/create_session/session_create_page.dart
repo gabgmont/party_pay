@@ -27,7 +27,7 @@ class _SessionCreatePageState extends State<SessionCreatePage> {
   final _textController = TextEditingController();
   final _sessionController = CreateSessionController();
   late Future _future;
-  var tables = [10, 12, 14, 16, 18, 20, 22, 24, 26];
+  var tables = [10, 12, 14, 16, 18, 20, 22, 24, 26, 28, 30];
   int dropdownValue = 10;
   int selected = 0;
 

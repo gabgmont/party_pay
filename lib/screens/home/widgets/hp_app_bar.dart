@@ -29,46 +29,46 @@ class _HomePageAppBarState extends State<HomePageAppBar> {
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     final List news = [
-      NewsWidget(
-        image: AppImages.siSenor,
-        onTap: () {
-          setState(() {
-            newsController.currentPage = 1;
-          });
-        },
-      ),
-      NewsWidget(
-        image: AppImages.cocoBambu,
-        onTap: () {
-          setState(() {
-            newsController.currentPage = 2;
-          });
-        },
-      ),
-      NewsWidget(
-        image: AppImages.paris6,
-        onTap: () {
-          setState(() {
-            newsController.currentPage = 3;
-          });
-        },
-      ),
-      NewsWidget(
-        image: AppImages.srShitake,
-        onTap: () {
-          setState(() {
-            newsController.currentPage = 4;
-          });
-        },
-      ),
-      NewsWidget(
-        image: AppImages.paris6,
-        onTap: () {
-          setState(() {
-            newsController.currentPage = 0;
-          });
-        },
-      )
+      // NewsWidget(
+      //   image: AppImages.siSenor,
+      //   onTap: () {
+      //     setState(() {
+      //       newsController.currentPage = 1;
+      //     });
+      //   },
+      // ),
+      // NewsWidget(
+      //   image: AppImages.cocoBambu,
+      //   onTap: () {
+      //     setState(() {
+      //       newsController.currentPage = 2;
+      //     });
+      //   },
+      // ),
+      // NewsWidget(
+      //   image: AppImages.paris6,
+      //   onTap: () {
+      //     setState(() {
+      //       newsController.currentPage = 3;
+      //     });
+      //   },
+      // ),
+      // NewsWidget(
+      //   image: AppImages.srShitake,
+      //   onTap: () {
+      //     setState(() {
+      //       newsController.currentPage = 4;
+      //     });
+      //   },
+      // ),
+      // NewsWidget(
+      //   image: AppImages.logo,
+      //   onTap: () {
+      //     setState(() {
+      //       newsController.currentPage = 0;
+      //     });
+      //   },
+      // )
     ];
     return Stack(
       alignment: Alignment.bottomCenter,
@@ -131,45 +131,45 @@ class _HomePageAppBarState extends State<HomePageAppBar> {
             ),
           ],
         ),
-        Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.end,
-            children: [
-              news[newsController.currentPage],
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  PageIndicatorWidget(
-                    color: newsController.currentPage == 0
-                        ? AppColors.secondary
-                        : AppColors.white,
-                  ),
-                  PageIndicatorWidget(
-                    color: newsController.currentPage == 1
-                        ? AppColors.secondary
-                        : AppColors.white,
-                  ),
-                  PageIndicatorWidget(
-                    color: newsController.currentPage == 2
-                        ? AppColors.secondary
-                        : AppColors.white,
-                  ),
-                  PageIndicatorWidget(
-                    color: newsController.currentPage == 3
-                        ? AppColors.secondary
-                        : AppColors.white,
-                  ),
-                  PageIndicatorWidget(
-                    color: newsController.currentPage == 4
-                        ? AppColors.secondary
-                        : AppColors.white,
-                  ),
-                ],
-              )
-            ],
-          ),
-        ),
+        // Padding(
+        //   padding: const EdgeInsets.all(8.0),
+        //   child: Column(
+        //     mainAxisAlignment: MainAxisAlignment.end,
+        //     children: [
+        //       news[newsController.currentPage],
+        //       Row(
+        //         mainAxisAlignment: MainAxisAlignment.center,
+        //         children: [
+        //           // PageIndicatorWidget(
+        //           //   color: newsController.currentPage == 0
+        //           //       ? AppColors.secondary
+        //           //       : AppColors.white,
+        //           // ),
+        //           // PageIndicatorWidget(
+        //           //   color: newsController.currentPage == 1
+        //           //       ? AppColors.secondary
+        //           //       : AppColors.white,
+        //           // ),
+        //           // PageIndicatorWidget(
+        //           //   color: newsController.currentPage == 2
+        //           //       ? AppColors.secondary
+        //           //       : AppColors.white,
+        //           // ),
+        //           // PageIndicatorWidget(
+        //           //   color: newsController.currentPage == 3
+        //           //       ? AppColors.secondary
+        //           //       : AppColors.white,
+        //           // ),
+        //           PageIndicatorWidget(
+        //             color: newsController.currentPage == 0
+        //                 ? AppColors.secondary
+        //                 : AppColors.white,
+        //           ),
+        //         ],
+        //       )
+        //     ],
+        //   ),
+        // ),
       ],
     );
   }

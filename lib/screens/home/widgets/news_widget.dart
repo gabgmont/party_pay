@@ -19,7 +19,8 @@ class NewsWidget extends StatelessWidget {
           height: size.height * 0.12,
           width: size.width * 0.9,
           decoration: BoxDecoration(
-            image: DecorationImage(image: AssetImage(image), fit: BoxFit.fill),
+            color: AppColors.white,
+            image: DecorationImage(image: AssetImage(image)),
             borderRadius: BorderRadius.circular(5),
             boxShadow: [BoxShadow(
               offset: Offset.fromDirection(1, 1.5),

@@ -40,7 +40,7 @@ class DoubleBigButtonWListWidget extends StatelessWidget {
                     onTap: onTap,
                     highlightColor: AppColors.secondary,
                     splashColor: AppColors.secondary,
-                    child: Container(
+                    child: SizedBox(
                       height: size.height * 0.13,
                       width: size.width * 0.59,
                       child: Center(
@@ -63,12 +63,12 @@ class DoubleBigButtonWListWidget extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
-            RecentActivityButtonItemWidget(image: AppImages.smallOutback, price: 'R\$87,99',),
-            Padding(
-              padding: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 30),
-              child: Container(height: 1,width: 50,color: AppColors.secondary,),
-            ),
-            RecentActivityButtonItemWidget(image: AppImages.smallSiSenor, price: 'R\$159,99',),
+            // RecentActivityButtonItemWidget(image: AppImages.smallOutback, price: 'R\$87,99',),
+            // Padding(
+            //   padding: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 30),
+            //   child: Container(height: 1,width: 50,color: AppColors.secondary,),
+            // ),
+            // RecentActivityButtonItemWidget(image: AppImages.smallSiSenor, price: 'R\$159,99',),
           ],
         ),
         const SizedBox()
