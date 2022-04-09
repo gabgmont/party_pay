@@ -5,9 +5,9 @@ class AppColors {
   static const black = Color(0xFF000000);
   static const primary = Color(0xFFFF9900);
   static const primary60 = Color(0x90FF9900);
-  static const secondary = Color(0xFFFFC42D );
-  static const gray  = Color(0xFFA39E9E);
-  static const lightGray  = Color(0xFFEEEEEE);
+  static const secondary = Color(0xFFFFC42D);
+  static const gray = Color(0xFFA39E9E);
+  static const lightGray = Color(0xFFEEEEEE);
   static const red = Color(0xFFFF0000);
   static const green = Color(0xFF00FF00);
   static const shadow = Colors.black26;

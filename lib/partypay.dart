@@ -50,7 +50,7 @@ class PartyPayApp extends StatelessWidget {
               sessionController: ModalRoute.of(context)?.settings.arguments as SessionController
             ),
 
-        '/signup_page' :(context) => SignUpPage()
+        '/signup_page' :(context) => const SignUpPage()
       },
     );
   }

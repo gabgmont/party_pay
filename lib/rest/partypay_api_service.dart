@@ -7,7 +7,9 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import '../shared/utils/AppColors.dart';
 
-const String url = 'https://partypay.herokuapp.com';
+const String prodUrl = 'https://partypay.herokuapp.com';
+const String homologUrl = 'https://partypay-homolog.herokuapp.com';
+const String url = prodUrl;
 
 class PartyPayService {
   static const String auth = '/auth';
@@ -102,3 +104,4 @@ class PartyPayService {
     return body;
   }
 }
+
