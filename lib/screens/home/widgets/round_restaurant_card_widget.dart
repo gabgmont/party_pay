@@ -20,11 +20,11 @@ class RoundRestaurantCardWidget extends StatelessWidget {
           height: 70,
           decoration: BoxDecoration(
             image: DecorationImage(
-              image: AssetImage(restaurant.image),
+              image: NetworkImage(restaurant.image),
             ),
             color: AppColors.white,
             borderRadius: BorderRadius.circular(shape == Shape.ROUND ? 100 : 20),
-            border: selected ? Border.fromBorderSide(BorderSide(width: 3, color: AppColors.secondary)) : null,
+            border: selected ? const Border.fromBorderSide(BorderSide(width: 3, color: AppColors.secondary)) : null,
             boxShadow: [
               BoxShadow(
                   offset: Offset.fromDirection(1, 1.5),

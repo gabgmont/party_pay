@@ -51,6 +51,7 @@ class SessionOrderWidget extends StatelessWidget {
                         height: size.height * .085,
                         width: size.height * .085,
                         decoration: BoxDecoration(
+                          image: DecorationImage(image: NetworkImage(sessionOrderModel.order.image), fit: BoxFit.fill),
                           border: const Border.fromBorderSide(
                             BorderSide(color: AppColors.secondary, width: 1),
                           ),

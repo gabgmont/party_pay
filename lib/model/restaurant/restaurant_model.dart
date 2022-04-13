@@ -1,6 +1,6 @@
 
 
-import 'package:partypay/shared/utils/AppImages.dart';
+
 
 class RestaurantModel {
   final int id;
@@ -12,5 +12,5 @@ class RestaurantModel {
   RestaurantModel.fromJson(Map<String, dynamic> json) :
   id = json['id'],
   name = json['restaurant'],
-  image = AppImages.smallOutback;
+  image = json['image'];
 }
