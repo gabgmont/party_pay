@@ -9,7 +9,7 @@ import '../shared/utils/AppColors.dart';
 
 const String prodUrl = 'https://partypay.herokuapp.com';
 const String homologUrl = 'https://partypay-homolog.herokuapp.com';
-const String url = prodUrl;
+const String url = homologUrl;
 
 class PartyPayService {
   static const String auth = '/auth';

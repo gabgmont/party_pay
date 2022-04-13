@@ -58,6 +58,7 @@ class _SessionMenuDrawerState extends State<SessionMenuDrawer> {
       var orderWidgetList = category.orderList
           .map((order) => MenuOrderWidget(
                 label: order.name,
+                image: order.image,
                 description: order.description,
                 price: order.value,
                 onTap: () {

@@ -6,21 +6,24 @@ const moneyPrefix = 'R\$';
 
 class MenuOrderWidget extends StatelessWidget {
   final String label;
+  final String image;
   final String description;
   final double price;
   final VoidCallback onTap;
 
-  const MenuOrderWidget(
-      {Key? key,
-      required this.label,
-      required this.description,
-      required this.price,
-      required this.onTap})
+  const MenuOrderWidget({Key? key,
+    required this.label,
+    required this.image,
+    required this.description,
+    required this.price,
+    required this.onTap})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final size = MediaQuery.of(context).size;
+    final size = MediaQuery
+        .of(context)
+        .size;
 
     return Padding(
       padding: EdgeInsets.all(size.height * .01),
@@ -37,6 +40,7 @@ class MenuOrderWidget extends StatelessWidget {
               alignment: Alignment.topRight,
               child: _MenuOrderCard(
                 label: label,
+                image: image,
                 description: description,
                 price: price,
                 onTap: onTap,
@@ -54,7 +58,9 @@ class _MenuOrderShadow extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final size = MediaQuery.of(context).size;
+    final size = MediaQuery
+        .of(context)
+        .size;
 
     return Container(
       height: size.height * .192,
@@ -66,21 +72,24 @@ class _MenuOrderShadow extends StatelessWidget {
 
 class _MenuOrderCard extends StatelessWidget {
   final String label;
+  final String image;
   final String description;
   final double price;
   final VoidCallback onTap;
 
-  const _MenuOrderCard(
-      {Key? key,
-      required this.price,
-      required this.label,
-      required this.description,
-      required this.onTap})
+  const _MenuOrderCard({Key? key,
+    required this.price,
+    required this.label,
+    required this.image,
+    required this.description,
+    required this.onTap})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final size = MediaQuery.of(context).size;
+    final size = MediaQuery
+        .of(context)
+        .size;
 
     return Material(
       color: AppColors.white,
@@ -100,8 +109,17 @@ class _MenuOrderCard extends StatelessWidget {
                   height: size.height * .13,
                   width: size.height * .13,
                   decoration: BoxDecoration(
+                      image: DecorationImage(image: NetworkImage(image), fit: BoxFit.fill),
                       color: AppColors.secondary,
-                      borderRadius: BorderRadius.circular(15)),
+                      borderRadius: BorderRadius.circular(15),
+                  boxShadow: [
+                    BoxShadow(
+                      offset: Offset.fromDirection(2, 2),
+                      color: AppColors.shadow,
+                      spreadRadius: .5,
+                      blurRadius: .5
+                    )
+                  ]),
                 ),
                 Align(
                   alignment: Alignment.bottomLeft,
@@ -143,7 +161,9 @@ class _MenuOrderNameDescription extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final size = MediaQuery.of(context).size;
+    final size = MediaQuery
+        .of(context)
+        .size;
 
     return Padding(
       padding: EdgeInsets.only(top: size.height * .03),
@@ -181,7 +201,9 @@ class _MenuOrderPrice extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final size = MediaQuery.of(context).size;
+    final size = MediaQuery
+        .of(context)
+        .size;
 
     return Align(
       alignment: Alignment.bottomRight,
