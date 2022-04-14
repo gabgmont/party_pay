@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:partypay/shared/utils/AppStyles.dart';
 
 import '../../../shared/utils/AppColors.dart';
 
@@ -28,11 +29,7 @@ class AlertWidget extends StatelessWidget {
             Text(
               message,
               textAlign: TextAlign.center,
-              style: TextStyle(
-                fontSize: size.height * .03,
-                color: AppColors.primary,
-                fontWeight: FontWeight.bold,
-              ),
+              style: AppStyles.mainLabel(color: AppColors.primary),
             ),
           ],
         ),

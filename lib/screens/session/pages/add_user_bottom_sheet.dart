@@ -3,6 +3,8 @@ import 'package:partypay/screens/create_session/controller/create_session_contro
 import 'package:partypay/screens/create_session/widget/user_round_card_widget.dart';
 import 'package:partypay/screens/session/controller/session_controller.dart';
 import 'package:partypay/screens/session/widgets/enter_button_widget.dart';
+import 'package:partypay/shared/utils/AppColors.dart';
+import 'package:partypay/shared/utils/AppStyles.dart';
 
 import '../../create_session/widget/username_add_form_field_widget.dart';
 
@@ -49,7 +51,7 @@ class _AddUserBottomSheetState extends State<AddUserBottomSheet>
                 children: [
                   Text(
                     addUserSession,
-                    style: TextStyle(fontSize: size.height * .03),
+                    style: AppStyles.mainLabel(color: AppColors.black),
                   ),
                   UsernameAddFormFieldWidget(
                     textController: usernameTextController,

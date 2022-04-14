@@ -3,10 +3,11 @@ import 'package:partypay/model/user/user_model.dart';
 import 'package:partypay/screens/session/widgets/enter_button_widget.dart';
 import 'package:partypay/screens/session/widgets/select_user_widget.dart';
 import 'package:partypay/shared/utils/AppColors.dart';
+import 'package:partypay/shared/utils/AppStyles.dart';
 
 import '../controller/session_controller.dart';
 
-const selectUsersToShare = 'Selecione usuários para dividir';
+const selectUsersToShare = 'Dividir';
 
 class AddOrderButtonBottomSheet extends StatefulWidget {
   final String orderName;
@@ -76,18 +77,12 @@ class _AddOrderButtonBottomSheetState extends State<AddOrderButtonBottomSheet>
                         padding: const EdgeInsets.symmetric(horizontal: 4.0),
                         child: Text.rich(
                           TextSpan(
-                            text: '$selectUsersToShare:\n',
-                            style: TextStyle(
-                              fontSize: size.height * .02,
-                              color: AppColors.white,
-                            ),
+                            text: '$selectUsersToShare: ',
+                            style: AppStyles.orderName(color: AppColors.white),
                             children: [
                               TextSpan(
                                 text: widget.orderName,
-                                style: TextStyle(
-                                    fontSize: size.height * .025,
-                                    color: AppColors.white,
-                                    fontWeight: FontWeight.bold),
+                                style: AppStyles.orderName(color: AppColors.white),
                               )
                             ],
                           ),

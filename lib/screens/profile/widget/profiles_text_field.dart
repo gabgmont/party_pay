@@ -74,8 +74,7 @@ class IconTextFieldWidget extends StatelessWidget {
                         decoration: InputDecoration(
                             floatingLabelBehavior: FloatingLabelBehavior.always,
                             labelText: label,
-                            labelStyle: const TextStyle(
-                                color: AppColors.gray, fontSize: 16),
+                            labelStyle: AppStyles.formField(isHint: true),
                             border: InputBorder.none),
                       ),
                     ),
