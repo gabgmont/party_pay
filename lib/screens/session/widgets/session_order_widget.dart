@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:partypay/model/session/session_order_model.dart';
 import 'package:partypay/screens/create_session/widget/user_round_card_widget.dart';
 import 'package:partypay/shared/utils/AppColors.dart';
+import 'package:partypay/shared/utils/AppStyles.dart';
 
 const moneyPrefix = 'R\$';
 
@@ -68,7 +70,7 @@ class SessionOrderWidget extends StatelessWidget {
                             children: [
                               Text(
                                 sessionOrderModel.order.name,
-                                style: TextStyle(fontSize: size.height * .02),
+                                style: AppStyles.orderName(),
                               ),
                             ],
                           ),
@@ -77,17 +79,17 @@ class SessionOrderWidget extends StatelessWidget {
                     ],
                   ),
                   Padding(
-                    padding: EdgeInsets.symmetric(horizontal: size.width * .03),
+                    padding: const EdgeInsets.symmetric(horizontal: 4.0),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.end,
                       children: [
                         Text(
                           '$moneyPrefix$totalValue',
-                          style: TextStyle(fontSize: size.height * .02),
+                          style: GoogleFonts.reemKufi(fontSize: 16),
                         ),
                         Text(
                           '$moneyPrefix$valuePerUser',
-                          style: TextStyle(fontSize: size.height * .015),
+                          style: GoogleFonts.reemKufi(fontSize: 12),
                         )
                       ],
                     ),

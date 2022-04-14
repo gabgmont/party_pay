@@ -5,6 +5,7 @@ import 'package:partypay/screens/login/widgets/double_button_widget.dart';
 import 'package:partypay/screens/login/widgets/double_input_text_widget.dart';
 import 'package:partypay/shared/utils/AppColors.dart';
 import 'package:partypay/shared/utils/AppImages.dart';
+import 'package:partypay/shared/utils/AppStyles.dart';
 
 const _signupLabel = 'Cadastrar';
 const _confirmButtonLabel = 'Confirmar';
@@ -61,9 +62,9 @@ class _SignUpPageState extends State<SignUpPage> {
                     height: 100,
                     width: 100,
                   ),
-                  const Text(
+                  Text(
                     _signupLabel,
-                    style: TextStyle(color: AppColors.white, fontSize: 48),
+                    style: AppStyles.logoLabel(),
                   ),
                   SizedBox(
                     height: size.height * .05,

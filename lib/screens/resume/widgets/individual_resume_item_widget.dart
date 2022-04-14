@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:partypay/model/session/session_order_model.dart';
+import 'package:partypay/shared/utils/AppStyles.dart';
 
 import '../../../shared/utils/AppColors.dart';
 
@@ -40,7 +42,7 @@ class IndividualResumeItem extends StatelessWidget {
                   width: size.width * .5,
                   child: Text(
                     sessionOrder.order.name,
-                    style: const TextStyle(fontSize: 14),
+                    style: AppStyles.orderName(),
                   ),
                 )
               ],
@@ -50,7 +52,7 @@ class IndividualResumeItem extends StatelessWidget {
               child: Center(
                 child: Text(
                   "R\$${(sessionOrder.order.value / sessionOrder.userList.length).toStringAsFixed(2)}",
-                  style: const TextStyle(fontSize: 18),
+                  style: AppStyles.orderName(),
                 ),
               ),
             )

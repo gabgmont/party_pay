@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:partypay/shared/utils/AppColors.dart';
+import 'package:partypay/shared/utils/AppStyles.dart';
 
 class HeaderTileWidget extends StatelessWidget {
   final IconData icon;
@@ -7,10 +8,7 @@ class HeaderTileWidget extends StatelessWidget {
   final double height;
 
   const HeaderTileWidget(
-      {Key? key,
-      required this.icon,
-      required this.data,
-      this.height = 0})
+      {Key? key, required this.icon, required this.data, this.height = 0})
       : super(key: key);
 
   @override
@@ -49,7 +47,10 @@ class HeaderTileWidget extends StatelessWidget {
                     const SizedBox(
                       width: 4,
                     ),
-                    Text(data)
+                    Text(
+                      data,
+                      style: AppStyles.orderName(),
+                    )
                   ],
                 ),
               ),
@@ -76,7 +77,10 @@ class HeaderTileWidget extends StatelessWidget {
                     const SizedBox(
                       width: 4,
                     ),
-                    Text(data)
+                    Text(
+                      data,
+                      style: AppStyles.orderName(),
+                    )
                   ],
                 ),
               ),

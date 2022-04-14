@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:partypay/shared/utils/AppColors.dart';
+import 'package:partypay/shared/utils/AppStyles.dart';
 
 class SessionNavigationButton extends StatelessWidget {
   final String label;
@@ -37,7 +38,7 @@ class SessionNavigationButton extends StatelessWidget {
           ),
           Text(
             label,
-            style: TextStyle(fontSize: size.height * .017),
+            style: AppStyles.iconButtonLabel(),
           )
         ],
       ),

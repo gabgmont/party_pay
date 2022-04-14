@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:partypay/shared/utils/AppColors.dart';
+import 'package:partypay/shared/utils/AppStyles.dart';
 
 class DoubleBigButtonWidget extends StatelessWidget {
   final String label;
@@ -33,16 +34,13 @@ class DoubleBigButtonWidget extends StatelessWidget {
                 onTap: onTap,
                 highlightColor: AppColors.secondary,
                 splashColor: AppColors.secondary,
-                child: Container(
+                child: SizedBox(
                   height: size.height * 0.13,
                   width: size.width * 0.9,
                   child: Center(
                     child: Text(
                       label,
-                      style: TextStyle(
-                          fontSize: 22,
-                          color: AppColors.white,
-                          fontWeight: FontWeight.bold),
+                      style: AppStyles.mainLabel(),
                     ),
                   ),
                 ),

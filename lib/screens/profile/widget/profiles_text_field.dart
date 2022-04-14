@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:partypay/shared/utils/AppColors.dart';
+import 'package:partypay/shared/utils/AppStyles.dart';
 
 class IconTextFieldWidget extends StatelessWidget {
   final IconData icon;
@@ -69,9 +70,7 @@ class IconTextFieldWidget extends StatelessWidget {
                         initialValue: value,
                         obscureText: hidden,
                         enabled: active,
-                        style: TextStyle(
-                            fontSize: 16,
-                            color: active ? AppColors.black : AppColors.gray),
+                        style: AppStyles.profileField(active),
                         decoration: InputDecoration(
                             floatingLabelBehavior: FloatingLabelBehavior.always,
                             labelText: label,

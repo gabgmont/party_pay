@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:partypay/shared/utils/AppStyles.dart';
 
 import '../../../model/session/session_user_model.dart';
 import '../../../shared/utils/AppColors.dart';
@@ -40,8 +41,7 @@ class GroupUserResumeWidget extends StatelessWidget {
                         padding: const EdgeInsets.all(4.0),
                         child: Text(
                           sessionUserModel.user.name,
-                          style: const TextStyle(
-                              color: AppColors.white, fontSize: 16, fontWeight: FontWeight.bold),
+                          style: AppStyles.orderName(color: AppColors.white),
                         ),
                       ),
                     ),
@@ -95,16 +95,11 @@ class GroupUserResumeWidget extends StatelessWidget {
                 child: Text.rich(
                   TextSpan(
                     text: "Total: ",
-                    style: const TextStyle(
-                        color: AppColors.white,
-                        fontSize: 16,
-                        fontWeight: FontWeight.bold),
+                    style: AppStyles.orderName(color: AppColors.white),
                     children: [
                       TextSpan(
                         text: "R\$${getUserTotal().toStringAsFixed(2)}",
-                        style: const TextStyle(
-                          fontWeight: FontWeight.normal,
-                        ),
+                        style: AppStyles.orderName(color: AppColors.white),
                       )
                     ],
                   ),

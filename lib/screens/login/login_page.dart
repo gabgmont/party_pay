@@ -5,6 +5,7 @@ import 'package:partypay/screens/login/widgets/double_button_widget.dart';
 import 'package:partypay/screens/login/widgets/double_input_text_widget.dart';
 import 'package:partypay/shared/utils/AppColors.dart';
 import 'package:partypay/shared/utils/AppImages.dart';
+import 'package:partypay/shared/utils/AppStyles.dart';
 
 import 'widgets/google_sign_in_widget.dart';
 
@@ -57,7 +58,9 @@ class LoginPage extends StatelessWidget {
                         padding: const EdgeInsets.all(16.0),
                         child: Column(
                           children: [
-                            SizedBox(height: safeAreaSize,),
+                            SizedBox(
+                              height: safeAreaSize,
+                            ),
                             Image.asset(
                               AppImages.logo,
                               width: 150,
@@ -68,8 +71,7 @@ class LoginPage extends StatelessWidget {
                             ),
                             Text(
                               _login,
-                              style: GoogleFonts.roboto(
-                                  fontSize: 48, color: AppColors.white),
+                              style: AppStyles.logoLabel(),
                             ),
                             const SizedBox(
                               height: 20,
@@ -93,11 +95,12 @@ class LoginPage extends StatelessWidget {
                               onPressed: () {
                                 Navigator.pushNamed(context, '/signup_page');
                               },
-                              child: const Text(
+                              child: Text(
                                 _register,
-                                style: TextStyle(
-                                    decoration: TextDecoration.underline,
-                                    color: AppColors.white),
+                                style: GoogleFonts.reemKufi(
+                                    fontSize: 16,
+                                    color: AppColors.white,
+                                    decoration: TextDecoration.underline),
                               ),
                             ),
                             const SizedBox(

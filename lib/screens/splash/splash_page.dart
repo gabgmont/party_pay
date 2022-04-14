@@ -31,13 +31,13 @@ class SplashPage extends StatelessWidget {
             const SizedBox(height: 15),
             Text(
               logoName,
-              style: GoogleFonts.rammettoOne(
-                  fontSize: 36, color: AppColors.primary),
+              style: GoogleFonts.reemKufi(
+                  fontSize: 36, color: AppColors.primary, fontWeight: FontWeight.bold),
             ),
             Text(
               catchPhrase,
               style:
-              GoogleFonts.redRose(fontSize: 24, color: AppColors.primary),
+              GoogleFonts.reemKufi(fontSize: 24, color: AppColors.primary),
             ),
           ],
         ),

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:package_info_plus/package_info_plus.dart';
 import 'package:partypay/model/user/user_model.dart';
 import 'package:partypay/shared/utils/AppColors.dart';
+import 'package:partypay/shared/utils/AppStyles.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'widget/profile_heading.dart';
@@ -37,48 +39,54 @@ class _ProfilePageState extends State<ProfilePage> {
             Navigator.pop(context, false);
           },
         ),
-        title: const Text(profileTitle),
+        title: Text(
+          profileTitle,
+          style: AppStyles.mainLabel(),
+        ),
         backgroundColor: AppColors.primary,
       ),
       body: SingleChildScrollView(
         scrollDirection: Axis.vertical,
-        child: Column(
-          children: [
-            ProfileHeading(
-              user: widget.user,
-              onEditPressed: () {
-                setState(() {
-                  active = !active;
-                });
-              },
-              onLogoutPressed: () async {
-                var prefs = await SharedPreferences.getInstance();
-                prefs.remove('token');
-                prefs.remove('user');
-                prefs.remove('session_id');
-                Navigator.pop(context, true);
-              },
-            ),
-            IconTextFieldWidget(
-              active: active,
-              label: userLabel,
-              icon: Icons.person,
-              value: widget.user.name,
-            ),
-            IconTextFieldWidget(
-              active: active,
-              label: emailLabel,
-              icon: Icons.mail_outline,
-              value: widget.user.email ?? '',
-            ),
-            IconTextFieldWidget(
-              active: active,
-              label: passwordLabel,
-              icon: Icons.password,
-              value: widget.user.secret ?? '',
-              hidden: true,
-            ),
-          ],
+        child: SizedBox(
+          height: MediaQuery.of(context).size.height - 200,
+          child: Column(
+            children: [
+              ProfileHeading(
+                user: widget.user,
+                onEditPressed: () {
+                  setState(() {
+                    active = !active;
+                  });
+                },
+                onLogoutPressed: () async {
+                  var prefs = await SharedPreferences.getInstance();
+                  prefs.remove('token');
+                  prefs.remove('user');
+                  prefs.remove('session_id');
+                  Navigator.pop(context, true);
+                },
+              ),
+              IconTextFieldWidget(
+                active: active,
+                label: userLabel,
+                icon: Icons.person,
+                value: widget.user.name,
+              ),
+              IconTextFieldWidget(
+                active: active,
+                label: emailLabel,
+                icon: Icons.mail_outline,
+                value: widget.user.email ?? '',
+              ),
+              IconTextFieldWidget(
+                active: active,
+                label: passwordLabel,
+                icon: Icons.password,
+                value: widget.user.secret ?? '',
+                hidden: true,
+              ),
+            ],
+          ),
         ),
       ),
     );

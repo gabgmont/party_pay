@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:partypay/shared/utils/AppColors.dart';
+import 'package:partypay/shared/utils/AppStyles.dart';
 
 class DoubleButtonWidget extends StatefulWidget {
   final String label;
@@ -47,10 +48,7 @@ class _DoubleButtonWidgetState extends State<DoubleButtonWidget> {
                   child: Center(
                     child: Text(
                       widget.label,
-                      style: const TextStyle(
-                        fontSize: 22,
-                        color: AppColors.primary,
-                      ),
+                      style: AppStyles.mainLabel(color: AppColors.primary),
                     ),
                   ),
                 ),

@@ -129,7 +129,8 @@ class _HomePageState extends State<HomePage> {
     return DoubleBigButtonWidget(
       label: enterSession,
       onTap: () {
-        Navigator.pushNamed(context, '/session_page', arguments: _homeController.sessionModel)
+        Navigator.pushNamed(context, '/session_page',
+                arguments: _homeController.sessionModel)
             .then((value) => setState(() {}));
       },
     );

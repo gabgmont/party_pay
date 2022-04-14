@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:partypay/shared/utils/AppStyles.dart';
 
 import '../../../shared/utils/AppColors.dart';
 import 'menu_order_widget.dart';
@@ -50,9 +51,7 @@ class CategoryDropDownState extends State<CategoryDropDown> {
                 Center(
                   child: Text(
                     widget.label,
-                    style: TextStyle(
-                        color: AppColors.white, fontSize: size.height * .03),
-                  ),
+                    style: AppStyles.mainLabel()),
                 )
               ],
             ),

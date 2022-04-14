@@ -4,6 +4,7 @@ import 'package:partypay/screens/create_session/widget/user_round_card_widget.da
 import 'package:partypay/screens/home/controller/news_controller.dart';
 import 'package:partypay/shared/utils/AppColors.dart';
 import 'package:partypay/shared/utils/AppImages.dart';
+import 'package:partypay/shared/utils/AppStyles.dart';
 import 'package:partypay/shared/utils/string_filter.dart';
 
 import 'news_widget.dart';
@@ -16,7 +17,8 @@ class HomePageAppBar extends StatefulWidget {
   final UserModel user;
   final VoidCallback onTap;
 
-  const HomePageAppBar({Key? key, required this.user, required this.onTap}) : super(key: key);
+  const HomePageAppBar({Key? key, required this.user, required this.onTap})
+      : super(key: key);
 
   @override
   State<HomePageAppBar> createState() => _HomePageAppBarState();
@@ -84,9 +86,15 @@ class _HomePageAppBarState extends State<HomePageAppBar> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    const Text(
-                      logo,
-                      style: TextStyle(color: AppColors.white, fontSize: 26),
+                    Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          logo,
+                          style: AppStyles.logoLabel(),
+                        ),
+                      ],
                     ),
                     Row(
                       children: [
@@ -94,29 +102,30 @@ class _HomePageAppBarState extends State<HomePageAppBar> {
                           mainAxisAlignment: MainAxisAlignment.center,
                           crossAxisAlignment: CrossAxisAlignment.end,
                           children: [
-                            const Text(
+                            Text(
                               welcome,
-                              style: TextStyle(color: AppColors.white),
+                              style: AppStyles.welcomeProfile(bold: true),
                             ),
                             Text(
-                                StringFilter.getFirstName(widget.user.name),
-                                style: const TextStyle(color: AppColors.white))
+                              StringFilter.getFirstName(widget.user.name),
+                              style: AppStyles.welcomeProfile(),
+                            )
                           ],
                         ),
                         const SizedBox(
                           width: 10,
                         ),
                         Padding(
-                          padding: EdgeInsets.symmetric(vertical: size.height*.05),
+                          padding:
+                              EdgeInsets.symmetric(vertical: size.height * .05),
                           child: InkWell(
-                            onTap: widget.onTap,
-                            child: UserRoundCardWidget(
-                              height: size.height*.09,
-                              width: size.height*.09,
-                              initials: widget.user.getInitials(),
-                              photo: widget.user.photo,
-                            )
-                          ),
+                              onTap: widget.onTap,
+                              child: UserRoundCardWidget(
+                                height: size.height * .09,
+                                width: size.height * .09,
+                                initials: widget.user.getInitials(),
+                                photo: widget.user.photo,
+                              )),
                         )
                       ],
                     )

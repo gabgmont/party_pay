@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:partypay/screens/session/controller/session_controller.dart';
 import 'package:partypay/shared/utils/AppColors.dart';
+import 'package:partypay/shared/utils/AppStyles.dart';
 
 import 'header_tile_widget.dart';
 
@@ -32,10 +33,7 @@ class SessionPageAppBar extends StatelessWidget {
                 alignment: Alignment.topLeft,
                 child: Text(
                   sessionController.sessionModel.restaurant,
-                  style: TextStyle(
-                      color: AppColors.white,
-                      fontSize: size.height * .035,
-                      fontWeight: FontWeight.bold),
+                  style: AppStyles.mainLabel(),
                 ),
               ),
               Row(

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:partypay/screens/session/controller/session_controller.dart';
+import 'package:partypay/shared/utils/AppStyles.dart';
 
 import '../../../shared/utils/AppColors.dart';
 import '../widgets/alert_widget.dart';
@@ -50,15 +51,11 @@ class _SessionBodyState extends State<SessionBody> {
           centerButtonLabel: Text.rich(
             TextSpan(
               text: 'Ver\n',
-              style: TextStyle(
-                color: AppColors.white,
-                fontSize: size.height * .033,
-              ),
+              style: AppStyles.mainLabel(),
               children: [
                 TextSpan(
                   text: 'Resumo',
-                  style: TextStyle(
-                      color: AppColors.white, fontSize: size.height * .028),
+                  style: AppStyles.mainLabel(),
                 )
               ],
             ),

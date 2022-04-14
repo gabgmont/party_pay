@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:partypay/model/user/user_model.dart';
 import 'package:partypay/screens/create_session/widget/user_round_card_widget.dart';
 import 'package:partypay/shared/utils/AppColors.dart';
+import 'package:partypay/shared/utils/AppStyles.dart';
 import 'package:partypay/shared/utils/string_filter.dart';
 
 class ProfileHeading extends StatelessWidget {
@@ -69,12 +70,11 @@ class ProfileHeading extends StatelessWidget {
                       children: [
                         Text(
                           StringFilter.getFirstName(user.name),
-                          style: const TextStyle(
-                              fontSize: 16, color: AppColors.gray),
+                          style: AppStyles.profileField(false),
                         ),
                         Text(
                           user.username ?? '',
-                          style: const TextStyle(color: AppColors.gray),
+                          style: AppStyles.profileField(false),
                         ),
                       ],
                     ),

@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:partypay/model/session/session_order_model.dart';
 import 'package:partypay/model/session/session_user_model.dart';
 import 'package:partypay/shared/utils/AppColors.dart';
+import 'package:partypay/shared/utils/AppStyles.dart';
 
 import '../widgets/individual_resume_item_widget.dart';
 import '../widgets/resume_header_widget.dart';
@@ -37,17 +39,11 @@ class IndividualResumePage extends StatelessWidget {
             child: Text.rich(
               TextSpan(
                 text: "Total: ",
-                style: TextStyle(
-                    fontSize: size.height * .025,
-                    fontWeight: FontWeight.bold,
-                    color: AppColors.white),
+                style: AppStyles.mainLabel(),
                 children: [
                   TextSpan(
                     text: "R\$${getUserTotal().toStringAsFixed(2)}",
-                    style: TextStyle(
-                      fontSize: size.height * .02,
-                      fontWeight: FontWeight.normal,
-                    ),
+                    style: GoogleFonts.reemKufi(color: AppColors.white, fontSize: 18),
                   )
                 ],
               ),

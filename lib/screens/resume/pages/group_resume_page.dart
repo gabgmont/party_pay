@@ -18,7 +18,7 @@ class GroupResumePage extends StatelessWidget {
       children: [
         const ResumeHeaderWidget(label: groupResume),
         SizedBox(
-          height: size.height * .616,
+          height: size.height * .611,
           child: ListView(
             children: getUsersResume(),
           ),

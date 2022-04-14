@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:partypay/shared/utils/AppColors.dart';
+import 'package:partypay/shared/utils/AppStyles.dart';
 
 const username = 'Username';
 
@@ -43,11 +44,17 @@ class DoubleInputTextWidgetWidget extends StatelessWidget {
                 padding: const EdgeInsets.only(top: 4.0, left: 4.0, right: 4.0),
                 child: TextFormField(
                   obscureText: obscureText,
-                  style: GoogleFonts.roboto(fontSize: 20),
+                  style: AppStyles.formField(),
                   textAlignVertical: TextAlignVertical.center,
                   controller: textController,
-                  decoration:
-                      InputDecoration(border: InputBorder.none, hintText: hint),
+                  decoration: InputDecoration(
+                    border: InputBorder.none,
+                    hintText: hint,
+                    hintStyle: AppStyles.formField(isHint: true),
+                    contentPadding: const EdgeInsets.only(
+                      bottom: 12,
+                    ),
+                  ),
                 ),
               ),
             ),

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:partypay/shared/utils/AppColors.dart';
 
+import '../../../shared/utils/AppStyles.dart';
+
 class SessionHeaderWidget extends StatelessWidget {
   final String label;
   final IconData leading;
@@ -40,9 +42,7 @@ class SessionHeaderWidget extends StatelessWidget {
                 ),
                 Text(
                   label,
-                  style: TextStyle(
-                      color: AppColors.white, fontSize: size.height * .03),
-                ),
+                  style: AppStyles.mainLabel()),
               ],
             ),
             showTrailing

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:partypay/shared/utils/AppStyles.dart';
 
 import '../../../shared/utils/AppColors.dart';
 
@@ -18,8 +19,7 @@ class ResumeHeaderWidget extends StatelessWidget {
           child: Center(
             child: Text(
               label,
-              style: TextStyle(
-                  color: AppColors.primary, fontSize: size.height * .05),
+              style: AppStyles.logoLabel(color: AppColors.primary),
             ),
           ),
         ),

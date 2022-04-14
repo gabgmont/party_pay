@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:partypay/model/user/user_model.dart';
+import 'package:partypay/shared/utils/AppColors.dart';
+import 'package:partypay/shared/utils/AppStyles.dart';
 
 import '../../create_session/widget/user_round_card_widget.dart';
 
@@ -28,7 +30,8 @@ class SessionUserCard extends StatelessWidget {
                 padding: const EdgeInsets.only(left: 8.0),
                 child: Text(
                   user.name,
-                  style: TextStyle(fontSize: size.height * .02),
+                  overflow: TextOverflow.clip,
+                  style: AppStyles.mainLabel(color: AppColors.black),
                 ),
               )
             ],

@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:partypay/shared/utils/AppStyles.dart';
 
 import '../../../shared/utils/AppColors.dart';
 
@@ -176,13 +178,11 @@ class _MenuOrderNameDescription extends StatelessWidget {
             child: Text.rich(
               TextSpan(
                 text: '$label\n',
-                style: TextStyle(fontSize: size.height * .023),
+                style: AppStyles.orderName(),
                 children: [
                   TextSpan(
                     text: description,
-                    style: TextStyle(
-                        fontSize: size.height * .013,
-                        overflow: TextOverflow.fade),
+                    style: AppStyles.orderDescription(),
                   ),
                 ],
               ),
@@ -216,7 +216,7 @@ class _MenuOrderPrice extends StatelessWidget {
                 alignment: Alignment.topRight,
                 child: Text(
                   moneyPrefix,
-                  style: TextStyle(fontSize: size.height * .016),
+                  style: GoogleFonts.reemKufi(fontSize: 12),
                 )),
             Align(
               alignment: Alignment.topLeft,

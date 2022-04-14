@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:partypay/shared/utils/AppColors.dart';
 import 'package:partypay/shared/utils/AppImages.dart';
+import 'package:partypay/shared/utils/AppStyles.dart';
 
 import 'recent_activity_button_item_widget.dart';
 
@@ -46,10 +48,7 @@ class DoubleBigButtonWListWidget extends StatelessWidget {
                       child: Center(
                         child: Text(
                           label,
-                          style: const TextStyle(
-                              fontSize: 22,
-                              color: AppColors.white,
-                              fontWeight: FontWeight.bold),
+                          style: AppStyles.mainLabel(),
                         ),
                       ),
                     ),

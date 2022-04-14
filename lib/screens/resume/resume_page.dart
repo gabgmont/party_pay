@@ -3,6 +3,7 @@ import 'package:partypay/screens/resume/pages/individual_resume_page.dart';
 import 'package:partypay/screens/session/controller/session_controller.dart';
 import 'package:partypay/screens/session/widgets/session_bottom_navigation_bar.dart';
 import 'package:partypay/shared/utils/AppColors.dart';
+import 'package:partypay/shared/utils/AppStyles.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'pages/group_resume_page.dart';
@@ -47,13 +48,9 @@ class _ResumePageState extends State<ResumePage> {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text(
+        title: Text(
           payment,
-          style: TextStyle(
-            color: AppColors.white,
-            fontSize: 24,
-            fontWeight: FontWeight.bold,
-          ),
+          style: AppStyles.mainLabel(),
         ),
         backgroundColor: AppColors.primary,
         leading: IconButton(
@@ -98,9 +95,9 @@ class _ResumePageState extends State<ResumePage> {
                   index = 1;
                 });
               },
-              centerButtonLabel: const Text(
+              centerButtonLabel: Text(
                 end,
-                style: TextStyle(color: AppColors.white, fontSize: 32),
+                style: AppStyles.mainLabel(),
               ),
               centerButtonTap: () async {
                 var sucess =

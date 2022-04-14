@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:partypay/shared/utils/AppStyles.dart';
 
 import '../../../model/session/order_model.dart';
 import '../../../shared/utils/AppColors.dart';
@@ -40,7 +42,7 @@ class GroupResumeItemWidget extends StatelessWidget {
                     width: size.width*.5,
                     child: Text(
                       orderModel.name,
-                      style: const TextStyle(fontSize: 14),
+                      style: AppStyles.orderName(),
                     ),
                   ),
                 )
@@ -59,7 +61,7 @@ class GroupResumeItemWidget extends StatelessWidget {
                       width: 40,
                       child: Center(
                         child: Text(orderModel.valuePerUser.toStringAsFixed(2),
-                            style: const TextStyle(fontSize: 10)),
+                            style: GoogleFonts.reemKufi(fontSize: 10)),
                       )),
                 ),
                 Container(
@@ -73,7 +75,7 @@ class GroupResumeItemWidget extends StatelessWidget {
                       width: 40,
                       child: Center(
                         child: Text(orderModel.value.toStringAsFixed(2),
-                            style: const TextStyle(fontSize: 10)),
+                            style: GoogleFonts.reemKufi(fontSize: 10)),
                       )),
                 ),
               ],
