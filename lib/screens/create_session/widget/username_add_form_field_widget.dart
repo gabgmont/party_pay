@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:partypay/shared/utils/AppColors.dart';
+import 'package:partypay/shared/utils/AppStyles.dart';
 
 class UsernameAddFormFieldWidget extends StatelessWidget {
   final TextEditingController textController;
@@ -17,7 +18,7 @@ class UsernameAddFormFieldWidget extends StatelessWidget {
       width: size.width * 0.9,
       child: Row(
         children: [
-          Icon(
+          const Icon(
             Icons.pin,
             size: 28,
             color: AppColors.primary,
@@ -52,18 +53,17 @@ class UsernameAddFormFieldWidget extends StatelessWidget {
                   padding: const EdgeInsets.only(left: 12.0),
                   child: Align(
                     alignment: Alignment.topRight,
-                    child: Container(
+                    child: SizedBox(
                       width: size.width * 0.77,
                       height: size.height * 0.8,
                       child: TextFormField(
                         controller: textController,
                         keyboardType: TextInputType.name,
-                        style: TextStyle(fontSize: 16, color: AppColors.gray),
+                        style: AppStyles.formField(),
                         decoration: InputDecoration(
                             floatingLabelBehavior: FloatingLabelBehavior.always,
                             labelText: 'Username',
-                            labelStyle: const TextStyle(
-                                color: AppColors.gray, fontSize: 16),
+                            labelStyle: AppStyles.formField(isHint: true),
                             border: InputBorder.none),
                       ),
                     ),
@@ -74,7 +74,7 @@ class UsernameAddFormFieldWidget extends StatelessWidget {
           ),
           IconButton(
             onPressed: onTap,
-            icon: Icon(Icons.add_circle),
+            icon: const Icon(Icons.add_circle),
             padding: EdgeInsets.zero,
             color: AppColors.primary,
             iconSize: 48,

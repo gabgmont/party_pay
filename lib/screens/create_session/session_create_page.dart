@@ -3,6 +3,7 @@ import 'package:partypay/model/user/user_model.dart';
 import 'package:partypay/screens/home/widgets/round_restaurant_card_widget.dart';
 import 'package:partypay/screens/session/widgets/enter_button_widget.dart';
 import 'package:partypay/shared/utils/AppColors.dart';
+import 'package:partypay/shared/utils/AppStyles.dart';
 
 import 'controller/create_session_controller.dart';
 import 'widget/username_add_form_field_widget.dart';
@@ -33,7 +34,7 @@ class _SessionCreatePageState extends State<SessionCreatePage> {
 
   @override
   Widget build(BuildContext context) {
-    if(!_sessionController.initialized){
+    if (!_sessionController.initialized) {
       _future = _sessionController.init(context, widget.user);
     }
     _sessionController.table = dropdownValue;
@@ -56,11 +57,11 @@ class _SessionCreatePageState extends State<SessionCreatePage> {
           padding: const EdgeInsets.all(24.0),
           child: Column(
             children: [
-              const Align(
+              Align(
                 alignment: Alignment.topLeft,
                 child: Text(
                   selectRestaurant,
-                  style: TextStyle(fontSize: 18),
+                  style: AppStyles.mainLabel(color: AppColors.black),
                 ),
               ),
               Padding(
@@ -85,20 +86,21 @@ class _SessionCreatePageState extends State<SessionCreatePage> {
                           break;
                         case ConnectionState.done:
                           return GridView.count(
-                              crossAxisSpacing: 4,
-                              crossAxisCount: 4,
-                              children: <Widget>[
-                                for (var i = 0;
-                                    i < _sessionController.restaurantList.length;
-                                    i++)
-                                  RoundRestaurantCardWidget(
-                                    restaurant:
-                                        _sessionController.restaurantList[i],
-                                    shape: Shape.SQUARE,
-                                    onTap: () => checkOption(i + 1),
-                                    selected: i + 1 == selected,
-                                  ),
-                              ]);
+                            crossAxisSpacing: 4,
+                            crossAxisCount: 4,
+                            children: <Widget>[
+                              for (var i = 0;
+                                  i < _sessionController.restaurantList.length;
+                                  i++)
+                                RoundRestaurantCardWidget(
+                                  restaurant:
+                                      _sessionController.restaurantList[i],
+                                  shape: Shape.SQUARE,
+                                  onTap: () => checkOption(i + 1),
+                                  selected: i + 1 == selected,
+                                ),
+                            ],
+                          );
                       }
                       return const Center(child: Text(error));
                     },
@@ -108,11 +110,12 @@ class _SessionCreatePageState extends State<SessionCreatePage> {
               const Divider(
                 thickness: 1,
               ),
-              const Padding(
-                padding: EdgeInsets.symmetric(vertical: 16.0),
+              Padding(
+                padding: const EdgeInsets.symmetric(vertical: 16.0),
                 child: Align(
                     alignment: Alignment.topLeft,
-                    child: Text(addUser, style: TextStyle(fontSize: 18))),
+                    child: Text(addUser,
+                        style: AppStyles.mainLabel(color: AppColors.black))),
               ),
               UsernameAddFormFieldWidget(
                 textController: _textController,
@@ -132,7 +135,7 @@ class _SessionCreatePageState extends State<SessionCreatePage> {
                 },
               ),
               SizedBox(
-                height: size.height * 0.02,
+                height: size.height * 0.01,
               ),
               SizedBox(
                 height: size.height * 0.09,
@@ -148,7 +151,7 @@ class _SessionCreatePageState extends State<SessionCreatePage> {
                 thickness: 1,
               ),
               SizedBox(
-                height: size.height * 0.04,
+                height: size.height * 0.02,
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -158,11 +161,11 @@ class _SessionCreatePageState extends State<SessionCreatePage> {
                     color: AppColors.primary,
                     size: 36,
                   ),
-                  const Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 8.0),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 8.0),
                     child: Text(
                       table,
-                      style: TextStyle(fontSize: 18),
+                      style: AppStyles.mainLabel(color: AppColors.black),
                     ),
                   ),
                   DropdownButton(
@@ -178,7 +181,10 @@ class _SessionCreatePageState extends State<SessionCreatePage> {
                     items: tables
                         .map<DropdownMenuItem<int>>((table) => DropdownMenuItem(
                               value: table,
-                              child: Text('$table'),
+                              child: Text(
+                                '$table',
+                                style: AppStyles.orderName(),
+                              ),
                             ))
                         .toList(),
                     onChanged: (int? newValue) {
@@ -190,7 +196,7 @@ class _SessionCreatePageState extends State<SessionCreatePage> {
                 ],
               ),
               SizedBox(
-                height: size.height * 0.06,
+                height: size.height * 0.03,
               ),
               EnterButtonWidget(
                 onTap: () async {

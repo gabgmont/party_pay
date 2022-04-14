@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:partypay/shared/utils/AppStyles.dart';
 
 import '../../../shared/utils/AppColors.dart';
 
@@ -40,8 +41,7 @@ class EnterButtonWidget extends StatelessWidget {
                   child: Center(
                     child: Text(
                       confirmLabel,
-                      style: TextStyle(
-                          fontSize: size.height * .04, color: AppColors.white),
+                      style: AppStyles.mainLabel(),
                     ),
                   ),
                 ),
