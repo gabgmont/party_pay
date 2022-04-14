@@ -70,13 +70,6 @@ class SessionOrderWidget extends StatelessWidget {
                                 sessionOrderModel.order.name,
                                 style: TextStyle(fontSize: size.height * .02),
                               ),
-                              Text(
-                                sessionOrderModel.order.description,
-                                style: TextStyle(
-                                  color: AppColors.gray,
-                                  fontSize: size.height * .015,
-                                ),
-                              )
                             ],
                           ),
                         ),
@@ -112,7 +105,7 @@ class SessionOrderWidget extends StatelessWidget {
                 ),
               ),
               child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 4.0),
+                padding: const EdgeInsets.fromLTRB(4.0, 4.0, 4.0, 0),
                 child: ListView(
                   scrollDirection: Axis.horizontal,
                   children: getOrderUsers(size),
