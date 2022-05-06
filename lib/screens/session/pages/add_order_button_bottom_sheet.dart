@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 import 'package:partypay/model/user/user_model.dart';
 import 'package:partypay/screens/session/widgets/enter_button_widget.dart';
 import 'package:partypay/screens/session/widgets/select_user_widget.dart';
@@ -41,7 +42,7 @@ class _AddOrderButtonBottomSheetState extends State<AddOrderButtonBottomSheet>
     return BottomSheet(
       animationController: BottomSheet.createAnimationController(this),
       onDragStart: (_) {
-        Navigator.pop(context);
+        Modular.to.pop();
       },
       constraints: BoxConstraints.expand(height: size.height * .32),
       onClosing: widget.onConfirmOrder,
@@ -139,7 +140,7 @@ class _AddOrderButtonBottomSheetState extends State<AddOrderButtonBottomSheet>
                 var sucess = await widget.sessionController
                     .addOrder(context, widget.orderId, selectedUsers);
                 if (sucess) {
-                  Navigator.pop(context);
+                  Modular.to.pop();
                   widget.onConfirmOrder();
                 }
               },

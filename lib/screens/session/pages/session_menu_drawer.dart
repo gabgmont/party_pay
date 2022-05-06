@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 import 'package:partypay/model/session/menu_model.dart';
 
 import '../controller/session_controller.dart';
@@ -62,7 +63,7 @@ class _SessionMenuDrawerState extends State<SessionMenuDrawer> {
                 description: order.description,
                 price: order.value,
                 onTap: () {
-                  Navigator.pop(context);
+                  Modular.to.pop();
                   Scaffold.of(context).showBottomSheet(
                     (context) => AddOrderButtonBottomSheet(
                       orderName: order.name,

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 import 'package:partypay/screens/create_session/controller/create_session_controller.dart';
 import 'package:partypay/screens/create_session/widget/user_round_card_widget.dart';
 import 'package:partypay/screens/session/controller/session_controller.dart';
@@ -35,7 +36,7 @@ class _AddUserBottomSheetState extends State<AddUserBottomSheet>
     return BottomSheet(
         animationController: BottomSheet.createAnimationController(this),
         onDragStart: (_) {
-          Navigator.pop(context);
+          Modular.to.pop();
         },
         constraints: BoxConstraints.expand(height: size.height * .6),
         onClosing: () {},
@@ -93,7 +94,7 @@ class _AddUserBottomSheetState extends State<AddUserBottomSheet>
                         .addUsers(context,
                         _createSessionController.usersList);
                     if (success) {
-                      Navigator.pop(context);
+                      Modular.to.pop();
                     }
                   })
                 ],

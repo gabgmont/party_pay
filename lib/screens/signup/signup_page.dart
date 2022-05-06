@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 import 'package:partypay/model/user/user_model.dart';
 import 'package:partypay/rest/client/user_client.dart';
 import 'package:partypay/screens/login/widgets/double_button_widget.dart';
@@ -214,7 +215,7 @@ class _SignUpPageState extends State<SignUpPage> {
       );
       return false;
     }
-    Navigator.pop(context);
+    Modular.to.pop();
     return true;
   }
 

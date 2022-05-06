@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 import 'package:partypay/model/user/user_model.dart';
 import 'package:partypay/screens/home/widgets/round_restaurant_card_widget.dart';
 import 'package:partypay/screens/session/widgets/enter_button_widget.dart';
@@ -45,7 +46,7 @@ class _SessionCreatePageState extends State<SessionCreatePage> {
         leading: IconButton(
           icon: const Icon(Icons.arrow_back_ios),
           onPressed: () {
-            Navigator.pop(context);
+            Modular.to.pop();
           },
         ),
         title: const Text(createSession),
@@ -203,7 +204,7 @@ class _SessionCreatePageState extends State<SessionCreatePage> {
                   var sessionModel =
                       await _sessionController.startSession(context);
                   if (sessionModel != null) {
-                    Navigator.pushReplacementNamed(context, '/session_page',
+                    Modular.to.pushReplacementNamed('/session_page',
                         arguments: sessionModel);
                   }
                 },

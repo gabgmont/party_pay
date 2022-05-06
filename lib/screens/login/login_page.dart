@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:partypay/partypay_module.dart';
 import 'package:partypay/screens/login/controller/login_controller.dart';
 import 'package:partypay/screens/login/widgets/double_button_widget.dart';
 import 'package:partypay/screens/login/widgets/double_input_text_widget.dart';
@@ -93,7 +95,7 @@ class LoginPage extends StatelessWidget {
                             ),
                             TextButton(
                               onPressed: () {
-                                Navigator.pushNamed(context, '/signup_page');
+                                Modular.to.pushNamed(routeToSignupPage);
                               },
                               child: Text(
                                 _register,

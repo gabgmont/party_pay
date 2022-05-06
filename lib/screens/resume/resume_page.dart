@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
+import 'package:partypay/partypay_module.dart';
 import 'package:partypay/screens/resume/pages/individual_resume_page.dart';
 import 'package:partypay/screens/session/controller/session_controller.dart';
 import 'package:partypay/screens/session/widgets/session_bottom_navigation_bar.dart';
@@ -33,18 +35,18 @@ class _ResumePageState extends State<ResumePage> {
     final pages = [
       IndividualResumePage(
         sessionOrderModel:
-        widget.sessionController.sessionModel.sessionOrderList,
+            widget.sessionController.sessionModel.sessionOrderList,
         sessionUserModel: widget.sessionController.sessionResume.userList
-            .where((_sessionUser) => _sessionUser.user == widget.sessionController.loggedUser).first,
+            .where((_sessionUser) =>
+                _sessionUser.user == widget.sessionController.loggedUser)
+            .first,
       ),
       GroupResumePage(
         sesionResume: widget.sessionController.sessionResume,
       )
     ];
 
-    final size = MediaQuery
-        .of(context)
-        .size;
+    final size = MediaQuery.of(context).size;
 
     return Scaffold(
       appBar: AppBar(
@@ -62,7 +64,7 @@ class _ResumePageState extends State<ResumePage> {
             size: 28,
           ),
           onPressed: () {
-            Navigator.pop(context);
+            Modular.to.pop();
           },
           color: AppColors.white,
         ),
@@ -101,16 +103,15 @@ class _ResumePageState extends State<ResumePage> {
               ),
               centerButtonTap: () async {
                 var sucess =
-                await widget.sessionController.closeSession(context);
+                    await widget.sessionController.closeSession(context);
 
                 if (sucess) {
                   var prefs = await SharedPreferences.getInstance();
                   prefs.remove('session_id');
 
-                  Navigator.of(context).pushNamedAndRemoveUntil(
-                      '/home_page', (Route<dynamic> route) => false,
+                  Modular.to.navigate(routeToHomePage,
                       arguments:
-                      widget.sessionController.sessionModel.userList[0]);
+                          widget.sessionController.sessionModel.userList[0]);
                 }
               },
             )

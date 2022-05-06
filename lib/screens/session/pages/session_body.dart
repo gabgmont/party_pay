@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
+import 'package:partypay/partypay_module.dart';
 import 'package:partypay/screens/session/controller/session_controller.dart';
 import 'package:partypay/shared/utils/AppStyles.dart';
 
@@ -65,7 +67,7 @@ class _SessionBodyState extends State<SessionBody> {
 
             var sucess = await widget.sessionController.showSessionResume(context);
             if (sucess) {
-              Navigator.of(context).pushNamed('/resume_page',
+              Modular.to.pushNamed(routeToResumePage,
                   arguments: widget.sessionController);
             }
           },

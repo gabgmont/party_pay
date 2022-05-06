@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 import 'package:partypay/model/user/user_model.dart';
 
 import '../widgets/session_header_widget.dart';
@@ -43,7 +44,7 @@ class _SessionUsersEndDrawerState extends State<SessionUsersEndDrawer> {
                 leading: Icons.groups,
                 showTrailing: true,
                 onTap: () {
-                  Navigator.pop(context);
+                  Modular.to.pop();
                   widget.trailingTap();
                 },
               ),

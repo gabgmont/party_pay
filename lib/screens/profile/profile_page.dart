@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:partypay/model/user/user_model.dart';
 import 'package:partypay/shared/utils/AppColors.dart';
@@ -36,7 +37,7 @@ class _ProfilePageState extends State<ProfilePage> {
             size: 28,
           ),
           onPressed: () {
-            Navigator.pop(context, false);
+            Modular.to.pop(false);
           },
         ),
         title: Text(
@@ -63,7 +64,7 @@ class _ProfilePageState extends State<ProfilePage> {
                   prefs.remove('token');
                   prefs.remove('user');
                   prefs.remove('session_id');
-                  Navigator.pop(context, true);
+                  Modular.to.pop(true);
                 },
               ),
               IconTextFieldWidget(

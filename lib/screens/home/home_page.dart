@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 import 'package:partypay/model/user/user_model.dart';
+import 'package:partypay/partypay_module.dart';
 import 'package:partypay/screens/home/controller/home_controller.dart';
 import 'package:partypay/screens/home/widgets/double_big_button_widget.dart';
 import 'package:partypay/screens/home/widgets/hp_app_bar.dart';
@@ -35,12 +37,12 @@ class _HomePageState extends State<HomePage> {
         child: HomePageAppBar(
           user: widget.user,
           onTap: () async {
-            Navigator.pushNamed(context, '/profile_page',
+            Modular.to.pushNamed(routeToProfilePage,
                     arguments: widget.user)
                 .then((shouldLogout) {
               if (shouldLogout == null) return;
               if (shouldLogout as bool) {
-                Navigator.pushReplacementNamed(context, '/login_page');
+                Modular.to.pushReplacementNamed(routeToLoginPage);
               }
             });
           },
@@ -118,7 +120,7 @@ class _HomePageState extends State<HomePage> {
     return DoubleBigButtonWidget(
       label: newSession,
       onTap: () {
-        Navigator.pushNamed(context, '/session_create_page',
+        Modular.to.pushNamed(routeToSessionCreatePage,
                 arguments: widget.user)
             .then((value) => setState(() {}));
       },
@@ -129,7 +131,7 @@ class _HomePageState extends State<HomePage> {
     return DoubleBigButtonWidget(
       label: enterSession,
       onTap: () {
-        Navigator.pushNamed(context, '/session_page',
+        Modular.to.pushNamed(routeToSessionPage,
                 arguments: _homeController.sessionModel)
             .then((value) => setState(() {}));
       },

@@ -1,57 +1,19 @@
 import 'package:flutter/material.dart';
-import 'package:partypay/model/session/session_model.dart';
-import 'package:partypay/model/user/user_model.dart';
-import 'package:partypay/screens/create_session/session_create_page.dart';
-import 'package:partypay/screens/home/home_page.dart';
-import 'package:partypay/screens/login/login_page.dart';
-import 'package:partypay/screens/profile/profile_page.dart';
-import 'package:partypay/screens/resume/resume_page.dart';
-import 'package:partypay/screens/session/controller/session_controller.dart';
-import 'package:partypay/screens/session/session_page.dart';
-import 'package:partypay/screens/signup/signup_page.dart';
-
-import 'screens/splash/splash_page.dart';
+import 'package:flutter_modular/flutter_modular.dart';
+import 'package:partypay/navigation_service.dart';
 
 class PartyPayApp extends StatelessWidget {
   const PartyPayApp({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    Modular.setNavigatorKey(NavigationService.navigationKey);
+    Modular.setInitialRoute('/splash_page');
+
+    return MaterialApp.router(
       title: 'Partypay',
-      initialRoute: '/splash_page',
-      routes: {
-        '/splash_page': (context) => const SplashPage(),
-        '/login_page': (context) => LoginPage(),
-
-        '/home_page': (context) => HomePage(
-              user: ModalRoute.of(context)?.settings.arguments == null
-                  ? UserModel(name: 'Guest')
-                  : ModalRoute.of(context)?.settings.arguments as UserModel,
-            ),
-
-        '/profile_page': (context) => ProfilePage(
-              user: ModalRoute.of(context)?.settings.arguments == null
-                  ? UserModel(name: 'Guest')
-                  : ModalRoute.of(context)?.settings.arguments as UserModel,
-            ),
-
-        '/session_create_page': (context) => SessionCreatePage(
-              user: ModalRoute.of(context)?.settings.arguments == null
-                  ? UserModel(name: 'Guest')
-                  : ModalRoute.of(context)?.settings.arguments as UserModel,
-            ),
-
-        '/session_page': (context) => SessionPage(
-            sessionModel:
-                ModalRoute.of(context)?.settings.arguments as SessionModel),
-
-        '/resume_page': (context) => ResumePage(
-              sessionController: ModalRoute.of(context)?.settings.arguments as SessionController
-            ),
-
-        '/signup_page' :(context) => const SignUpPage()
-      },
+      routeInformationParser: Modular.routeInformationParser,
+      routerDelegate: Modular.routerDelegate,
     );
   }
 }

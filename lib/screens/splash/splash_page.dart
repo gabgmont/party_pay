@@ -1,8 +1,10 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:partypay/model/user/user_model.dart';
+import 'package:partypay/partypay_module.dart';
 import 'package:partypay/shared/utils/AppColors.dart';
 import 'package:partypay/shared/utils/AppImages.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -54,7 +56,7 @@ void checkLogin(BuildContext context) async {
   if (token == null || user == null) {
     prefs.remove('token');
     prefs.remove('user');
-    Navigator.pushReplacementNamed(context, '/login_page');
+    Modular.to.pushReplacementNamed(routeToLoginPage);
 
     return;
   }
@@ -66,5 +68,5 @@ void checkLogin(BuildContext context) async {
       email: userMap['email'],
       photo: userMap['photo']);
 
-  Navigator.pushReplacementNamed(context, '/home_page', arguments: userModel);
+  Modular.to.pushReplacementNamed(routeToHomePage, arguments: userModel);
 }
